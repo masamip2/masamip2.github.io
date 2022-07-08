@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .bubbles {
+        stroke-width: 1px;
+        stroke: black;
+        opacity: .8
+    }
+    .bubbles:hover {
+        stroke: black;
+    }
+</style>
+<body onload='init()'>
+    <div id="svg"></div>
+    <svg width=150 height=300>
+    </svg>
+</body>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+async function init() {
+    //const data = await d3.csv('imdb_top_1000.csv');
+    var margin = {top: 50, right: 200, bottom: 50, left: 50},
+        width = 1000 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+
+    var svg = d3.select("#svg").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv('annual_aqi_by_cbsa.csv',
+        function(d) {
+            return { year: d.Released_Year,
+                rating: d.IMDB_Rating,
+                metascore: d.Meta_score,
+                genre: (d.Genre).split(',')[0]
+             }},
+        function(data) {
+            var states = d3.map(data, function(d) { return(d.state) }).keys();
+            var stackedData = d3.stack().keys(states)(data);
+
+            var x = d3.scaleLinear().domain(d3.extent(data, function(d) { return d.year })).range([0, width]);
+            var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(5));
+
+            var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+            svg.append("g").call(d3.axisLeft(y).ticks(5));
+
+            var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
+
+            svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
+            svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
+
+            var tooltip = d3.select("#my_dataviz").append("div").style("opacity", 0).attr("class", "tooltip")
+                .style("background-color", "black")
+                .style("border-radius", "5px")
+                .style("padding", "10px")
+                .style("color", "white")
+            });
+
+            var showTooltip = function(d) {
+                tooltip.transition().duration(2000)
+                tooltip.style("opacity", 1).html("Country: " + d.country).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+            }
+            var moveTooltip = function(d) {
+                tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+            }
+            var hideTooltip = function(d) {
+                tooltip.transition().duration(200).style("opacity", 0)
+            }
+}
+</script>
