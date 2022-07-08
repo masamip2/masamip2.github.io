@@ -16,7 +16,8 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 async function init() {
-    //const data = await d3.csv('imdb_top_1000.csv');
+    const data = await d3.csv('imdb_top_1000.csv');
+
     var margin = {top: 50, right: 200, bottom: 50, left: 50},
         width = 1000 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
@@ -26,8 +27,7 @@ async function init() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    const data = await d3.csv('imdb_top_1000.csv');
+    
     var x = d3.scaleLinear().domain([1910, 2030]).range([0, width]);
     var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(12));
 
@@ -35,16 +35,15 @@ async function init() {
     svg.append("g").call(d3.axisLeft(y).ticks(10));
 
     //var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
-    var z = d3.scaleLinear().domain([0, 10]).range([2, 30]);
+    var z = d3.scaleLog().domain([1300, 1000000000]).range([2, 30]);
 
     svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
     svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
 
-    /*
     var color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet1);
-    */
+
     /*
     var tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
         .style("background-color", "black")
@@ -66,11 +65,10 @@ async function init() {
 
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
-        .attr("cx", function (d) { return x(d.Released_Year) } )
-        .attr("cy", function (d) { return y(d.Meta_score) } )
-        .attr("r", function (d) { return z(d.IMDB_Rating) } )
-        .style("fill", "black");
-        //.style("fill", function (d) { return color((d.Genre).split(',')[0]); } )
+        .attr("cx", function (d) { return x(d.Released_Year) })
+        .attr("cy", function (d) { return y(d.Meta_score) })
+        .attr("r", function (d) { return z(d.IMDB_Rating) })
+        .style("fill", function (d) { return color((d.Genre).split(',')[0]); });
         //.on("mouseover", showTooltip)
         //.on("mousemove", moveTooltip)
         //.on("mouseleave", hideTooltip);
