@@ -37,9 +37,6 @@ async function init() {
                 genre: (d.Genre).split(',')[0]
              }},
         function(data) {
-            var states = d3.map(data, function(d) { return(d.state) }).keys();
-            var stackedData = d3.stack().keys(states)(data);
-
             var x = d3.scaleLinear().domain(d3.extent(data, function(d) { return d.year })).range([0, width]);
             var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(5));
 
