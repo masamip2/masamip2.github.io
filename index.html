@@ -29,50 +29,49 @@ async function init() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv('imdb_top_1000.csv',
-        function(data) {
-            var x = d3.scaleLinear().domain([1910, 2030]).range([0, width]);
-            var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(12));
+    d3.csv('imdb_top_1000.csv', function(data) {
+        var x = d3.scaleLinear().domain([1910, 2030]).range([0, width]);
+        var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(12));
 
-            var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
-            svg.append("g").call(d3.axisLeft(y).ticks(10));
+        var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+        svg.append("g").call(d3.axisLeft(y).ticks(10));
 
-            var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
+        var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
 
-            svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
-            svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
+        svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
+        svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
 
-            var color = d3.scaleOrdinal()
-                .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
-                .range(d3.schemeSet1);
+        var color = d3.scaleOrdinal()
+            .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
+            .range(d3.schemeSet1);
 
-            var tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
-                .style("background-color", "black")
-                .style("border-radius", "5px")
-                .style("padding", "10px")
-                .style("color", "white")
-            });
-
-            var showTooltip = function(d) {
-                tooltip.transition().duration(2000)
-                tooltip.style("opacity", 1).html("Year: " + d.Released_Year).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
-            }
-            var moveTooltip = function(d) {
-                tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
-            }
-            var hideTooltip = function(d) {
-                tooltip.transition().duration(200).style("opacity", 0)
-            }
-            svg.append('g').selectAll("dot").data(data).enter().append("circle")
-                .attr("class", "bubbles")
-                .attr("cx", function (d) { return x(d.Released_Year) } )
-                .attr("cy", function (d) { return y(d.Meta_score) } )
-                .attr("r", function (d) { return z(d.IMDB_Rating) } )
-                .style("fill", function (d) { return color((d.Genre).split(',')[0]); } )
-                .on("mouseover", showTooltip)
-                .on("mousemove", moveTooltip)
-                .on("mouseleave", hideTooltip);
+        var tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
+            .style("background-color", "black")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+            .style("color", "white");
 
 
+        var showTooltip = function(d) {
+            tooltip.transition().duration(2000)
+            tooltip.style("opacity", 1).html("Year: " + d.Released_Year).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+        }
+        var moveTooltip = function(d) {
+            tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+        }
+        var hideTooltip = function(d) {
+            tooltip.transition().duration(200).style("opacity", 0)
+        }
+
+        svg.append('g').selectAll("dot").data(data).enter().append("circle")
+            .attr("class", "bubbles")
+            .attr("cx", function (d) { return x(d.Released_Year) } )
+            .attr("cy", function (d) { return y(d.Meta_score) } )
+            .attr("r", function (d) { return z(d.IMDB_Rating) } )
+            .style("fill", function (d) { return color((d.Genre).split(',')[0]); } )
+            .on("mouseover", showTooltip)
+            .on("mousemove", moveTooltip)
+            .on("mouseleave", hideTooltip);
+    });
 }
 </script>
