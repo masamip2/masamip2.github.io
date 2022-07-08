@@ -29,14 +29,15 @@ async function init() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv('imdb_top_1000.csv', function(data) {
+    d3.csv('imdb_top_1000.csv', await function(data) {
         var x = d3.scaleLinear().domain([1910, 2030]).range([0, width]);
         var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(12));
 
         var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
         svg.append("g").call(d3.axisLeft(y).ticks(10));
 
-        var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
+        //var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
+        var z = d3.scaleLinear().domain([0, 10]).range([2, 30]);
 
         svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
         svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
@@ -65,7 +66,7 @@ async function init() {
         }
         */
 
-        svg.append('g').selectAll("dot").data(data).enter().append("circle")
+        svg.append('g').selectAll("circle").data(data).enter().append("circle")
             .attr("class", "bubble")
             .attr("cx", function (d) { return x(d.Released_Year) } )
             .attr("cy", function (d) { return y(d.Meta_score) } )
