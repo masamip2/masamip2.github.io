@@ -30,12 +30,6 @@ async function init() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     d3.csv('imdb_top_1000.csv',
-        function(d) {
-            return { year: d.Released_Year,
-                rating: d.IMDB_Rating,
-                metascore: d.Meta_score,
-                genre: (d.Genre).split(',')[0]
-             }},
         function(data) {
             var x = d3.scaleLinear().domain([0, 100]).range([0, width]);
             var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(5));
@@ -54,10 +48,10 @@ async function init() {
 
             svg.append('g').selectAll("dot").data(data).enter().append("circle")
                 .attr("class", "bubbles")
-                .attr("cx", function (d) { return x(d.year) } )
-                .attr("cy", function (d) { return y(d.metascore) } )
-                .attr("r", function (d) { return z(d.rating) } )
-                .style("fill", function (d) { return color(d.genre); } )
+                .attr("cx", function (d) { return x(d.Released_Year) } )
+                .attr("cy", function (d) { return y(d.Meta_score) } )
+                .attr("r", function (d) { return z(d.IMDB_Rating) } )
+                .style("fill", function (d) { return color((d.Genre).split(',')[0]); } )
                 .on("mouseover", showTooltip)
                 .on("mousemove", moveTooltip)
                 .on("mouseleave", hideTooltip);
