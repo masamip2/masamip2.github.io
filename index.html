@@ -31,11 +31,11 @@ async function init() {
 
     d3.csv('imdb_top_1000.csv',
         function(data) {
-            var x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-            var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(5));
+            var x = d3.scaleLinear().domain([1910, 2030]).range([0, width]);
+            var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(12));
 
             var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
-            svg.append("g").call(d3.axisLeft(y).ticks(5));
+            svg.append("g").call(d3.axisLeft(y).ticks(10));
 
             var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
 
