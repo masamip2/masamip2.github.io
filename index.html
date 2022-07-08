@@ -48,6 +48,20 @@ async function init() {
             svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
             svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
 
+            var color = d3.scaleOrdinal()
+                .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
+                .range(d3.schemeSet1);
+
+            svg.append('g').selectAll("dot").data(data).enter().append("circle")
+                .attr("class", "bubbles")
+                .attr("cx", function (d) { return x(d.year) } )
+                .attr("cy", function (d) { return y(d.metascore) } )
+                .attr("r", function (d) { return z(d.rating) } )
+                .style("fill", function (d) { return color(d.genre); } )
+                .on("mouseover", showTooltip)
+                .on("mousemove", moveTooltip)
+                .on("mouseleave", hideTooltip);
+
             var tooltip = d3.select("#my_dataviz").append("div").style("opacity", 0).attr("class", "tooltip")
                 .style("background-color", "black")
                 .style("border-radius", "5px")
