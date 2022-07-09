@@ -53,21 +53,21 @@ async function init() {
     svg.append('g').selectAll("rect").data(decades).enter().append("rect")
         .attr("class", "rect")
         .attr('x', function(d, i) { return 50*(i+1) })
-        .attr('y', 50)
+        .attr('y', 0)
         .attr('width', 100)
         .attr('height', 50)
         .append("text").text(function (d) { return xPos(d) });
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
-    svg.append("g").attr("transform", `translate(0, ${height+slide.height})`).call(d3.axisBottom(x).ticks(10));
+    svg.append("g").attr("transform", `translate(0, ${margin.top+slide.height+height})`).call(d3.axisBottom(x).ticks(10));
 
     let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
-    svg.append("g").attr("transform", `translate(0, ${slide.height})`).call(d3.axisLeft(y).ticks(5));
+    svg.append("g").attr("transform", `translate(0, ${margin.top+slide.height})`).call(d3.axisLeft(y).ticks(5));
 
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
-    svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50).text("Year");
-    svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Rating").attr("text-anchor", "start");
+    svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+slide.height+height).text("Year");
+    svg.append("text").attr("text-anchor", "end").attr("x", -20).attr("y", 0 ).text("Rating").attr("text-anchor", "start");
 
     const color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
