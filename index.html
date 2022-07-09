@@ -59,7 +59,7 @@ async function init() {
         .append("text").text(function (d) { return xPos(d) });
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
-    svg.append("g").attr("transform", `translate(0, ${margin.top+slide.height+height})`).call(d3.axisBottom(x).ticks(10));
+    svg.append("g").attr("transform", `translate(0, ${margin.top+height})`).call(d3.axisBottom(x).ticks(10));
 
     let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
     svg.append("g").attr("transform", `translate(0, ${margin.top+slide.height})`).call(d3.axisLeft(y).ticks(5));
