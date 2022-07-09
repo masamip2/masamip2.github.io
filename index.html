@@ -57,14 +57,14 @@ async function init() {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
         .on("mouseover", function(event, d) {
+            tooltip.style("opacity", 1);
+        })
+        .on("mousemove", function(event, d) {
             const [x, y] = d3.pointer(event);
             console.log(`${x}, ${y}`);
-            tooltip.style("opacity", 1);
             tooltip.append("g");
             tooltip.attr("transform", `translate(${x}, ${y})`);
             tooltip.text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
-        })
-        .on("mousemove", function(event, d) {
         })
         .on("mouseleave", function(event, d) {
             tooltip.style("opacity", 0);
