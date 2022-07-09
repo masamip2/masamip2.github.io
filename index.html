@@ -30,7 +30,6 @@
         background-color: lightslategray;
         border-radius: 2px;
         padding: 2px;
-        color: white;
     }
 </style>
 <body onload='init()'>
@@ -90,12 +89,12 @@ async function init() {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) });
 
-    let tooltip = svg.append("g");
+    let tooltip = svg.append("g").style("opacity", 0).attr("class", "tooltip");
     
     plot.on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
-            tooltip.attr("class", "tooltip").append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
             tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
