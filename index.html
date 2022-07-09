@@ -46,7 +46,7 @@ async function init() {
         width = 1200 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom - slidesize.height;
 
-    const svg = d3.select("#svg").append("svg")
+    let svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom + slidesize.height)
         .append("g")
