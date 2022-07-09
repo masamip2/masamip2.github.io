@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+    .body {
+        font-family: Verdana, Helvetica, Arial;
+        color: gray;
+    }
+    .h1 {
+        top: 50;
+        left: 50;
+    }
+    rect {
+        stroke: white;
+        fill: lightgray;
+    }
     .bubble {
         stroke-width: 1px;
         stroke: white;
@@ -9,8 +21,15 @@
     .bubble:hover {
         stroke: gray;
     }
+    .tooltip {
+        opacity: 0;
+        background-color: lightslategray;
+        border-radius: 2px;
+        padding: 4px;
+    }
 </style>
 <body onload='init()'>
+    <div><h1>Top 1000 Movies by IMDB Rating</h1></div>
     <div id="svg"></div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -27,6 +46,13 @@ async function init() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+    svg.append('g').selectAll("rect").data(decades).enter().append("rect").append("text").text(d)
+        .attr('x', function(d, i) { return 50*(i+1) })
+        .attr('y', 50)
+        .attr('width', 50)
+        .attr('height', 14);
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
     let xAxis = svg.append("g").attr("transform", `translate(0, ${height})`).call(d3.axisBottom(x).ticks(10));
@@ -50,24 +76,15 @@ async function init() {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) });
 
-    let tooltip = svg.append("g").attr("class", "tooltip")
-        .style("opacity", 0)
-        .style("background-color", "water")
-        .style("border-radius", "2px")
-        .style("padding", "10px")
-        .style("color", "gray");
+    let tooltip = svg.append("g").attr("class", "tooltip");
     
     plot.on("mouseover", function(event, d) {
-            //tooltip.style("opacity", 1);
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
             tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
             tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
-            //const [x, y] = d3.pointer(event);
-            //tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
-            //tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mouseleave", function(event, d) {
             tooltip.style("opacity", 0);
