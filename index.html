@@ -5,7 +5,7 @@
         font-family: Verdana, Helvetica, Arial;
         color: gray;
     }
-    h1 {
+    div1 {
         top: 50;
         left: 100;
     }
@@ -38,12 +38,13 @@ async function init() {
     const data = await d3.csv('imdb_top_1000.csv');
 
     const margin = {top: 50, right: 200, bottom: 50, left: 50},
+        slide = {width: 100, height: 50},
         width = 1200 - margin.left - margin.right,
-        height = 1000 - margin.top - margin.bottom;
+        height = 1000 - margin.top - margin.bottom - slide.height;
 
     const svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height + margin.top + margin.bottom + slide.height)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
@@ -53,9 +54,9 @@ async function init() {
         .attr("class", "rect")
         .attr('x', function(d, i) { return 50*(i+1) })
         .attr('y', 50)
-        .attr('width', 50)
-        .attr('height', 20)
-        .text(function (d) { return xPos(d) });
+        .attr('width', 100)
+        .attr('height', 50)
+        .append("text").text(function (d) { return xPos(d) });
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
     svg.append("g").attr("transform", `translate(0, ${height})`).call(d3.axisBottom(x).ticks(10));
@@ -65,7 +66,7 @@ async function init() {
 
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
-    svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
+    svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50).text("Year");
     svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Rating").attr("text-anchor", "start");
 
     const color = d3.scaleOrdinal()
@@ -84,7 +85,7 @@ async function init() {
     plot.on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
-            tooltip.text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
             tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
