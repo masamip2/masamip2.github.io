@@ -88,7 +88,7 @@ async function init() {
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet3);
 
-    let tooltip = d3.select("#svg").append("div").attr("class", "tooltip").style("opacity", 0);
+    let tooltip = svg.append("g").append("div").attr("class", "tooltip").style("opacity", 0);
 
     let plot = svg.append('g').selectAll("dot").data(data).enter().append("circle")
         .attr("class", "bubble")
@@ -98,12 +98,13 @@ async function init() {
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
         .on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
-            tooltip.style("opacity", 1);
+            tooltip.style("opacity", 1)
+                .style("left", `${x+30} px`)
+                .style("top", `${y+30} px`);
             console.log(`${x}, ${y}: ${d.Released_Year}`);
-            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`)
-                //.style("left", `${x+30} px`)
-                //.style("top", `${y+30} px`);
-                .attr("transform", `translate(${x+30}, ${y+30})`);
+            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+
+                //.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
         })
