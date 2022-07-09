@@ -50,7 +50,17 @@ async function init() {
         .style("padding", "10px")
         .style("color", "gray");
     
-    //let tooltip = d3.select(".tooltip");
+    const mouseover = function(event, d) {
+        tooltip.style("opacity", 1);
+    }
+    const mousemove = function(event, d) {
+        const [x, y] = d3.pointer(event);
+        tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+        tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
+    }
+    const mouseleave = function(event, d) {
+        tooltip.style("opacity", 0);
+    }
 
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
@@ -58,18 +68,9 @@ async function init() {
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
-        .on("mouseover", function(event, d) {
-            tooltip.style("opacity", 1);
-        })
-        .on("mousemove", function(event, d) {
-            const [x, y] = d3.pointer(event);
-            //console.log(`${x}, ${y}`);
-            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
-            tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
-        })
-        .on("mouseleave", function(event, d) {
-            tooltip.style("opacity", 0);
-        });
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave);
 
 
 }
