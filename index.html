@@ -28,13 +28,13 @@ body {
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 60px;
-    height: 28px;
+    width: 80px;
+    height: 40px;
     padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
+    font: 12px;
+    background: lightslategray;
     border: 0px;
-    border-radius: 8px;
+    border-radius: 2px;
     pointer-events: none;
 }
 </style>
@@ -68,8 +68,8 @@ slide.append("rect")
 
 slide.append("text")
     .attr("class", "slide")
-    .attr('x', function(d, i) { return slidesize.width*(i) })
-    .attr('y', slidesize.height*-1)
+    .attr('x', function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
+    .attr('y', slidesize.height*-1.5)
     .text(function (d, i) { return decades[i] });
 
 let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
