@@ -26,7 +26,7 @@ async function init() {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
     let xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(10));
@@ -43,7 +43,8 @@ async function init() {
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet3);
 
-    let tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
+    let tooltip = svg.append('g').attr("class", "tooltip")
+        .style("opacity", 0)
         .style("background-color", "water")
         .style("border-radius", "2px")
         .style("padding", "10px")
@@ -59,7 +60,7 @@ async function init() {
             const [x, y] = d3.pointer(event);
             console.log(`${x}, ${y}`);
             tooltip.style("opacity", 1);
-            tooltip.attr('transform', `translate(${x}, ${y})`);
+            tooltip.attr("transform", `translate(${x}, ${y})`);
             tooltip.text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
         })
         .on("mousemove", function(event, d) {
