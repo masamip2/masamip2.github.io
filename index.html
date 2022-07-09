@@ -40,7 +40,7 @@ async function init() {
     const margin = {top: 50, right: 200, bottom: 50, left: 50},
         slide = {width: 100, height: 50},
         width = 1200 - margin.left - margin.right,
-        height = 1200 - margin.top - margin.bottom - slide.height;
+        height = 1000 - margin.top - margin.bottom - slide.height;
 
     const svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -59,10 +59,10 @@ async function init() {
         .append("text").text(function (d) { return xPos(d) });
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
-    svg.append("g").attr("transform", `translate(0, ${margin.top+slide.height+height})`).call(d3.axisBottom(x).ticks(10));
+    svg.append("g").attr("transform", `translate(0, ${slide.height+height})`).call(d3.axisBottom(x).ticks(10));
 
     let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
-    svg.append("g").attr("transform", `translate(0, ${margin.top+slide.height})`).call(d3.axisLeft(y).ticks(5));
+    svg.append("g").attr("transform", `translate(0, ${slide.height})`).call(d3.axisLeft(y).ticks(5));
 
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
