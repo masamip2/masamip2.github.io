@@ -9,7 +9,7 @@
         top: 50;
         left: 100;
     }
-    rect {
+    .rect {
         stroke: white;
         fill: lightgray;
     }
@@ -49,11 +49,13 @@ async function init() {
 
     const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
     const xPos = d3.scaleBand().domain(decades).range([0, width]);
-    svg.append('g').selectAll("rect").data(decades).enter().append("rect").append("text").text(function (d) { return xPos(d) })
+    svg.append('g').selectAll("rect").data(decades).enter().append("rect")
+        .attr("class", "rect")
         .attr('x', function(d, i) { return 50*(i+1) })
         .attr('y', 50)
         .attr('width', 50)
-        .attr('height', 20);
+        .attr('height', 20)
+        .text(function (d) { return xPos(d) });
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
     svg.append("g").attr("transform", `translate(0, ${height})`).call(d3.axisBottom(x).ticks(10));
@@ -64,7 +66,7 @@ async function init() {
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
     svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
-    svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
+    svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Rating").attr("text-anchor", "start");
 
     const color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
@@ -82,7 +84,7 @@ async function init() {
     plot.on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
-            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+            tooltip.text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
             tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
