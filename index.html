@@ -61,7 +61,7 @@ var svg = d3.select("body").append("svg")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("data.csv").then(function(data) {
+d3.csv("imdb_top_1000.csv").then(function(data) {
 
   // format the data
   data.forEach(function(d) {
