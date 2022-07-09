@@ -59,13 +59,13 @@ async function init() {
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
-        .on("mouseover", function(d) {
+        .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", 1).text("Year: " + d.Released_Year).style("left", (d3.pointer(event)[0]+30) + "px").style("top", (d3.pointer(event)[1]+30) + "px");
         })
-        .on("mousemove",function(d) {
+        .on("mousemove",function(event, d) {
             tooltip.style("left", (d3.pointer(event)[0]+30) + "px").style("top", (d3.pointer(event)[1]+30) + "px");
         })
-        .on("mouseleave", function(d) {
+        .on("mouseleave", function(event, d) {
             tooltip.transition().duration(200).style("opacity", 0);
         });
 
