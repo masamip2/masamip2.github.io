@@ -58,12 +58,16 @@ async function init() {
         .style("color", "gray");
     
     plot.on("mouseover", function(event, d) {
-            tooltip.style("opacity", 1);
-        })
-        .on("mousemove", function(event, d) {
+            //tooltip.style("opacity", 1);
             const [x, y] = d3.pointer(event);
+            tooltip.style("opacity", 1);
             tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
             tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
+        })
+        .on("mousemove", function(event, d) {
+            //const [x, y] = d3.pointer(event);
+            //tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+            //tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mouseleave", function(event, d) {
             tooltip.style("opacity", 0);
