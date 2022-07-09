@@ -53,9 +53,8 @@ var tooltip = d3.select("body").append("div")
 
 let svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom + slidesize.height)
-    .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .attr("height", height + margin.top + margin.bottom + slidesize.height);
+svg.append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 /*
 const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
