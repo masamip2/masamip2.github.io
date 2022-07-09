@@ -102,10 +102,11 @@ async function init() {
             //console.log(`${x}, ${y}: ${d.Released_Year}`);
             //tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`)
             console.log(`${event.pageX}, ${event.pageY}: ${d.Released_Year}`);
-            tooltip.style("opacity", 1);
-            tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`)
+            tooltip.style("opacity", 1)
                 .style("left", `${event.pageX+30} px`)
                 .style("top", `${event.pageY+30} px`);
+            tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`);
+
                 //.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
