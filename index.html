@@ -67,7 +67,7 @@ async function init() {
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
         .attr("cy", function (d) { return y(d.Meta_score) })
-        .attr("r", function (d) { return z(d.Gross == null? 0 : d.Gross) })
+        .attr("r", function (d) { return z(d.Gross == ''? 0 : d.Gross) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) });
         //.on("mouseover", showTooltip)
         //.on("mousemove", moveTooltip)
