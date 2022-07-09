@@ -28,6 +28,9 @@
     }
     .tooltip {
         background-color: lightslategray;
+        border: solid;
+        border-color: 2px;
+        border-width: 1px;
         border-radius: 2px;
         padding: 2px;
     }
@@ -82,16 +85,15 @@ async function init() {
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet3);
 
+    let tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip");
+
     let plot = svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
-        .style("fill", function (d) { return color((d.Genre).split(',')[0]) });
-
-    let tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip");
-    
-    plot.on("mouseover", function(event, d) {
+        .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
+        .on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
             tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
