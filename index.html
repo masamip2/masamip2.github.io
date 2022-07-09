@@ -54,13 +54,15 @@ async function init() {
     let slide = svg.append('g').selectAll("rect").data(decades).enter();
     slide.append("rect")
         .attr("class", "rect")
-        .attr('x', function(d, i) { return slidesize.width*(i+1) })
+        .attr('x', function(d, i) { return slidesize.width*(i) })
         .attr('y', slidesize.height*-1)
         .attr('width', slidesize.width)
         .attr('height', slidesize.height);
 
     slide.append("text")
         .attr("class", "slide")
+        .attr('x', function(d, i) { return slidesize.width*(i) })
+        .attr('y', slidesize.height*-1)
         .text(function (d, i) { return decades[i] });
     
     let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
@@ -69,7 +71,7 @@ async function init() {
 
     let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
     svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
-    svg.append("text").attr("text-anchor", "end").attr("x", margin.left).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
+    svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
 
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
