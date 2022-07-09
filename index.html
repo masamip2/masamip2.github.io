@@ -65,7 +65,7 @@ async function init() {
             const [x, y] = d3.pointer(event);
             //console.log(`${x}, ${y}`);
             tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
-            tooltip.attr("transform", `translate(${x}+parseInt(30), ${y}+parseInt(30))`);
+            tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mouseleave", function(event, d) {
             tooltip.style("opacity", 0);
