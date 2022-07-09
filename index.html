@@ -40,7 +40,6 @@
 </style>
 <body onload='init()'>
     <div class="div"><h1>Top 1000 Movies by IMDB Rating</h1></div>
-    <div class="div" id="svg"></div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
@@ -52,7 +51,8 @@ async function init() {
         width = 1200 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom - slidesize.height;
 
-    let svg = d3.select("#svg").append("svg")
+    let svg = d3.select("body").append("svg")
+    //let svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom + slidesize.height)
         .append("g")
