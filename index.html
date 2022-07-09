@@ -48,7 +48,7 @@ async function init() {
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-    svg.append('g').selectAll("rect").data(decades).enter().append("rect").append("text").text(d)
+    svg.append('g').selectAll("rect").data(decades).enter().append("rect").append("text").text(function (d) { return d })
         .attr('x', function(d, i) { return 50*(i+1) })
         .attr('y', 50)
         .attr('width', 50)
