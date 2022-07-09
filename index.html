@@ -66,8 +66,8 @@ async function init() {
 
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
-    svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+slide.height+height).text("Year");
-    svg.append("text").attr("text-anchor", "end").attr("x", -20).attr("y", 0 ).text("Rating").attr("text-anchor", "start");
+    svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+height).text("Year");
+    svg.append("text").attr("text-anchor", "end").attr("x", -20).attr("y", slide.height).text("Rating").attr("text-anchor", "start");
 
     const color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
