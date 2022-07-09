@@ -27,12 +27,15 @@
         stroke: gray;
     }
     .tooltip {
-        background-color: lightslategray;
-        border: solid;
-        border-color: 2px;
-        border-width: 2px;
-        border-radius: 2px;
+        position: absolute;
+        text-align: center;
+        width: 100px;
+        height: 20px;
         padding: 2px;
+        background: lightslategray;
+        border: 0px;
+        border-radius: 2px;
+        pointer-events: none;
     }
 </style>
 <body onload='init()'>
@@ -98,7 +101,9 @@ async function init() {
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
             tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
-            tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
+            tooltip.style("left", `${x+30} px`);
+            tooltip.style("top", `${y+30} px`);
+            //tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
         })
