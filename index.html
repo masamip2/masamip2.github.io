@@ -19,7 +19,7 @@ async function init() {
     const data = await d3.csv('imdb_top_1000.csv');
 
     var margin = {top: 50, right: 200, bottom: 50, left: 50},
-        width = 1800 - margin.left - margin.right,
+        width = 1200 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom;
 
     var svg = d3.select("#svg").append("svg")
@@ -31,7 +31,7 @@ async function init() {
     var x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
     var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(10));
 
-    var y = d3.scaleLinear().domain([7.5, 10]).range([height, 0]);
+    var y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
     svg.append("g").call(d3.axisLeft(y).ticks(5));
 
     var z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
@@ -50,10 +50,10 @@ async function init() {
         .style("color", "gray");
 
     var showTooltip = function(d) {
-        tooltip.transition().style("opacity", 1).html("Year: " + d.Released_Year).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px");
+        tooltip.transition().style("opacity", 1).html("Year: " + d.Released_Year).style("left", (d3.pointer(event)[0]+30) + "px").style("top", (d3.pointer(event)[1]+30) + "px");
     }
     var moveTooltip = function(d) {
-        tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px");
+        tooltip.style("left", (d3.pointer(event)[0]+30) + "px").style("top", (d3.pointer(event)[1]+30) + "px");
     }
     var hideTooltip = function(d) {
         tooltip.transition().duration(200).style("opacity", 0);
