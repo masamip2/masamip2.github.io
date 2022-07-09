@@ -98,12 +98,12 @@ async function init() {
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
         .on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
-            tooltip.attr("transform", `translate(${x+30}, ${y+30})`);
             tooltip.style("opacity", 1);
             console.log(`${x}, ${y}: ${d.Released_Year}`);
-            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
+            tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`)
                 //.style("left", `${x+30} px`)
                 //.style("top", `${y+30} px`);
+                .attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
         })
