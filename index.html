@@ -26,7 +26,7 @@
     .bubble:hover {
         stroke: gray;
     }
-    .tooltipp {
+    .tooltip {
         background-color: lightslategray;
         border-radius: 2px;
         padding: 2px;
@@ -89,14 +89,7 @@ async function init() {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) });
 
-    let tooltip = svg.append("g")
-        .style("opacity", 0)
-        .attr("class", "tooltip")
-        .style("background-color", "black")
-        .style("border-radius", "5px")
-        .style("padding", "10px")
-        .style("color", "white");
-        //.style("opacity", 0).attr("class", "tooltip");
+    let tooltip = svg.append("g").append("div").style("opacity", 0).attr("class", "tooltip");
     
     plot.on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
