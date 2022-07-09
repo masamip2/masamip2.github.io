@@ -18,32 +18,32 @@
 async function init() {
     const data = await d3.csv('imdb_top_1000.csv');
 
-    var margin = {top: 50, right: 200, bottom: 50, left: 50},
+    let margin = {top: 50, right: 200, bottom: 50, left: 50},
         width = 1200 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom;
 
-    var svg = d3.select("#svg").append("svg")
+    let svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    var x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
-    var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(10));
+    let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
+    let xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(10));
 
-    var y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
+    let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
     svg.append("g").call(d3.axisLeft(y).ticks(5));
 
-    var z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
+    let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
     svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
     svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
 
-    var color = d3.scaleOrdinal()
+    let color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet3);
 
-    var tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
+    let tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
         .style("background-color", "water")
         .style("border-radius", "2px")
         .style("padding", "10px")
@@ -56,7 +56,9 @@ async function init() {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
         .on("mouseover", function(event, d) {
-            tooltip.transition().duration(200).style("opacity", 1).text("Year: " + d.Released_Year).style("left", (d3.pointer(event, this)[0]+30) + "px").style("top", (d3.pointer(event, this)[1]+30) + "px");
+            let pos = d3.pointer(event, this);
+            console.log(pos);
+            tooltip.transition().duration(200).style("opacity", 1).text("Year: " + d.Released_Year).style("left", (pos[0]+30) + "px").style("top", (pos[1]+30) + "px");
         })
         .on("mousemove",function(event, d) {
             tooltip.style("left", (d3.pointer(event, this)[0]+30) + "px").style("top", (d3.pointer(event, this)[1]+30) + "px");
