@@ -57,6 +57,7 @@ let svg = d3.select("body").append("svg")
     .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+/*
 const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
 //const xPos = d3.scaleBand().domain(decades).range([0, width]);
 let slide = svg.append('g').selectAll("rect").data(decades).enter();
@@ -72,6 +73,7 @@ slide.append("text")
     .attr('x', function(d, i) { return slidesize.width*(i) })
     .attr('y', slidesize.height*-1)
     .text(function (d, i) { return decades[i] });
+*/
 
 let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
@@ -94,17 +96,22 @@ d3.csv("imdb_top_1000.csv").then(function(data) {
             //console.log(`${x}, ${y}: ${d.Released_Year}`);
             //tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`)
             console.log(`${event.pageX}, ${event.pageY}: ${d.Released_Year}`);
-            tooltip.style("opacity", 1);
+
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", 1);
             tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`)
-                .style("left", `${event.pageX+30} px`)
-                .style("top", `${event.pageY+30} px`);
+                .style("left", (event.pageX + 30) + "px")
+                .style("top", (event.pageY + 30) + "px");
 
                 //.attr("transform", `translate(${x+30}, ${y+30})`);
         })
         .on("mousemove", function(event, d) {
         })
         .on("mouseout", function(event, d) {
-            tooltip.style("opacity", 0);
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
         });
 
     svg.append("g").attr("transform", `translate(0, ${slidesize.height+height})`).call(d3.axisBottom(x).ticks(10));
