@@ -16,6 +16,7 @@ body {
 .slide {
     color: slategray;
     text-anchor: middle;
+    z-index: 9999;
 }
 .bubble {
     stroke-width: 1px;
@@ -29,8 +30,8 @@ div.tooltip {
     position: absolute;
     text-align: center;
     width: 120px;
-    height: 40px;
-    padding: 2px;
+    height: 50px;
+    padding: 4px;
     font: 12px;
     color: white;
     background: lightslategray;
@@ -72,7 +73,7 @@ slide.append("rect")
 slide.append("text")
     .attr("class", "slide")
     .attr('x', function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
-    .attr('y', slidesize.height*-1)
+    .attr('y', slidesize.height*-0.5)
     .text(function (d, i) { return decades[i] });
 
 let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
