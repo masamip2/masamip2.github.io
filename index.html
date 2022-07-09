@@ -3,11 +3,11 @@
 <style>
     .bubble {
         stroke-width: 1px;
-        stroke: black;
+        stroke: gray;
         opacity: .8
     }
     .bubble:hover {
-        stroke: black;
+        stroke: white;
     }
 </style>
 <body onload='init()'>
@@ -19,8 +19,8 @@ async function init() {
     const data = await d3.csv('imdb_top_1000.csv');
 
     var margin = {top: 50, right: 200, bottom: 50, left: 50},
-        width = 1000 - margin.left - margin.right,
-        height = 800 - margin.top - margin.bottom;
+        width = 1800 - margin.left - margin.right,
+        height = 1800 - margin.top - margin.bottom;
 
     var svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -28,13 +28,12 @@ async function init() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    var x = d3.scaleLinear().domain([1910, 2030]).range([0, width]);
-    var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(12));
+    var x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
+    var xAxis = svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(10));
 
-    var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
-    svg.append("g").call(d3.axisLeft(y).ticks(10));
+    var y = d3.scaleLinear().domain([7, 10]).range([height, 0]);
+    svg.append("g").call(d3.axisLeft(y).ticks(3));
 
-    //var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
     var z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
     svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
@@ -42,18 +41,16 @@ async function init() {
 
     var color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
-        .range(d3.schemeSet1);
+        .range(d3.schemeSet3);
 
-    /*
     var tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip")
-        .style("background-color", "black")
-        .style("border-radius", "5px")
+        .style("background-color", "water")
+        .style("border-radius", "2px")
         .style("padding", "10px")
-        .style("color", "white");
+        .style("color", "gray");
 
     var showTooltip = function(d) {
-        tooltip.transition().duration(2000)
-        tooltip.style("opacity", 1).html("Year: " + d.Released_Year).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+        tooltip.transition().html("Year: " + d.Released_Year).style("opacity", 1).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
     }
     var moveTooltip = function(d) {
         tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
@@ -61,17 +58,16 @@ async function init() {
     var hideTooltip = function(d) {
         tooltip.transition().duration(200).style("opacity", 0)
     }
-    */
 
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
-        .attr("cy", function (d) { return y(d.Meta_score) })
+        .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
-        .style("fill", function (d) { return color((d.Genre).split(',')[0]) });
-        //.on("mouseover", showTooltip)
-        //.on("mousemove", moveTooltip)
-        //.on("mouseleave", hideTooltip);
+        .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
+        .on("mouseover", showTooltip)
+        .on("mousemove", moveTooltip)
+        .on("mouseleave", hideTooltip);
 
 
 }
