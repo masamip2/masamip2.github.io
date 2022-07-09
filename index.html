@@ -53,7 +53,7 @@ async function init() {
     svg.append('g').selectAll("rect").data(decades).enter().append("rect")
         .attr("class", "rect")
         .attr('x', function(d, i) { return 50*(i+1) })
-        .attr('y', -50)
+        .attr('y', -40)
         .attr('width', 100)
         .attr('height', 50)
         .append("text").text(function (d) { return xPos(d) });
@@ -67,7 +67,7 @@ async function init() {
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
     svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+height).text("Year");
-    svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", slide.height+20).text("Rating").attr("text-anchor", "start");
+    svg.append("text").attr("text-anchor", "end").attr("x", 120).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
 
     const color = d3.scaleOrdinal()
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
