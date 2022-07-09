@@ -100,7 +100,7 @@ async function init() {
         .on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
             tooltip.style("opacity", 1);
-            console.log(`${x}, ${y}: d.Released_Year`);
+            console.log(`${x}, ${y}: ${d.Released_Year}`);
             tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
             tooltip.style("left", `${x+30} px`);
             tooltip.style("top", `${y+30} px`);
