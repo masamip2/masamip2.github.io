@@ -35,7 +35,7 @@ async function init() {
     svg.append("g").call(d3.axisLeft(y).ticks(10));
 
     //var z = d3.scaleSqrt().domain([0, 10]).range([2, 30]);
-    var z = d3.scaleLog().domain([1, 1000000000]).range([1, 30]);
+    var z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
     svg.append("text").attr("text-anchor", "end").attr("x", width).attr("y", height+50 ).text("Year");
     svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", -20 ).text("Metascore").attr("text-anchor", "start");
