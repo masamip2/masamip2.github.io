@@ -1,113 +1,117 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style> /* set the CSS */
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 2px;
+<style>
+body {
+    font-family: Verdana, Helvetica, Arial;
+    color: gray;
 }
-
+.div {
+    top: 50;
+    left: 100;
+}
+.rect {
+    stroke: white;
+    fill: lightgray;
+}
+.slide {
+    color: slategray;
+    text-anchor: middle;
+}
+.bubble {
+    stroke-width: 1px;
+    stroke: white;
+    opacity: .8
+}
+.bubble:hover {
+    stroke: gray;
+}
 div.tooltip {
-  position: absolute;
-  text-align: center;
-  width: 60px;
-  height: 28px;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 8px;
-  pointer-events: none;
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
-
 </style>
 <body>
-
-<!-- load the d3.js library -->    	
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 
-// set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+const margin = {top: 50, right: 200, bottom: 50, left: 50},
+    slidesize = {width: 100, height: 50},
+    width = 1200 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom - slidesize.height;
 
-// parse the date / time
-var parseTime = d3.timeParse("%d-%b-%y");
-var formatTime = d3.timeFormat("%e %B");
-
-// set the ranges
-var x = d3.scaleTime().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
-
-// define the line
-var valueline = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.close); });
-
-var div = d3.select("body").append("div")
+var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("body").append("svg")
+let svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("height", height + margin.top + margin.bottom + slidesize.height)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-// Get the data
+const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+//const xPos = d3.scaleBand().domain(decades).range([0, width]);
+let slide = svg.append('g').selectAll("rect").data(decades).enter();
+slide.append("rect")
+    .attr("class", "rect")
+    .attr('x', function(d, i) { return slidesize.width*(i) })
+    .attr('y', slidesize.height*-1)
+    .attr('width', slidesize.width)
+    .attr('height', slidesize.height);
+
+slide.append("text")
+    .attr("class", "slide")
+    .attr('x', function(d, i) { return slidesize.width*(i) })
+    .attr('y', slidesize.height*-1)
+    .text(function (d, i) { return decades[i] });
+
+let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
+let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
+let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
+
+const color = d3.scaleOrdinal()
+    .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
+    .range(d3.schemeSet3);
+
 d3.csv("imdb_top_1000.csv").then(function(data) {
 
-  // format the data
-  data.forEach(function(d) {
-      d.date = parseTime(d.date);
-      d.close = +d.close;
-  });
+    svg.append('g').selectAll("dot").data(data).enter().append("circle")
+        .attr("class", "bubble")
+        .attr("cx", function (d) { return x(d.Released_Year) })
+        .attr("cy", function (d) { return y(d.IMDB_Rating) })
+        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
+        .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
+        .on("mouseover", function(event, d) {
+            //const [x, y] = d3.pointer(event);
+            //console.log(`${x}, ${y}: ${d.Released_Year}`);
+            //tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`)
+            console.log(`${event.pageX}, ${event.pageY}: ${d.Released_Year}`);
+            tooltip.style("opacity", 1);
+            tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`)
+                .style("left", `${event.pageX+30} px`)
+                .style("top", `${event.pageY+30} px`);
 
-  // scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.close; })]);
+                //.attr("transform", `translate(${x+30}, ${y+30})`);
+        })
+        .on("mousemove", function(event, d) {
+        })
+        .on("mouseout", function(event, d) {
+            tooltip.style("opacity", 0);
+        });
 
-  // add the valueline path.
-  svg.append("path")
-     .data([data])
-     .attr("class", "line")
-     .attr("d", valueline);
+    svg.append("g").attr("transform", `translate(0, ${slidesize.height+height})`).call(d3.axisBottom(x).ticks(10));
+    svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+height).text("Year");
 
-  // add the dots with tooltips
-  svg.selectAll("dot")
-     .data(data)
-   .enter().append("circle")
-     .attr("r", 5)
-     .attr("cx", function(d) { return x(d.date); })
-     .attr("cy", function(d) { return y(d.close); })
-     .on("mouseover", function(event,d) {
-       div.transition()
-         .duration(200)
-         .style("opacity", .9);
-       div.html(formatTime(d.date) + "<br/>" + d.close)
-         .style("left", (event.pageX) + "px")
-         .style("top", (event.pageY - 28) + "px");
-       })
-     .on("mouseout", function(d) {
-       div.transition()
-         .duration(500)
-         .style("opacity", 0);
-       });
-
-  // add the X Axis
-  svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-  // add the Y Axis
-  svg.append("g")
-      .call(d3.axisLeft(y));
+    svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
+    svg.append("text").attr("text-anchor", "end").attr("x", 10).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
 
 });
 
