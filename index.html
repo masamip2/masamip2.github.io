@@ -28,10 +28,11 @@ body {
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 80px;
+    width: 120px;
     height: 40px;
     padding: 2px;
     font: 12px;
+    color: white;
     background: lightslategray;
     border: 0px;
     border-radius: 2px;
@@ -69,7 +70,7 @@ slide.append("rect")
 slide.append("text")
     .attr("class", "slide")
     .attr('x', function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
-    .attr('y', slidesize.height*-1.5)
+    .attr('y', slidesize.height*1.5)
     .text(function (d, i) { return decades[i] });
 
 let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
@@ -104,8 +105,8 @@ d3.csv("imdb_top_1000.csv").then(function(data) {
                 .duration(200)
                 .style("opacity", 1);
             tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`)
-                .style("left", (event.pageX + 30) + "px")
-                .style("top", (event.pageY + 30) + "px");
+                .style("left", (event.pageX+30) + "px")
+                .style("top", (event.pageY+30) + "px");
 
                 //.attr("transform", `translate(${x+30}, ${y+30})`);
         })
