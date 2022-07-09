@@ -5,14 +5,18 @@
         font-family: Verdana, Helvetica, Arial;
         color: gray;
     }
-    div1 {
+    div {
         top: 50;
         left: 100;
     }
     .rect {
         stroke: white;
         fill: lightgray;
+    }
+    .slide {
+        color: slategray;
         text-anchor: middle;
+        z-index: 9999;
     }
     .bubble {
         stroke-width: 1px;
@@ -24,9 +28,9 @@
     }
     .tooltip {
         opacity: 0;
-        background-color: lightslategray;
+        background-color: black;
         border-radius: 2px;
-        padding: 4px;
+        padding: 2px;
     }
 </style>
 <body onload='init()'>
@@ -71,7 +75,7 @@ async function init() {
 
     let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
     svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
-    svg.append("text").attr("text-anchor", "end").attr("x", 0).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
+    svg.append("text").attr("text-anchor", "end").attr("x", 10).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
 
     let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
