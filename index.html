@@ -40,6 +40,8 @@
 </style>
 <body onload='init()'>
     <div class="div"><h1>Top 1000 Movies by IMDB Rating</h1></div>
+    <div class="div" id="svg"></div>
+    <div id="tooltip"></div>
 </body>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
@@ -51,8 +53,7 @@ async function init() {
         width = 1200 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom - slidesize.height;
 
-    let svg = d3.select("body").append("svg")
-    //let svg = d3.select("#svg").append("svg")
+    let svg = d3.select("#svg").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom + slidesize.height)
         .append("g")
@@ -88,7 +89,7 @@ async function init() {
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet3);
 
-    let tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+    let tooltip = d3.select("#svg").attr("class", "tooltip").style("opacity", 0);
 
     let plot = svg.append('g').selectAll("dot").data(data).enter().append("circle")
         .attr("class", "bubble")
@@ -100,6 +101,7 @@ async function init() {
             //const [x, y] = d3.pointer(event);
             //console.log(`${x}, ${y}: ${d.Released_Year}`);
             //tooltip.append("text").text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`)
+            console.log(`${event.pageX}, ${event.pageY}: ${d.Released_Year}`);
             tooltip.style("opacity", 1);
             tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`)
                 .style("left", `${event.pageX+30} px`)
