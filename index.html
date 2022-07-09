@@ -50,13 +50,13 @@ async function init() {
         .style("color", "gray");
 
     var showTooltip = function(d) {
-        tooltip.transition().html("Year: " + d.Released_Year).style("opacity", 1).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+        tooltip.transition().style("opacity", 1).html("Year: " + d.Released_Year).style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px");
     }
     var moveTooltip = function(d) {
-        tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px")
+        tooltip.style("left", (d3.mouse(this)[0]+30) + "px").style("top", (d3.mouse(this)[1]+30) + "px");
     }
     var hideTooltip = function(d) {
-        tooltip.transition().duration(200).style("opacity", 0)
+        tooltip.transition().duration(200).style("opacity", 0);
     }
 
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
