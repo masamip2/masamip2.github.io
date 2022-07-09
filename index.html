@@ -58,7 +58,7 @@ async function init() {
         .on("mouseover", function(event, d) {
             const [x, y] = d3.pointer(event);
             console.log(`${x}, ${y}`);
-            tooltip.attr('transform', `translate(${x}+30, ${y}+30)`);
+            tooltip.attr('transform', `translate(${x}, ${y})`);
             tooltip.text(`Year: ${d.Released_Year}, Rating: ${d.IMDB_Rating}`);
         })
         .on("mousemove", function(event, d) {
