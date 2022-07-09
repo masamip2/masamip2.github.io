@@ -30,7 +30,7 @@
         background-color: lightslategray;
         border: solid;
         border-color: 2px;
-        border-width: 1px;
+        border-width: 2px;
         border-radius: 2px;
         padding: 2px;
     }
@@ -85,7 +85,7 @@ async function init() {
         .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
         .range(d3.schemeSet3);
 
-    let tooltip = d3.select("#svg").append("div").style("opacity", 0).attr("class", "tooltip");
+    let tooltip = svg.append('g').style("opacity", 0).attr("class", "tooltip");
 
     let plot = svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
