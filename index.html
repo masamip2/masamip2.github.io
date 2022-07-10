@@ -134,8 +134,8 @@ let handle = slider.append("rect").attr("class", ".track-overlay")
   .attr("width", 10)
   .attr("height", 30)
   .attr("x", scale(2020))
-  .attr("y", -10)
-  .call(d3.drag().on("start drag", function(event, value) { changeYear(scale(value)) }));
+  .attr("y", -15)
+  .call(d3.drag().on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
 
 function changeYear(h) {
   handle.attr("x", scale(h));
