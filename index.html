@@ -126,7 +126,8 @@ const color = d3.scaleOrdinal()
 
 
 async function plot(data) {
-    svg.append('g').selectAll("dot").data(data).enter().append("circle")
+    d3.selectAll().remove(circle);
+    svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
