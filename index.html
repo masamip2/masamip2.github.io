@@ -138,10 +138,13 @@ let handle = slider.append("rect")
         .on("start drag", function(event) { changeYear(parseInt(scale.invert(event.x))) }))
     .attr("width", 10)
     .attr("height", 30)
-    .attr("x", scale(2020))
+    .attr("x", scale(d3.max(decades)))
     .attr("y", -15);
 
-//let year = handle.append("text").text(d3.max(decades));
+let year = slider.append("text")
+    .text(d3.max(decades))
+    .attr("x", scale(d3.max(decades)))
+    .attr("y", -30);
 //let year = svg.append("g").append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top).text(d3.max(decades));
 
 function changeYear(h) {
