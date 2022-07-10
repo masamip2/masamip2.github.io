@@ -75,8 +75,8 @@ let svg = d3.select("body").append("svg")
 
 const tPos = d3.scaleBand().domain(decades).range([0, width]);
 
-let slider = svg.append('g').selectAll("rect").data(decades).enter();
-slider.append("input")
+//let slider = svg.append('g').selectAll("rect").data(decades).enter();
+svg.append('g').append("input")
     .attr("class", "slider")
     .attr("type", "range")
     .attr("value", d3.max(decades))
@@ -85,7 +85,7 @@ slider.append("input")
     .attr("width", width)
     .on("onchange", val => { filter(val) });
 
-svg.append("g").attr("transform", `translate(0, ${margin.top})`).call(d3.axisBottom(tPos).ticks(10));
+svg.append("g").attr("transform", `translate(0, 0)`).call(d3.axisBottom(tPos).ticks(11));
 
 /*
 slider.append("text")
