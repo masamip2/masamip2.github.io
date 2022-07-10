@@ -126,11 +126,13 @@ slider.append("line")
     .call(d3.drag()
         //.on("start.interrupt", function() { slider.interrupt() })
         //.on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
-        .on("start drag", function(event) { changeYear(scale(event.value)) }));
+        .on("start drag", function(event, value) { changeYear(scale(value)) }));
 
-let handle = slider.insert("circle", ".track-overlay")
+//let handle = slider.insert("circle", ".track-overlay")
+let handle = slider.append("circle").attr("class", ".track-overlay")
   .attr("class", "handle")
-  .attr("r", 9);
+  .attr("r", 9)
+  .attr("cx", scale(2020));
 
 function changeYear(h) {
   handle.attr("cx", scale(h));
