@@ -67,14 +67,23 @@ let svg = d3.select("body").append("svg")
 
 var year = d3.select("body").append("div").attr("class", "year");
 
-let slider = d3.sliderBottom().min(1920).max(2020).step(10).width(width).tickFormat(d3.timeFormat('%Y')).ticks(10).default(2020).displayValue(true)
-    .handle(d3.symbol().type(d3.symbolCircle).size(200)())
+let slider = svg.append('g').append("input")
+    .attr("class", "slider")
+    .attr("min", 1920)
+    .attr("max", 2020)
+    .attr("step", 10)
+    .attr("width", width)
+    .attr("ticks", 10)
+    .attr("default", 2020)
+
+//let slider = d3.sliderBottom().min(1920).max(2020).step(10).width(width).tickFormat(d3.timeFormat('%Y')).ticks(10).default(2020).displayValue(true)
+    //.handle(d3.symbol().type(d3.symbolCircle).size(200)())
     .on('onchange', val => {
-        year.text(d3.timeFormat('%Y')(val));
+        year.text(val);
         plot(dataset.filter(function(d) { return d.Released_Year <= val }));
     });
-svg.append('g').attr('transform', `translate(margin.top, margin.left)`).call(slider);
-year.text(d3.timeFormat('%Y')(slider.value()));
+//svg.append('g').attr('transform', `translate(margin.top, margin.left)`).call(slider);
+//year.text(d3.timeFormat('%Y')(slider.value()));
 
 /*
 const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
