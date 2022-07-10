@@ -126,7 +126,7 @@ slider.append("line")
     .call(d3.drag()
         ////.on("start.interrupt", function() { slider.interrupt() })
         ////.on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
-        .on("start drag", function(event) { changeYear(parseIng(scale(event.x))) }));
+        .on("start drag", function(event) { changeYear(parseInt(scale(event.x))) }));
 
 //let handle = slider.insert("circle", ".track-overlay")
 let handle = slider.append("rect")
