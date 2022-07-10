@@ -83,7 +83,7 @@ slider.append("input")
     .attr("min", d3.min(decades))
     .attr("max", d3.max(decades))
     .attr("width", width)
-    .on("onchange", val => { await filter(val) });
+    .on("onchange", val => { filter(val) });
 
 slider.call(d3.axisBottom(tPos).ticks(10));
 slider.append("text")
