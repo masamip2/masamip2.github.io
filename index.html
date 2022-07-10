@@ -42,6 +42,7 @@ div.tooltip {
 </style>
 <body onload="init()">
 <div class="div"><h1>Top 1000 Movies by IMDB Rating</h1></div>
+<div class="div"><input id="slider" type="range" min="1920" max="2020" value="2020"></div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
@@ -67,6 +68,13 @@ let svg = d3.select("body").append("svg")
 
 var year = d3.select("body").append("div").attr("class", "year");
 
+d3.select("#slider")
+    .on("onchange", val => {
+        year.text(val);
+        plot(dataset.filter(function(d) { return d.Released_Year <= val }));
+    });
+
+/*
 let slider = svg.append('g').append("input")
     .attr("class", "slider")
     .attr("min", 1920)
@@ -84,7 +92,7 @@ let slider = svg.append('g').append("input")
     });
 //svg.append('g').attr('transform', `translate(margin.top, margin.left)`).call(slider);
 //year.text(d3.timeFormat('%Y')(slider.value()));
-
+*/
 /*
 const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
 //const xPos = d3.scaleBand().domain(decades).range([0, width]);
