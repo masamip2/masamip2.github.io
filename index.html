@@ -117,16 +117,16 @@ slider.append("line")
     .append("line")
     .attr("class", "track-inset")
     .attr("x1", scale.range()[0])
-    .attr("x2", scale.range()[1]);
+    .attr("x2", scale.range()[1])
     //.select(function() { return this.parentNode })
-    //.append("line")
-    //.attr("class", "track-overlay")
-    //.attr("x1", scale.range()[0])
-    //.attr("x2", scale.range()[1])
-    //.call(d3.drag()
+    .append("line")
+    .attr("class", "track-overlay")
+    .attr("x1", scale.range()[0])
+    .attr("x2", scale.range()[1])
+    .call(d3.drag()
         ////.on("start.interrupt", function() { slider.interrupt() })
         ////.on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
-        //.on("start drag", function(event, value) { changeYear(scale(value)) }));
+        .on("start drag", function(event, value) { changeYear(scale.invert(event.pageX)) }));
 
 //let handle = slider.insert("circle", ".track-overlay")
 let handle = slider.append("rect").attr("class", ".track-overlay")
@@ -134,11 +134,10 @@ let handle = slider.append("rect").attr("class", ".track-overlay")
   .attr("width", 10)
   .attr("height", 30)
   .attr("x", scale(2020))
-  .attr("y", -15)
-  .call(d3.drag().on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
+  .attr("y", -15);
 
 function changeYear(h) {
-  handle.attr("x", scale(h));
+  handle.attr("x", h);
   filter(h);
 }
 
