@@ -54,7 +54,7 @@ async function init() {
 
 function filter(val) {
     console.log(val);
-    plot(dataset.filter(function(d) { return d.Released_Year <= val }));
+    await plot(await dataset.filter(function(d) { return d.Released_Year <= val }));
 }
 
 const margin = {top: 50, right: 200, bottom: 50, left: 50},
@@ -125,7 +125,7 @@ const color = d3.scaleOrdinal()
     .range(d3.schemeSet3);
 
 
-function plot(data) {
+async function plot(data) {
     svg.append('g').selectAll("dot").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
