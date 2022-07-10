@@ -72,7 +72,7 @@ d3.select("#slider")
     .on("onchange", val => {
         //year.text(val);
         console.log(val);
-        await plot(dataset.filter(function(d) { return d.Released_Year <= val }));
+        plot(dataset.filter(function(d) { return d.Released_Year <= val }));
     });
 
 /*
@@ -127,7 +127,7 @@ const color = d3.scaleOrdinal()
     .range(d3.schemeSet3);
 
 
-async function plot(data) {
+function plot(data) {
     svg.append('g').selectAll("dot").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
