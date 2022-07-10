@@ -47,7 +47,7 @@ div.tooltip {
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 let dataset;
-async function init() {
+function init() {
     dataset = await d3.csv('imdb_top_1000.csv');
     await plot(dataset);
 }
@@ -125,7 +125,7 @@ const color = d3.scaleOrdinal()
     .range(d3.schemeSet3);
 
 
-async function plot(data) {
+function plot(data) {
     svg.append('g').selectAll("dot").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
