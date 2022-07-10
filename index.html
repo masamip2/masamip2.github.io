@@ -111,7 +111,7 @@ slide.append("text")
 */
 
 //let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
-let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, width]);
+let x = d3.scaleLog().domain([25000, 2350000]).range([0, width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
