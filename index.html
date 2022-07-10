@@ -28,13 +28,13 @@ body {
 
 .track {
     stroke: gray;
-    stroke-opacity: 0.5;
-    stroke-width: 10px;
+    stroke-width: 2px;
 }
 
 .track-inset {
     stroke: lightgray;
-    stroke-width: 8px;
+    stroke-opacity: 0.5;
+    stroke-width: 5px;
 }
 
 .track-overlay {
@@ -104,18 +104,15 @@ let svg = d3.select("body").append("svg")
 
 const scale = d3.scaleLinear().domain(decades).range([0, width]).clamp(true);
 
-//svg.append("g").call(d3.axisBottom(scale).tickFormat(d3.timeFormat('%Y')).ticks(11));
-svg.append("g").call(d3.axisBottom(scale).ticks(11));
-
 let slider = svg.append("g")
     .attr("class", "slider");
 
 slider.append("line")
-    //.attr("class", "track")
-    //.attr("x1", scale.range()[0])
-    //.attr("x2", scale.range()[1])
+    .attr("class", "track")
+    .attr("x1", scale.range()[0])
+    .attr("x2", scale.range()[1])
     //.select(function() { return this.parentNode })
-    //.append("line")
+    .append("line")
     .attr("class", "track-inset")
     .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1])
@@ -141,18 +138,19 @@ let handle = slider.append("rect")
 
 let year = slider.append("text")
     .text(d3.max(decades))
-    .attr("x", scale(d3.max(decades)))
+    .attr("x", scale(d3.max(decades))-25)
     .attr("y", -30);
 //let year = svg.append("g").append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top).text(d3.max(decades));
 
 function changeYear(h) {
   console.log(h);
   handle.attr("x", scale(h));
-  year.text(h);
+  year.text(h).attr("x", scale(h)-25);
   filter(h);
 }
 
-
+//svg.append("g").call(d3.axisBottom(scale).tickFormat(d3.timeFormat('%Y')).ticks(11));
+svg.append("g").call(d3.axisBottom(scale).ticks(11));
 
 
 
