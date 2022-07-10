@@ -104,9 +104,9 @@ let svg = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom + slidesize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-svg.append("g").call(d3.axisBottom(scale).ticks(11));
-
 const scale = d3.scaleLinear().domain(decades).range([0, width]).clamp(true);
+
+svg.append("g").call(d3.axisBottom(scale).ticks(11));
 
 let slider = svg.append("g")
     .attr("class", "slider");
