@@ -131,13 +131,14 @@ slider.append("line")
         .on("start drag", function(event, value) { changeYear(scale(value)) }));
 
 //let handle = slider.insert("circle", ".track-overlay")
-let handle = slider.append("dot").attr("class", ".track-overlay")
+let handle = slider.append("rect").attr("class", ".track-overlay")
   .attr("class", "handle")
-  .attr("r", 9)
-  .attr("cx", scale(2020));
+  .attr("width", 20)
+  .attr("height", 20)
+  .attr("x", scale(2020));
 
 function changeYear(h) {
-  handle.attr("cx", scale(h));
+  handle.attr("x", scale(h));
   filter(h);
 }
 
