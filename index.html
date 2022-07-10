@@ -23,7 +23,7 @@ body {
 .track,
 .track-inset,
 .track-overlay {
-    stroke-linecap: round;
+    stroke-linecap: square;
 }
 
 .track {
@@ -111,11 +111,11 @@ let slider = svg.append("g")
     .attr("class", "slider");
 
 slider.append("line")
-    .attr("class", "track")
-    .attr("x1", scale.range()[0])
-    .attr("x2", scale.range()[1])
-    .select(function() { return this.parentNode })
-    .append("line")
+    //.attr("class", "track")
+    //.attr("x1", scale.range()[0])
+    //.attr("x2", scale.range()[1])
+    //.select(function() { return this.parentNode })
+    //.append("line")
     .attr("class", "track-inset")
     .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1])
