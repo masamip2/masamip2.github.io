@@ -126,19 +126,20 @@ slider.append("line")
     .call(d3.drag()
         ////.on("start.interrupt", function() { slider.interrupt() })
         ////.on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
-        .on("start drag", function(event, value) { changeYear(scale.invert(event.pageX)) }));
+        .on("start drag", function(event, value) { console.log(value); changeYear(scale.invert(value)) }));
 
 //let handle = slider.insert("circle", ".track-overlay")
-let handle = slider.append("rect").attr("class", ".track-overlay")
-  .attr("class", "handle")
-  .attr("width", 10)
-  .attr("height", 30)
-  .attr("x", scale(2020))
-  .attr("y", -15);
+let handle = slider.append("rect")
+    .attr("class", "track-overlay")
+    .attr("class", "handle")
+    .attr("width", 10)
+    .attr("height", 30)
+    .attr("x", scale(2020))
+    .attr("y", -15);
 
 function changeYear(h) {
   console.log(h);
-  handle.attr("x", h);
+  handle.attr("x", scale(h));
   filter(h);
 }
 
