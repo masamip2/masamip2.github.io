@@ -106,7 +106,7 @@ let svg = d3.select("body").append("svg")
 
 const scale = d3.scaleLinear().domain(decades).range([0, width]).clamp(true);
 
-svg.append("g").call(d3.axisBottom(scale)).tickFormat(d3.timeFormat('%Y')).ticks(11);
+svg.append("g").call(d3.axisBottom(scale).tickFormat(d3.timeFormat('%Y')).ticks(11));
 
 let slider = svg.append("g")
     .attr("class", "slider");
