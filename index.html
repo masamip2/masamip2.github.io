@@ -47,7 +47,7 @@ div.tooltip {
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 let dataset;
-function init() {
+async function init() {
     dataset = await d3.csv('imdb_top_1000.csv');
     await plot(dataset);
 }
