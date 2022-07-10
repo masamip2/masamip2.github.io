@@ -126,7 +126,7 @@ const color = d3.scaleOrdinal()
 
 
 async function plot(data) {
-    d3.selectAll().remove(circle);
+    d3.selectAll("circle").remove();
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
