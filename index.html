@@ -49,7 +49,7 @@ div.tooltip {
 let dataset;
 async function init() {
     dataset = await d3.csv('imdb_top_1000.csv');
-    plot(dataset);
+    await plot(dataset);
 }
 
 const margin = {top: 50, right: 200, bottom: 50, left: 50},
@@ -66,12 +66,13 @@ let svg = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom + slidesize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-var year = d3.select("body").append("div").attr("class", "year");
+//var year = d3.select("body").append("div").attr("class", "year");
 
 d3.select("#slider")
     .on("onchange", val => {
-        year.text(val);
-        plot(dataset.filter(function(d) { return d.Released_Year <= val }));
+        //year.text(val);
+        console.log(val);
+        await plot(dataset.filter(function(d) { return d.Released_Year <= val }));
     });
 
 /*
@@ -126,7 +127,7 @@ const color = d3.scaleOrdinal()
     .range(d3.schemeSet3);
 
 
-function plot(data) {
+async function plot(data) {
     svg.append('g').selectAll("dot").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.Released_Year) })
