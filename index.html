@@ -44,7 +44,7 @@ body {
 }
 
 .handle {
-    fill: white;
+    fill: gray;
     stroke: slategray;
     stroke-opacity: 0.5;
     stroke-width: 1.25px;
@@ -108,7 +108,6 @@ const scale = d3.scaleLinear().domain(decades).range([0, width]).clamp(true);
 
 let slider = svg.append("g")
     .attr("class", "slider");
-    //.attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 slider.append("line")
     .attr("class", "track")
@@ -125,8 +124,9 @@ slider.append("line")
     .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1])
     .call(d3.drag()
-        .on("start.interrupt", function() { slider.interrupt() })
-        .on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
+        //.on("start.interrupt", function() { slider.interrupt() })
+        //.on("start drag", function() { changeYear(scale.invert(d3.event.x)) }));
+        .on("start drag", function(event) { changeYear(scale(event.value)) }));
 
 let handle = slider.insert("circle", ".track-overlay")
   .attr("class", "handle")
@@ -138,7 +138,7 @@ function changeYear(h) {
 }
 
 svg.append("g").call(d3.axisBottom(scale).ticks(11));
-//svg.append("g").attr("transform", `translate(0, 0)`).call(d3.axisBottom(scale).ticks(11));
+
 
 
 
