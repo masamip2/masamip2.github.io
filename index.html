@@ -112,6 +112,16 @@ let slider = svg.append("g")
     .attr("class", "slider");
 
 slider.append("line")
+    .attr("class", "track")
+    .attr("x1", scale.range()[0])
+    .attr("x2", scale.range()[1])
+    .select(function() { return this.parentNode })
+    .append("line")
+    .attr("class", "track-inset")
+    .attr("x1", scale.range()[0])
+    .attr("x2", scale.range()[1])
+    .select(function() { return this.parentNode })
+    .append("line")
     .attr("class", "track-overlay")
     .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1])
@@ -121,7 +131,7 @@ slider.append("line")
         .on("start drag", function(event, value) { changeYear(scale(value)) }));
 
 //let handle = slider.insert("circle", ".track-overlay")
-let handle = slider.append("circle").attr("class", ".track-overlay")
+let handle = slider.append("dot").attr("class", ".track-overlay")
   .attr("class", "handle")
   .attr("r", 9)
   .attr("cx", scale(2020));
