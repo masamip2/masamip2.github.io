@@ -37,12 +37,15 @@ body {
     stroke-width: 8px;
 }
 
-.handle {
-    stroke: slategray;
-    stroke-opacity: 0.5;
+.track-overlay {
     pointer-events: stroke;
     stroke-width: 50px;
     cursor: pointer;
+}
+
+.handle {
+    fill: lightslategray;
+    opacity: 0.5;
 }
 
 .bubble {
@@ -128,7 +131,7 @@ slider.append("line")
 
 //let handle = slider.insert("circle", ".track-overlay")
 let handle = slider.append("rect")
-    .attr("class", "handle")
+    .attr("class", "track-overlay handle")
     .call(d3.drag()
         .on("start drag", function(event) { changeYear(parseInt(scale.invert(event.x))) }))
     .attr("width", 10)
