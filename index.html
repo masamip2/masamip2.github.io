@@ -54,7 +54,7 @@ async function init() {
 
 async function filter(val) {
     console.log(val);
-    await plot(dataset.filter(function(d) { return d.Released_Year <= val }));
+    await plot(dataset.filter(function(d) { return d.Released_Year == val }));
 }
 
 const margin = {top: 50, right: 200, bottom: 50, left: 50},
@@ -110,12 +110,13 @@ slide.append("text")
     .text(function (d, i) { return decades[i] });
 */
 
-let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
+//let x = d3.scaleLinear().domain([1920, 2020]).range([0, width]);
+let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+height})`).call(d3.axisBottom(x).ticks(10));
-svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+height).text("Year");
+svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+height).text("Votes");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", 10).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
@@ -129,7 +130,7 @@ async function plot(data) {
     d3.selectAll("circle").remove();
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
-        .attr("cx", function (d) { return x(d.Released_Year) })
+        .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) { return color((d.Genre).split(',')[0]) })
@@ -137,7 +138,7 @@ async function plot(data) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 1);
-            tooltip.html(`Year: ${d.Released_Year}<br>Rating: ${d.IMDB_Rating}`)
+            tooltip.html(`Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
                 .style("left", (event.pageX+30) + "px")
                 .style("top", (event.pageY+30) + "px");
         })
