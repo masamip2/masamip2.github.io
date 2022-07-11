@@ -115,7 +115,7 @@ const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
 slide.append("rect")
-    .attr("class", "rect track-overlay")
+    .attr("class", "track-overlay")
     .attr("x", function(d, i) { return slidesize.width*(i) })
     .attr("y", slidesize.height*-2)
     .attr("width", slidesize.width)
@@ -131,7 +131,6 @@ d3.select("All").attr("class", "slide-selected");
 
 let slider = svg.append("g")
     .attr("class", "slider");
-    //.attr("transform", `translate(${margin.left}, 0)`);
 slider.append("line")
     .attr("class", "track")
     .attr("x1", scale.range()[0])
