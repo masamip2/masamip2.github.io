@@ -168,7 +168,7 @@ function changeDecade(y) {
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     const id = y == 'All'? y : decade;
     handle.attr("x", positionHandle(decade));
-    year.style("opacity", 'All'? 0 : 1).text(decade).attr("x", positionYear(decade)+20);
+    year.style("opacity", 1).text(decade).attr("x", positionYear(decade)+20);
     filter(decade);
 }
 
