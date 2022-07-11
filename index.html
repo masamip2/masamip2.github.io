@@ -169,7 +169,7 @@ function changeDecade(y) {
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     const id = y == 'All'? y : decade;
     handle.attr("x", scale(decade));
-    year.text(decade).attr("x", scale(decade)-20);
+    year.text(decade).attr("x", scale(decade)-20).attr("color", "orange");
     //d3.select(id).attr("class", "slide-selected");
     filter(decade);
 }
