@@ -203,10 +203,11 @@ function changeSlide(v) {
     if (typeof(v) == 'string') {
         if (v != 'All') {
             let y = d3.select("#year").text();
+            console.log(`y: ${y}`);
             if (y) {
-                if (v == '< Prev' && d3.min(decades) < parseInt(y)) {
+                if (v == '< Prev' && parseInt(d3.min(decades)) < parseInt(y)) {
                     v = parseInt(y) - 10;
-                } else if (v == 'Next >' && parseInt(y) < d3.max(decades)) {
+                } else if (v == 'Next >' && parseInt(y) < parseInt(d3.max(decades))) {
                     v = parseInt(y) + 10;
                 }
             } else {
