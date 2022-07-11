@@ -15,13 +15,24 @@ body {
     fill: lightgray;
     cursor: pointer;
 }
+.slide-all,
+.slide-nav,
+.slide-text {
+    text-anchor: middle;
+}
+.slide-all {
+    color: salmon;
+}
+.slide-nav {
+    color: darkorange;
+}
 .slide-text {
     color: slategray;
-    text-anchor: middle;
 }
 
 .year {
-    fill: orange;
+    fill: greenyellow;
+    opacity: 0.8;
     z-index: 9999;
 }
 
@@ -126,12 +137,11 @@ slide.append("rect")
     .attr("width", slidesize.width)
     .attr("height", slidesize.height)
     .on("click", function(event, d) { changeSlide(d) });
-let text = slide.append("text")
-    .attr("class", "slide-text")
+slide.append("text")
+    .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "slide-all" : "slide-nav") : "slide-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return d })
-    .style("opacity", 1)
     .text(function (d, i) { return d });
 
 let slider = svg.append("g")
@@ -167,7 +177,6 @@ function changeDecade(y) {
 
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     const id = y == 'All'? y : decade;
-    text.style("opacity", 0);
     handle.attr("x", positionHandle(decade));
     year.style("opacity", y == 'All'? 0 : 1).text(decade).attr("x", positionYear(decade));
     filter(decade);
