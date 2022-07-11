@@ -11,17 +11,7 @@ body {
     left: 100;
 }
 #wrapper {
-    width: 1800px;
     display: flex;
-    border: 5px solid black;
-}
-#left {
-    width: 1220px;
-    border: 5px solid red;
-}
-#right {
-    width: 280px;
-    border: 5px solid green;
 }
 .rect-all,
 .rect-nav,
@@ -154,7 +144,7 @@ let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-let svg = d3.select("#right").append("svg")
+let svg = d3.select("#left").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
