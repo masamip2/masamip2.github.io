@@ -273,7 +273,7 @@ async function plot(data) {
         .on("mousemove", function(event, d) {
         })
         .on("click", function(event, d) {
-            info.html(`<img src="${(d.Poster_Link).split('@')[0]+'@'}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
+            info.html(`<img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
         });
 }
 
