@@ -6,9 +6,21 @@ body {
     color: gray;
     background: whitesmoke;
 }
-.div {
+.title {
     top: 50;
     left: 100;
+}
+#wrapper {
+    overflow: hidden;
+    border: 1px solid black;
+}
+#left {
+    float: left;
+    border: 1px solid red;
+}
+#right {
+    overflow: hidden;
+    border: 1px solid green;
 }
 .rect-all,
 .rect-nav,
@@ -101,7 +113,11 @@ div.tooltip {
 }
 </style>
 <body onload="init()">
-<div class="div"><h1>Top 1000 Movies by IMDB Rating</h1></div>
+<div class="title"><h1>Top 1000 Movies by IMDB Rating</h1></div>
+<div id="wrapper">
+    <div id="left"></div>
+    <div id="right"></div>
+</div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
@@ -137,7 +153,7 @@ let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-let svg = d3.select("body").append("svg")
+let svg = d3.select("#right").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -235,7 +251,7 @@ const color = d3.scaleOrdinal()
     .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
     .range(d3.schemeSet3);
 
-let info = d3.select("body").append("div")
+let info = d3.select("#right").append("div")
     .attr("class", "info")
     .attr("width", infosize.width)
     .attr("height", infosize.height)
