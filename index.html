@@ -100,7 +100,7 @@ const margin = {top: 100, right: 50, bottom: 50, left: 50},
     handlesize = {width: 10, height: 30},
     decades = [1920, 2020],
     slides = ['All', '< Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next >']
-    ranges = [slidesize.width+slidesize.width*0.5, slidesize.width*(slides.length-2)-slidesize.width*0.5];
+    ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5];
 
 let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -130,8 +130,8 @@ slide.append("text")
 d3.select("All").attr("class", "slide-selected");
 
 let slider = svg.append("g")
-    .attr("class", "slider")
-    .attr("transform", `translate(${margin.left}, 0)`);
+    .attr("class", "slider");
+    //.attr("transform", `translate(${margin.left}, 0)`);
 slider.append("line")
     .attr("class", "track")
     .attr("x1", scale.range()[0])
