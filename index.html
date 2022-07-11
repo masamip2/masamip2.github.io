@@ -20,11 +20,6 @@ body {
     text-anchor: middle;
 }
 
-.year {
-    color: orange;
-    z-index: 9999;
-}
-
 .track,
 .track-inset,
 .track-overlay {
@@ -155,11 +150,11 @@ let handle = slider.append("rect")
     .attr("y", -15);
 
 let year = slider.append("text")
-    .attr("class", "year")
     .attr("x", positionYear(d3.max(decades)))
-    .attr("y", -34)
+    .attr("y", -33)
     .attr("id", "year")
-    .style("opacity", 1)
+    .style("color", "orange")
+    .style("opacity", 0)
     .text(d3.max(decades));
 
 function changeDecade(y) {
