@@ -67,7 +67,6 @@ body {
 
 .track-overlay {
     pointer-events: stroke;
-    stroke-width: 50px;
     cursor: pointer;
 }
 
@@ -161,7 +160,7 @@ slide.append("text")
 svg.append("g").call(d3.axisBottom(scale).ticks(11));
 
 let slider = svg.append("g")
-    .attr("class", "slider");
+    //.attr("class", "slider");
 slider.append("line")
     .attr("class", "track")
     .attr("x1", scale.range()[0])
