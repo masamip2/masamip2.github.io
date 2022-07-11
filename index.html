@@ -104,6 +104,7 @@ const margin = {top: 100, right: 50, bottom: 50, left: 50},
     ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5];
 
 function positionYear(decade) { return scale(decade)-20; }
+function positionHandle(decade) { return scale(decade)-handlesize.width/2; }
 
 let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -127,7 +128,7 @@ slide.append("rect")
 slide.append("text")
     .attr("class", "slide")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
-    .attr("y", slidesize.height*-0.6)
+    .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return d })
     .text(function (d, i) { return d });
 //d3.select("All").attr("class", "slide-selected");
@@ -149,30 +150,23 @@ let handle = slider.append("rect")
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
     .attr("height", handlesize.height)
-    .attr("x", scale(d3.max(decades))-handlesize.width/2)
+    .attr("x", positionHandle(d3.max(decades)))
     .attr("y", -15);
 
 let year = slider.append("text")
     .attr("class", "year")
     .attr("x", positionYear(d3.max(decades)))
-    .attr("y", -30)
+    .attr("y", -40)
     .attr("id", "year")
     .style("opacity", 0)
     .text(d3.max(decades));
-
-function reset() {
-    handle.attr("x", scale(d3.max(decades))-handlesize.width/2);
-    year.text("").attr("x", positionYear(d3.max(decades)));
-    //d3.select("All").attr("class", "slide-selected");
-    filter();
-}
 
 function changeDecade(y) {
     console.log(`year: ${y}`);
 
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     const id = y == 'All'? y : decade;
-    handle.attr("x", scale(decade));
+    handle.attr("x", positionHandle(decade));
     year.style("opacity", 'All'? 0 : 1).text(decade).attr("x", positionYear(decade));
     filter(decade);
 }
