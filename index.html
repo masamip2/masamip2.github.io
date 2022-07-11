@@ -125,7 +125,7 @@ slide.append("rect")
 slide.append("text")
     .attr("class", "slide")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
-    .attr("y", slidesize.height*-1.3)
+    .attr("y", slidesize.height*-0.5)
     .attr("id", function (d, i) { return d })
     .text(function (d, i) { return d });
 d3.select("All").attr("class", "slide-selected");
