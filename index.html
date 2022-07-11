@@ -245,8 +245,8 @@ const color = d3.scaleOrdinal()
 let info = d3.select("#right").append("div")
     .attr("class", "info")
     .attr("width", infosize.width)
-    .attr("height", infosize.height)
-    .append("g").attr("transform", `translate(${svgsize.width}, ${margin.top})`);
+    .attr("height", infosize.height);
+    //.append("g").attr("transform", `translate(${svgsize.width}, ${margin.top})`);
 
 async function plot(data) {
     d3.selectAll("circle").remove();
@@ -261,8 +261,8 @@ async function plot(data) {
                 .duration(200)
                 .style("opacity", 1);
             tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
-                .style("left", (event.pageX+30) + "px")
-                .style("top", (event.pageY+30) + "px");
+                .style("left", (event.pageX+10) + "px")
+                .style("top", (event.pageY+10) + "px");
         })
         .on("mouseout", function(event, d) {
             tooltip.transition()
