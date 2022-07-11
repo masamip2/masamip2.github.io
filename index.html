@@ -156,7 +156,8 @@ slide.append("text")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return d })
-    .text(function (d, i) { return d });
+    .text(function (d, i) { return d })
+    .on("click", function(event, d) { changeSlide(d) });
 
 svg.append("g").call(d3.axisBottom(scale).ticks(11));
 
@@ -203,7 +204,7 @@ function changeSlide(v) {
     if (typeof(v) == 'string') {
         if (v != 'All') {
             let y = d3.select("year").text();
-            if (y != "") {
+            if (y) {
                 v = parseInt(y) + (v == '< Prev'? -1 : 1);
                 // if (v == '< Prev') {
                 //     v = parseInt(y)-10;
