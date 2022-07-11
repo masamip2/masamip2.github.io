@@ -34,7 +34,6 @@ body {
 .year {
     fill: greenyellow;
     opacity: 0.8;
-    z-index: 9999;
 }
 
 .track,
@@ -145,6 +144,8 @@ slide.append("text")
     .attr("id", function (d, i) { return d })
     .text(function (d, i) { return d });
 
+svg.append("g").call(d3.axisBottom(scale).ticks(11));
+
 let slider = svg.append("g")
     .attr("class", "slider");
 slider.append("line")
@@ -167,7 +168,7 @@ let handle = slider.append("rect")
 
 let year = slider.append("text")
     .attr("class", "year")
-    .attr("x", positionYear(d3.max(decades)))
+    .attr("x", scale(d3.max(decades)))
     .attr("y", -33)
     .attr("id", "year")
     .style("opacity", 0)
@@ -179,7 +180,7 @@ function changeDecade(y) {
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     const id = y == 'All'? y : decade;
     handle.attr("x", positionHandle(decade));
-    year.style("opacity", y == 'All'? 0 : 1).text(decade).attr("x", positionYear(decade));
+    year.style("opacity", y == 'All'? 0 : 1).text(decade).attr("x", scale(decade));
     filter(decade);
 }
 
@@ -203,7 +204,7 @@ function changeSlide(v) {
     changeDecade(v);
 }
 //svg.append("g").call(d3.axisBottom(scale).tickFormat(d3.timeFormat('%Y')).ticks(11));
-svg.append("g").call(d3.axisBottom(scale).ticks(11));
+
 
 
 
