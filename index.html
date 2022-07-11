@@ -99,7 +99,8 @@ const margin = {top: 100, right: 50, bottom: 50, left: 50},
     height = 1000 - margin.top - margin.bottom - slidesize.height,
     handlesize = {width: 10, height: 30},
     decades = [1920, 2020],
-    slides = ['All', '< Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next >'];
+    slides = ['All', '< Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next >']
+    ranges = [slidesize.width+slidesize.width*0.5, slidesize.width*(slides.length-2)-slidesize.width*0.5];
 
 let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -110,7 +111,7 @@ let svg = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom + slidesize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-const scale = d3.scaleLinear().domain(decades).range([slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5]).clamp(true);
+const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
 slide.append("rect")
@@ -146,7 +147,7 @@ let handle = slider.append("rect")
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
     .attr("height", handlesize.height)
-    .attr("x", scale(d3.max(decades)))
+    .attr("x", scale(d3.max(decades))-handlesize.width/2)
     .attr("y", -15);
 
 let year = slider.append("text")
