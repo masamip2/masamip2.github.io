@@ -122,8 +122,7 @@ slide.append("rect")
     .on("click", function(event, d) { changeSlide(d) });
 slide.append("text")
     .attr("class", "slide")
-    .attr("x", scale(d3.max(decades)))
-    //.attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
+    .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-1.3)
     .attr("id", function (d, i) { return d })
     .text(function (d, i) { return d });
@@ -147,7 +146,7 @@ let handle = slider.append("rect")
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
     .attr("height", handlesize.height)
-    .attr("x", scale(d3.max(decades)))
+    .attr("x", scale(d3.max(decades))-handlesize.width/2)
     .attr("y", -15);
 
 let year = slider.append("text")
