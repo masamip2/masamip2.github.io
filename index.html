@@ -10,11 +10,23 @@ body {
     top: 50;
     left: 100;
 }
-.rect {
+.rect-all,
+.rect-nav,
+.rect-text {
     stroke: white;
-    fill: lightgray;
     cursor: pointer;
+    z-index: 9999;
 }
+.rect-all {
+    fill: slategray;
+}
+.rect-nav {
+    fill: darkslategray;
+}
+.rect-text {
+    fill: lightgray;
+}
+
 .slide-all,
 .slide-nav,
 .slide-text,
@@ -25,7 +37,7 @@ body {
     fill: salmon;
 }
 .slide-nav {
-    fill: darkslategray;
+    fill: white;
 }
 .slide-text {
     fill: slategray;
@@ -61,6 +73,8 @@ body {
 
 .handle {
     fill: lightslategray;
+    border: 2px;
+    border-color: darkslategray;
     opacity: 0.5;
 }
 
@@ -75,8 +89,8 @@ body {
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 120px;
-    height: 40px;
+    width: 150px;
+    height: 100px;
     padding: 4px;
     font: 12px;
     color: white;
@@ -131,7 +145,7 @@ const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
 slide.append("rect")
-    .attr("class", "rect")
+    .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "rect-all" : "rect-nav") : "rect-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) })
     .attr("y", slidesize.height*-1.5)
     .attr("width", slidesize.width)
@@ -203,49 +217,6 @@ function changeSlide(v) {
     }
     changeDecade(v);
 }
-//svg.append("g").call(d3.axisBottom(scale).tickFormat(d3.timeFormat('%Y')).ticks(11));
-
-
-
-
-
-/*
-//let slider = svg.append('g').selectAll("rect").data(decades).enter();
-svg.append('g').attr("transform", `translate(0, 0)`).append("input")
-    .attr("class", "slider")
-    .attr("type", "range")
-    .attr("value", d3.max(decades))
-    .attr("min", d3.min(decades))
-    .attr("max", d3.max(decades))
-    .attr("width", width)
-    .on("onchange", val => { filter(val) });
-*/
-
-
-/*
-slider.append("text")
-    .attr("class", "decades")
-    .attr('x', function(d, i) { return (width/(decades.length()-1))*i })
-    .attr('y', 0)
-    .text(function (d, i) { return d });
-*/
-
-/*
-//let slider = d3.sliderBottom().min(1920).max(2020).step(10).width(width).tickFormat(d3.timeFormat('%Y')).ticks(10).default(2020).displayValue(true)
-    //.handle(d3.symbol().type(d3.symbolCircle).size(200)())
-    .on('onchange', val => {
-        year.text(val);
-        plot(dataset.filter(function(d) { return d.Released_Year <= val }));
-    });
-//svg.append('g').attr('transform', `translate(margin.top, margin.left)`).call(slider);
-//year.text(d3.timeFormat('%Y')(slider.value()));
-*/
-/*
-const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-//const xPos = d3.scaleBand().domain(decades).range([0, width]);
-
-*/
-
 
 let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
@@ -261,7 +232,6 @@ const color = d3.scaleOrdinal()
     .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
     .range(d3.schemeSet3);
 
-
 async function plot(data) {
     d3.selectAll("circle").remove();
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
@@ -274,7 +244,7 @@ async function plot(data) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 1);
-            tooltip.html(`Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
+            tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
                 .style("left", (event.pageX+30) + "px")
                 .style("top", (event.pageY+30) + "px");
         })
