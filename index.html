@@ -34,7 +34,7 @@ body {
     cursor: pointer;
 }
 .slide-all {
-    fill: salmon;
+    fill: orangered;
 }
 .slide-nav {
     fill: white;
@@ -90,7 +90,7 @@ div.tooltip {
     position: absolute;
     text-align: center;
     width: 150px;
-    height: 100px;
+    height: 75px;
     padding: 4px;
     font: 12px;
     color: white;
@@ -120,10 +120,11 @@ async function filter(val) {
     }
 }
 
-const margin = {top: 100, right: 50, bottom: 50, left: 50},
+const infosize = {width: 280, height: 500},
+    svgsize = {width: 1220, height: 1000},
+    margin = {top: 100, right: 50, bottom: 50, left: 50},
+    vizsize = {width: svgsize.width - margin.left - margin.right, height: svgsize.height - margin.top - margin.bottom - slidesize.height},
     slidesize = {width: 80, height: 40},
-    width = 1220 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom - slidesize.height,
     handlesize = {width: 10, height: 30},
     decades = [1920, 2020],
     slides = ['All', '< Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next >']
@@ -137,8 +138,8 @@ let tooltip = d3.select("body").append("div")
     .style("opacity", 0);
 
 let svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom + slidesize.height)
+    .attr("width", svgsize.width)
+    .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
@@ -220,12 +221,12 @@ function changeSlide(v) {
     changeDecade(v);
 }
 
-let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, width]);
-let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
+let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
+let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
-svg.append("g").attr("transform", `translate(0, ${slidesize.height+height})`).call(d3.axisBottom(x).ticks(10));
-svg.append("text").attr("text-anchor", "end").attr("x", width-(margin.right*0.5)).attr("y", height+(margin.bottom*0.25)).text("Votes");
+svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.height})`).call(d3.axisBottom(x).ticks(10));
+svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+(margin.bottom*0.25)).text("Votes");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", margin.top*0.5).text("Rating").attr("text-anchor", "start");
@@ -233,6 +234,12 @@ svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y
 const color = d3.scaleOrdinal()
     .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
     .range(d3.schemeSet3);
+
+let info = d3.select("body").append("div")
+    .attr("class", "info")
+    .attr("width", infosize.width)
+    .attr("height", infosize.height)
+    .append("g").attr("transform", `translate(${svgsize.width}, ${margin.top})`);
 
 async function plot(data) {
     d3.selectAll("circle").remove();
@@ -250,14 +257,19 @@ async function plot(data) {
                 .style("left", (event.pageX+30) + "px")
                 .style("top", (event.pageY+30) + "px");
         })
-        .on("mousemove", function(event, d) {
-        })
         .on("mouseout", function(event, d) {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
+        })
+        .on("mousemove", function(event, d) {
+        })
+        .on("click", function(event, d) {
+            info.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
         });
 }
+
+
 
 </script>
 </body>
