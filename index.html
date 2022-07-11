@@ -13,7 +13,7 @@ body {
 .rect {
     stroke: white;
     fill: lightgray;
-    opacity: 0.8;
+    cursor: pointer;
 }
 .slide,
 .slide-selected {
@@ -49,7 +49,7 @@ body {
 
 .handle {
     fill: lightslategray;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .bubble {
@@ -170,7 +170,7 @@ function changeDecade(y) {
     const id = y == 'All'? y : decade;
     handle.attr("x", scale(decade));
     year.text(decade).attr("x", scale(decade)-20);
-    d3.select(id).attr("class", "slide-selected");
+    //d3.select(id).attr("class", "slide-selected");
     filter(decade);
 }
 
