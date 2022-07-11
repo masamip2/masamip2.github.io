@@ -18,7 +18,6 @@ body {
 .slide-selected {
     color: slategray;
     text-anchor: middle;
-    z-index: 9999;
 }
 .slide-selected {
     color: orange;
@@ -147,7 +146,7 @@ let handle = slider.append("rect")
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
     .attr("height", handlesize.height)
-    .attr("x", scale(d3.max(decades))-handlesize.width/2)
+    .attr("x", scale(d3.max(decades)))
     .attr("y", -15);
 
 let year = slider.append("text")
