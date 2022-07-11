@@ -249,7 +249,7 @@ const decades = [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 202
 
 let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([height, 0]);
-let z = d3.scaleSqrt().domain([1, 1000000000]).range([1, 30]);
+let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+height})`).call(d3.axisBottom(x).ticks(10));
 svg.append("text").attr("text-anchor", "end").attr("x", width+margin.left).attr("y", margin.top+height).text("Votes");
