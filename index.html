@@ -13,9 +13,8 @@ body {
 #wrapper {
     display: flex;
 }
-#info {
-    width: 330;
-
+.info {
+    font: 12px;
 }
 .rect-all,
 .rect-nav,
@@ -111,28 +110,7 @@ div.tooltip {
 <div class="title"><h1>Top 1000 Movies by IMDB Rating</h1></div>
 <div id="wrapper">
     <div id="left"></div>
-    <div id="right">
-        <div id="info">
-            <dl>
-                <dt>Released Year</dt>
-                <dd><text id="released_year"></text></dd>
-                <dt>IMDB Rating</dt>
-                <dd><text id="imdb_rating"></text></dd>
-                <dt>Number of Votes</dt>
-                <dd><text id="no_of_votes"></text></dd>
-                <dt>Gross</dt>
-                <dd><text id="gross"></text></dd>
-                <dt>Series Title</dt>
-                <dd><text id="series_title"></text></dd>
-                <dt>Genra</dt>
-                <dd><text id="genra"></text></dd>
-                <dt>Director</dt>
-                <dd><text id="director"></text></dd>
-                <dt>Overview</dt>
-                <dd><text id="overview"></text></dd>
-              </dl>
-        </div>"
-    </div>
+    <div id="right"></div>
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -153,9 +131,9 @@ async function filter(val) {
 }
 
 const svgsize = {width: 1220, height: 1000},
-    //infosize = {width: 330, height: 1000},
+    infosize = {width: 330, height: 1000},
     margin = {top: 100, right: 50, bottom: 50, left: 50},
-    //imgsize = {width: infosize.width - margin.left, height: 370},
+    imgsize = {width: infosize.width - margin.left, height: 370},
     slidesize = {width: 80, height: 40},
     vizsize = {width: svgsize.width - margin.left - margin.right, height: svgsize.height - margin.top - margin.bottom - slidesize.height},
     handlesize = {width: 10, height: 30},
@@ -268,13 +246,12 @@ const color = d3.scaleOrdinal()
     .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
     .range(d3.schemeSet3);
 
-/*
 let info = d3.select("#right").append("div")
     .attr("class", "info")
     .attr("width", infosize.width)
     .attr("height", infosize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top+slidesize.height+handlesize.height})`);
-*/
+//info.append("g").append("dl").append("dt").append("dd").attr("")
 
 async function plot(data) {
     d3.selectAll("circle").remove();
@@ -300,14 +277,27 @@ async function plot(data) {
         .on("mousemove", function(event, d) {
         })
         .on("click", function(event, d) {
-            d3.select("#released_year").text(d.released_year);
-            d3.select("#imdb_rating").text(d.imdb_rating);
-            d3.select("#no_of_votes").text(d.no_of_votes);
-            d3.select("#gross").text(d.gross);
-            d3.select("#series_title").text(d.series_title);
-            d3.select("#genra").text(d.genra);
-            d3.select("#director").text(d.director);
-            d3.select("#overview").text(d.overview);
+            info.html(`
+                <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                <dl>
+                    <dt>Released Year</dt>
+                        <dd>${d.Released_Year}</dd>
+                    <dt>IMDB Rating</dt>
+                        <dd>${d.IMDB_Rating}</dd>
+                    <dt>Number of Votes</dt>
+                        <dd>${d.No_of_Votes}</dd>
+                    <dt>Gross</dt>
+                        <dd>${d.Gross}</dd>
+                    <dt>Series Title</dt>
+                        <dd>${d.Series_Title}</dd>
+                    <dt>Genra</dt>
+                        <dd>${d.Genra}</dd>
+                    <dt>Director</dt>
+                        <dd>${d.Director}</dd>
+                    <dt>Overview</dt>
+                        <dd>${d.Overview}</dd>
+                </dl>
+            `);
             //info.html(`<img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
         });
 }
