@@ -157,9 +157,9 @@ let handle = slider.append("rect")
 let year = slider.append("text")
     .attr("class", "year")
     .attr("x", positionYear(d3.max(decades)))
-    .attr("y", -35)
+    .attr("y", -34)
     .attr("id", "year")
-    .style("opacity", 0)
+    .style("opacity", 1)
     .text(d3.max(decades));
 
 function changeDecade(y) {
