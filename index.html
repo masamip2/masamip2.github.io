@@ -118,7 +118,7 @@ let slide = svg.append('g').selectAll("rect").data(slides).enter();
 slide.append("rect")
     .attr("class", "rect")
     .attr("x", function(d, i) { return slidesize.width*(i) })
-    .attr("y", slidesize.height*-2)
+    .attr("y", slidesize.height*-1.5)
     .attr("width", slidesize.width)
     .attr("height", slidesize.height)
     .on("click", function(event, d) { changeSlide(d) });
