@@ -209,6 +209,8 @@ function changeSlide(v) {
                     v = parseInt(y) - 10;
                 } else if (v == 'Next >' && parseInt(y) < parseInt(d3.max(decades))) {
                     v = parseInt(y) + 10;
+                } else {
+                    return;
                 }
             } else {
                 return;
