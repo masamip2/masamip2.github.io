@@ -159,8 +159,8 @@ let year = slider.append("text")
     .attr("x", positionYear(d3.max(decades)))
     .attr("y", -35)
     .attr("id", "year")
-    .style("opacity", 0);
-    //.text(d3.max(decades));
+    .style("opacity", 0)
+    .text(d3.max(decades));
 
 function changeDecade(y) {
     console.log(`year: ${y}`);
