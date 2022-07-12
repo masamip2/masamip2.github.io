@@ -244,7 +244,7 @@ let year = slider.append("text")
 
 let yearover = slider.append("text")
     .attr("class", "mouse-over")
-    .attr("x", scale(d3.max(decades))-slidesize.width*0.5)
+    .attr("x", scale(d3.max(decades)))
     .attr("y", -33)
     .attr("id", "year")
     .style("opacity", 1)
