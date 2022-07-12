@@ -190,7 +190,14 @@ const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
 svg.append("g").call(d3.axisBottom(scale).ticks(11));
 let slider = svg.append("g");
-    //.attr("class", "slider");
+
+let year = slider.append("text")
+    .attr("class", "year")
+    .attr("x", scale(d3.max(decades)))
+    .attr("y", -33)
+    .attr("id", "year")
+    .style("opacity", 0)
+    .text(d3.max(decades));
 
 slide.append("rect")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "rect-all" : "rect-nav") : "rect-text" })
@@ -216,11 +223,11 @@ slide.append("text")
 slider.append("line")
     .attr("class", "track")
     .attr("x1", scale.range()[0])
-    .attr("x2", scale.range()[1])
-    .append("line")
-    .attr("class", "track-inset")
-    .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1]);
+    // .append("line")
+    // .attr("class", "track-inset")
+    // .attr("x1", scale.range()[0])
+    // .attr("x2", scale.range()[1]);
 
 let handle = slider.append("rect")
     .attr("class", "track-overlay handle")
@@ -233,13 +240,7 @@ let handle = slider.append("rect")
     .attr("x", positionHandle(d3.max(decades)))
     .attr("y", -15);
 
-let year = slider.append("text")
-    .attr("class", "year")
-    .attr("x", scale(d3.max(decades)))
-    .attr("y", -33)
-    .attr("id", "year")
-    .style("opacity", 0)
-    .text(d3.max(decades));
+
 
 /*
 let yearover = slider.append("text")
@@ -324,7 +325,7 @@ async function plot(data) {
                 .duration(200)
                 .style("opacity", 1);
             tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
-                .style("left", (event.pageX-20) + "px")
+                .style("left", (event.pageX+20) + "px")
                 .style("top", (event.pageY+20) + "px");
         })
         .on("mouseout", function(event, d) {
