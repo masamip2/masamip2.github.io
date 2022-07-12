@@ -8,15 +8,15 @@ body {
 }
 th, td {
   border: 1px;
-  border-color: darkgray;
+  border-color: gray;
   text-align: left;
-  padding: 8px;
+  padding: 2px;
 }
 th {
-  width: 150px;
+  width: 120px;
 }
 td {
-    width: 180px;
+    width: 210px;
 }
 .title {
     top: 50px;
@@ -289,7 +289,7 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             info.html(`
-                <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                <center><img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"></center>
                 <table>
                     <tr>
                         <th>Released Year</th>
