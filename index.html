@@ -188,10 +188,7 @@ let svg = d3.select("#left").append("svg")
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
-let slider = svg.append("g");
-svg.append("g").call(d3.axisBottom(scale).ticks(11));
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
-
 slide.append("rect")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "rect-all" : "rect-nav") : "rect-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) })
@@ -201,15 +198,6 @@ slide.append("rect")
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
     .on("click", function(event, d) { changeSlide(d) });
-
-let year = slider.append("text")
-    .attr("class", "year")
-    .attr("x", scale(d3.max(decades)))
-    .attr("y", -33)
-    .attr("id", "year")
-    .style("opacity", 0)
-    .text(d3.max(decades));
-
 slide.append("text")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "slide-all" : "slide-nav") : "slide-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
@@ -221,6 +209,9 @@ slide.append("text")
     .on("mouseout", function(event, d) { overDecade(d, 0) })
     .on("click", function(event, d) { changeSlide(d) });
 
+svg.append("g").call(d3.axisBottom(scale).ticks(11));
+
+let slider = svg.append("g");
 slider.append("line")
     .attr("class", "track")
     .attr("x1", scale.range()[0])
@@ -241,7 +232,13 @@ let handle = slider.append("rect")
     .attr("x", positionHandle(d3.max(decades)))
     .attr("y", -15);
 
-
+let year = slider.append("text")
+    .attr("class", "year")
+    .attr("x", scale(d3.max(decades)))
+    .attr("y", -33)
+    .attr("id", "year")
+    .style("opacity", 0)
+    .text(d3.max(decades));
 
 /*
 let yearover = slider.append("text")
