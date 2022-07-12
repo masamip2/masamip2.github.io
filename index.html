@@ -80,7 +80,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 
 .year {
     text-anchor: middle;
-    fill: darkorange;
+    fill: orangered;
 }
 
 .track-line {
@@ -212,13 +212,13 @@ let year = slider.append("text")
     .attr("id", "year");
 
 function overDecade(y, opacity) {
-    d3.select(`#_${y}`).style("fill", opacity? "orangered" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
+    d3.select(`#_${y}`).style("fill", opacity? "darkorange" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
 }
 
 function changeDecade(y) {
     console.log(`year: ${y}`);
 
-    d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
+    d3.select('#_All').style("fill", y == 'All'? "darkorange" : "whitesmoke");
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
     year.style("opacity", y == 'All'? 0 : 1).text(decade).attr("x", scale(decade));
@@ -275,8 +275,6 @@ function formatNumber(num) {
 
 const grosses = [10000000, 100000000, 1000000000];
 const circlepos = {x: 1200, y: 100};
-    var xCircle = 390
-    var xLabel = 440
 
 let legend = d3.select("#right").append("svg")
     .attr("width", infosize.width)
