@@ -8,10 +8,10 @@ body {
 }
 table, th, td {
     border-collapse: collapse;
-    border-color: darkgray;
     border: 1px dotted;
 }
 table {
+    border-color: darkgray;
     height: 1000px;
 }
 /*
@@ -30,12 +30,13 @@ th, td {
     font-size: 13px;
 }
 th {
-    /* border-color: lightgray; */
+    border-color: lightgray;
     width: 130px;
     color: whitesmoke;
     background: darkgray;
 }
 td {
+    border-color: darkgray;
     width: 200px;
     color: slategray;
 }
@@ -55,9 +56,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     vertical-align: middle;
     padding: 25px;
 }
-.rect-all,
-.rect-nav,
-.rect-text {
+.rect-all, .rect-nav, .rect-text {
     stroke: white;
     cursor: pointer;
 }
@@ -71,9 +70,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     fill: lightgray;
 }
 
-.slide-all,
-.slide-nav,
-.slide-text {
+.slide-all, .slide-nav, .slide-text {
     text-anchor: middle;
     cursor: pointer;
 }
