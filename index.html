@@ -7,7 +7,7 @@ body {
     background: whitesmoke;
 }
 table {
-    border: 1px;
+    border: 2px;
     border-style: solid;
     border-collapse: collapse;
     border-color: red;
@@ -18,8 +18,7 @@ th, td {
 }
 th {
     width: 120px;
-    color: lightslategray;
-    background-color: slategray;
+    color: darkgray;
 }
 td {
     width: 210px;
@@ -30,6 +29,9 @@ td {
 }
 #wrapper {
     display: flex;
+}
+#right {
+    background-color: slategray;
 }
 .info {
     font: 12px;
@@ -320,6 +322,7 @@ async function plot(data) {
         .on("click", function(event, d) {
             info.html(`
                 <center><img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"></center>
+                <br>
                 <table>
                     <tr>
                         <th>Released Year</th>
