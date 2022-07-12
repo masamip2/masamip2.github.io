@@ -66,7 +66,6 @@ td {
 .slide-text {
     text-anchor: middle;
     cursor: pointer;
-    z-index: 9999;
 }
 .slide-all {
     fill: whitesmoke;
@@ -204,6 +203,7 @@ slide.append("text")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return `_${d}` })
+    .style("z-index", function (d, i) { return 9000+i })
     .text(function (d, i) { return d })
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
