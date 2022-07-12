@@ -240,7 +240,7 @@ let year = slider.append("text")
 
 let yearover = slider.append("text")
     .attr("class", "mouse-over")
-    .attr("x", scale(d3.max(decades)))
+    .attr("x", scale(d3.max(decades))-slidesize.width*0.25)
     .attr("y", -33)
     .attr("id", "year")
     .style("opacity", 1)
@@ -249,7 +249,7 @@ let yearover = slider.append("text")
 function overDecade(y, opacity) {
     if (typeof(y) != 'string') {
         const decade = Math.round(y/10)*10;
-        yearover.style("opacity", opacity).text(decade).attr("x", scale(decade));
+        yearover.style("opacity", opacity).text(decade).attr("x", scale(decade)-slidesize.width*0.25);
     }
 }
 
