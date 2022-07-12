@@ -6,14 +6,20 @@ body {
     color: gray;
     background: whitesmoke;
 }
-td, th {
-  border: 1px solid slategray;
+th, td {
+  border: 1px solid darkgray;
   text-align: left;
   padding: 8px;
 }
+th {
+  width: 150px;
+}
+td {
+    width: 180px;
+}
 .title {
-    top: 50;
-    left: 100;
+    top: 50px;
+    left: 100px;
 }
 #wrapper {
     display: flex;
@@ -286,35 +292,35 @@ async function plot(data) {
                 <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
                 <table>
                     <tr>
-                        <td>Released Year</td>
+                        <th>Released Year</th>
                         <td>${d.Released_Year}</td>
                     </tr>
                     <tr>
-                        <td>IMDB_Rating</td>
+                        <th>IMDB_Rating</th>
                         <td>${d.IMDB_Rating}</td>
                     </tr>
                     <tr>
-                        <td>Number of Votes</td>
+                        <th>Number of Votes</th>
                         <td>${d.No_of_Votes}</td>
                     </tr>
                     <tr>
-                        <td>Gross</td>
+                        <th>Gross</th>
                         <td>${d.Gross}</td>
                     </tr>
                     <tr>
-                        <td>Series_Title</td>
+                        <th>Series_Title</th>
                         <td>${d.Series_Title}</td>
                     </tr>
                     <tr>
-                        <td>Genra</td>
+                        <th>Genra</th>
                         <td>${d.Genra}</td>
                     </tr>
                     <tr>
-                        <td>Director</td>
+                        <th>Director</th>
                         <td>${d.Director}</td>
                     </tr>
                     <tr>
-                        <td>Overview</td>
+                        <th>Overview</th>
                         <td>${d.Overview}</td>
                     </tr>
                 </table>
