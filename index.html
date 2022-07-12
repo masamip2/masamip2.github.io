@@ -362,9 +362,11 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             info.html(`
-                <div class="img">
-                    <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
-                </div>
+                <table>
+                    <div class="img">
+                        <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                    </div>
+                </table>
                 <table>
                     <tr>
                         <th>Released Year</th>
