@@ -7,21 +7,21 @@ body {
     background: whitesmoke;
 }
 table {
-    border: 2px;
+    border-right: 2px;
     border-style: solid;
     border-collapse: collapse;
-    border-color: red;
+    border-color: darkslategray;
 }
 th, td {
     text-align: left;
     padding: 4px;
 }
 th {
-    width: 120px;
-    color: darkgray;
+    width: 130px;
+    color: darkslategray;
 }
 td {
-    width: 210px;
+    width: 200px;
     color: slategray;
 }
 .title {
@@ -105,7 +105,7 @@ td {
     fill: lightslategray;
     border: 2px;
     border-color: darkslategray;
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .bubble {
@@ -236,7 +236,7 @@ let yearover = slider.append("text")
     .attr("x", scale(d3.max(decades)))
     .attr("y", -33)
     .attr("id", "year")
-    .style("opacity", 0)
+    .style("opacity", 1)
     .text(d3.max(decades));
 
 function overDecade(y, opacity) {
