@@ -14,12 +14,6 @@ table {
     border-color: darkgray;
     height: 1000px;
 }
-/*
-table {
-    border-color: darkgray;
-    height: 600px;
-}
-*/
 .tr-img {
     height: 400px;
 }
@@ -82,51 +76,18 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 }
 .slide-text {
     fill: slategray;
-    /*opacity: 0.8;*/
 }
 
 .year {
     text-anchor: middle;
     fill: darkorange;
 }
-/*
-.mouse-over {
-    fill: orangered;
-}
-*/
-/*
-.track,
-.track-inset,
-.track-handle {
-    stroke-linecap: square;
-}
-*/
 
 .track-line {
     stroke: gray;
     stroke-width: 10px;
     stroke-linecap: square;
     stroke-opacity: 0.5;
-}
-/*
-.track-inset {
-    stroke: orange;
-    stroke-opacity: 0.5;
-    stroke-width: 5px;
-}
-*/
-/*
-.track-path {
-    stroke: darkgray;
-    stroke-width: 2px;
-}
-*/
-.track-handle {
-    /*
-    pointer-events: stroke;
-    stroke-width: 25px;
-    cursor: pointer;
-    */
 }
 
 .handle {
@@ -222,7 +183,6 @@ slide.append("text")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return `_${d}` })
-    //.style("z-index", function (d, i) { return 9000+i })
     .text(function (d, i) { return d })
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
@@ -235,15 +195,9 @@ slider.append("line")
     .attr("class", "track-line")
     .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1]);
-    // .append("path")
-    // .attr("class", "track-path")
-    // .attr("x1", scale.range()[0])
-    // .attr("x2", scale.range()[1]);
 
 let handle = slider.append("rect")
-    .attr("class", "track-handle handle")
-    //.on("mouseover", function(event, d) { handle.style("fill", "gold") })
-    //.on("mouseout", function(event, d) { handle.style("fill", "lightslategray") })
+    .attr("class", "handle")
     .call(d3.drag()
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
@@ -256,29 +210,9 @@ let year = slider.append("text")
     .attr("x", scale(d3.max(decades)))
     .attr("y", -33)
     .attr("id", "year");
-    //.style("opacity", 0)
-    //.text(d3.max(decades));
 
-/*
-let yearover = slider.append("text")
-    .attr("class", "mouse-over")
-    .attr("x", scale(d3.max(decades)))
-    .attr("y", -33)
-    .attr("id", "year")
-    .style("opacity", 1)
-    .text(d3.max(decades));
-*/
 function overDecade(y, opacity) {
     d3.select(`#_${y}`).style("fill", opacity? "orangered" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
-    /*
-    if (typeof(y) != 'string') {
-        d3.select(`#_${y}`).style("opacity", opacity === 1? 0 : 1);
-        const decade = Math.round(y/10)*10;
-        year.style("opacity", opacity).text(decade).attr("x", scale(decade));
-    } else {
-        d3.select(`#_${y}`).style("fill", opacity? "orangered" : "whitesmoke");
-    }
-    */
 }
 
 function changeDecade(y) {
@@ -358,20 +292,20 @@ diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("dot")
     .attr("cx", circlepos.x)
     .attr("cy", circlepos.y)
-    .attr("r", function (d) { return z(d) })
+    .attr("r", function (d, i) { return z(d) })
     .style("fill", "none")
     .attr("stroke", "gray");
 diagram.append("line")
-    .attr("x1", function (d) { return circlepos.x + z(d) })
+    .attr("x1", function (d, i) { return circlepos.x + z(d) })
     .attr("x2", circlepos.x+50)
-    .attr("y1", function (d) { return circlepos.y + z(d) })
-    .attr("y2", function (d) { return circlepos.y + z(d) })
+    .attr("y1", function (d, i) { return circlepos.y + z(d) })
+    .attr("y2", function (d, i) { return circlepos.y + z(d) })
     .attr("stroke", 'gray')
     .style("stroke-dasharray", ("2, 2"));
 diagram.append("text")
     .attr("x", circlepos.x+50)
-    .attr("y", function (d) { return circlepos.y + z(d) })
-    .text(formatNumber(d))
+    .attr("y", function (d, i) { return circlepos.y + z(d) })
+    .text(function (d, i) { return formatNumber(d) })
     .style("font-size", 10)
     .attr('alignment-baseline', 'middle');
 
