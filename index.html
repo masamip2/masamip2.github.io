@@ -371,7 +371,7 @@ diagram.append("line")
 diagram.append("text")
     .attr("x", circlepos.x+50)
     .attr("y", function (d) { return circlepos.y + z(d) })
-    .text(`${formatNumber(d)}`)
+    .text(function (d) { return formatNumber(d) })
     .style("font-size", 10)
     .attr('alignment-baseline', 'middle');
 
