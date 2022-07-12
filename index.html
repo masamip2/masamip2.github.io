@@ -11,7 +11,7 @@ table, th, td {
 }
 table {
     border: 1px dotted darkgray;
-    height: 1000px;
+    height: 600px;
 }
 th, td {
     text-align: left;
@@ -42,6 +42,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     background-color: lightgray;
 }
 .img {
+    border: 1px dotted darkgray;
     text-align: center;
     vertical-align: middle;
     padding: 25px;
@@ -362,15 +363,11 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             info.html(`
-                
+            <div class="img">
+                <div>
+                    <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                </div>
                 <table>
-                    <tr>
-                        <td colspan=2>
-                            <div class="img">
-                                <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
-                            </div>
-                        </td>
-                    </tr>
                     <tr>
                         <th>Released Year</th>
                         <td>${d.Released_Year}</td>
