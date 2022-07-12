@@ -30,7 +30,7 @@ td {
     width: 200px;
     color: slategray;
 }
-g.tick text { font-size: 14px; margin-top: 20px; } /* d3 axis tick */
+g.tick text { font-size: 14px; } /* d3 axis tick */
 .title {
     top: 50px;
     left: 100px;
@@ -127,7 +127,7 @@ g.tick text { font-size: 14px; margin-top: 20px; } /* d3 axis tick */
     fill: lightslategray;
     stroke: darkslategray;
     stroke-width: 2px;
-    opacity: 0.8;
+    opacity: 0.6;
     cursor: pointer;
 }
 
@@ -143,7 +143,7 @@ div.tooltip {
     position: absolute;
     text-align: center;
     width: 150px;
-    height: 65px;
+    height: 75px;
     padding: 4px;
     color: white;
     background: lightslategray;
@@ -278,6 +278,7 @@ function overDecade(y, opacity) {
 function changeDecade(y) {
     console.log(`year: ${y}`);
 
+    d3.select(`#_${y}`).style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.max(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
     year.style("opacity", y == 'All'? 0 : 1).text(decade).attr("x", scale(decade));
@@ -291,9 +292,9 @@ function changeSlide(v) {
             let y = d3.select("#year").text();
             console.log(`y: ${y}`);
             if (y) {
-                if (v == '< Prev' && parseInt(d3.min(decades)) < parseInt(y)) {
+                if (v == 'Prev' && parseInt(d3.min(decades)) < parseInt(y)) {
                     v = parseInt(y) - 10;
-                } else if (v == 'Next >' && parseInt(y) < parseInt(d3.max(decades))) {
+                } else if (v == 'Next' && parseInt(y) < parseInt(d3.max(decades))) {
                     v = parseInt(y) + 10;
                 } else {
                     return;
@@ -326,6 +327,16 @@ let info = d3.select("#right").append("div")
     .attr("height", infosize.height);
     //.append("g").attr("transform", `translate(${margin.left}, ${margin.top+slidesize.height+handlesize.height})`);
 
+function formatNumber(num) {
+    const n = parseInt(num.replace(/,/g,''));
+    if (n >= 1000 && num < 1000000) {
+        return (n/1000).toFixed(1) + 'K';
+    } else if (n >= 1000000) {
+        return (n/1000000).toFixed(1) + 'M';
+    }
+    return n;
+}
+
 async function plot(data) {
     d3.selectAll("circle").remove();
     svg.append('g').selectAll("circle").data(data).enter().append("circle")
@@ -338,7 +349,7 @@ async function plot(data) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 1);
-            tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
+            tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}<br>Gross: $ ${formatNumber(d.Gross)}`)
                 .style("left", (event.pageX+20) + "px")
                 .style("top", (event.pageY+20) + "px");
         })
