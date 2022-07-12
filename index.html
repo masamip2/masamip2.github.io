@@ -187,8 +187,11 @@ let svg = d3.select("#left").append("svg")
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
-
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
+svg.append("g").call(d3.axisBottom(scale).ticks(11));
+let slider = svg.append("g");
+    //.attr("class", "slider");
+
 slide.append("rect")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "rect-all" : "rect-nav") : "rect-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) })
@@ -203,16 +206,13 @@ slide.append("text")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return `_${d}` })
-    .style("z-index", function (d, i) { return 9000+i })
+    //.style("z-index", function (d, i) { return 9000+i })
     .text(function (d, i) { return d })
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
     .on("click", function(event, d) { changeSlide(d) });
 
-svg.append("g").call(d3.axisBottom(scale).ticks(11));
 
-let slider = svg.append("g")
-    //.attr("class", "slider");
 slider.append("line")
     .attr("class", "track")
     .attr("x1", scale.range()[0])
