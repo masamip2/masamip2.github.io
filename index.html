@@ -6,6 +6,11 @@ body {
     color: gray;
     background: whitesmoke;
 }
+td, th {
+  border: 1px solid slategray;
+  text-align: left;
+  padding: 8px;
+}
 .title {
     top: 50;
     left: 100;
@@ -279,24 +284,40 @@ async function plot(data) {
         .on("click", function(event, d) {
             info.html(`
                 <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
-                <dl>
-                    <dt>Released Year</dt>
-                        <dd>${d.Released_Year}</dd>
-                    <dt>IMDB Rating</dt>
-                        <dd>${d.IMDB_Rating}</dd>
-                    <dt>Number of Votes</dt>
-                        <dd>${d.No_of_Votes}</dd>
-                    <dt>Gross</dt>
-                        <dd>${d.Gross}</dd>
-                    <dt>Series Title</dt>
-                        <dd>${d.Series_Title}</dd>
-                    <dt>Genra</dt>
-                        <dd>${d.Genra}</dd>
-                    <dt>Director</dt>
-                        <dd>${d.Director}</dd>
-                    <dt>Overview</dt>
-                        <dd>${d.Overview}</dd>
-                </dl>
+                <table>
+                    <tr>
+                        <td>Released Year</td>
+                        <td>${d.Released_Year}</td>
+                    </tr>
+                    <tr>
+                        <td>IMDB_Rating</td>
+                        <td>${d.IMDB_Rating}</td>
+                    </tr>
+                    <tr>
+                        <td>Number of Votes</td>
+                        <td>${d.No_of_Votes}</td>
+                    </tr>
+                    <tr>
+                        <td>Gross</td>
+                        <td>${d.Gross}</td>
+                    </tr>
+                    <tr>
+                        <td>Series_Title</td>
+                        <td>${d.Series_Title}</td>
+                    </tr>
+                    <tr>
+                        <td>Genra</td>
+                        <td>${d.Genra}</td>
+                    </tr>
+                    <tr>
+                        <td>Director</td>
+                        <td>${d.Director}</td>
+                    </tr>
+                    <tr>
+                        <td>Overview</td>
+                        <td>${d.Overview}</td>
+                    </tr>
+                </table>
             `);
             //info.html(`<img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
         });
