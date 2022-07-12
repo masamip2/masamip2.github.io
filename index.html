@@ -66,6 +66,7 @@ td {
 .slide-text {
     text-anchor: middle;
     cursor: pointer;
+    z-index: 9999;
 }
 .slide-all {
     fill: whitesmoke;
@@ -197,15 +198,6 @@ slide.append("rect")
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
     .on("click", function(event, d) { changeSlide(d) });
-
-let year = slider.append("text")
-    .attr("class", "year")
-    .attr("x", scale(d3.max(decades)))
-    .attr("y", -33)
-    .attr("id", "year")
-    .style("opacity", 0)
-    .text(d3.max(decades));
-
 slide.append("text")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "slide-all" : "slide-nav") : "slide-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
@@ -239,6 +231,14 @@ let handle = slider.append("rect")
     .attr("height", handlesize.height)
     .attr("x", positionHandle(d3.max(decades)))
     .attr("y", -15);
+
+let year = slider.append("text")
+    .attr("class", "year")
+    .attr("x", scale(d3.max(decades)))
+    .attr("y", -33)
+    .attr("id", "year")
+    .style("opacity", 0)
+    .text(d3.max(decades));
 
 /*
 let yearover = slider.append("text")
