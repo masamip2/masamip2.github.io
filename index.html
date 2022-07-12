@@ -72,6 +72,9 @@ td {
 .year {
     fill: darkorange;
 }
+.yearover {
+    fill: darkkhaki;
+}
 
 .track,
 .track-inset,
@@ -181,6 +184,8 @@ slide.append("rect")
     .attr("y", slidesize.height*-1.5)
     .attr("width", slidesize.width)
     .attr("height", slidesize.height)
+    .on("mouseover", function(event, d) { handle.style("fill", "darkkhaki") })
+    .on("mouseout", function(event, d) { handle.style("fill", "darkkhaki") })
     .on("click", function(event, d) { changeSlide(d) });
 slide.append("text")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "slide-all" : "slide-nav") : "slide-text" })
@@ -188,6 +193,8 @@ slide.append("text")
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return d })
     .text(function (d, i) { return d })
+    .on("mouseover", function(event, d) { overDecade(d, 1) })
+    .on("mouseout", function(event, d) { overDecade(d, 0) })
     .on("click", function(event, d) { changeSlide(d) });
 
 svg.append("g").call(d3.axisBottom(scale).ticks(11));
@@ -205,6 +212,8 @@ slider.append("line")
 
 let handle = slider.append("rect")
     .attr("class", "track-overlay handle")
+    .on("mouseover", function(event, d) { overHandle(1) })
+    .on("mouseout", function(event, d) { overHandle(0) })
     .call(d3.drag()
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
@@ -219,6 +228,20 @@ let year = slider.append("text")
     .attr("id", "year")
     .style("opacity", 0)
     .text(d3.max(decades));
+
+let yearover = slider.append("text")
+    .attr("class", "yearover")
+    .attr("x", scale(d3.max(decades)))
+    .attr("y", -33)
+    .attr("id", "year")
+    .style("opacity", 0)
+    .text(d3.max(decades));
+
+function overDecade(y, opacity) {
+    if (typeof(y) != 'string') {
+        yearover.style("opacity", opacity).text(y).attr("x", scale(y));
+    }
+}
 
 function changeDecade(y) {
     console.log(`year: ${y}`);
