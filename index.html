@@ -187,9 +187,10 @@ let svg = d3.select("#left").append("svg")
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
-let slide = svg.append('g').selectAll("rect").data(slides).enter();
-svg.append("g").call(d3.axisBottom(scale).ticks(11));
+
 let slider = svg.append("g");
+svg.append("g").call(d3.axisBottom(scale).ticks(11));
+let slide = svg.append('g').selectAll("rect").data(slides).enter();
 
 let year = slider.append("text")
     .attr("class", "year")
