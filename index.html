@@ -6,9 +6,13 @@ body {
     color: gray;
     background: whitesmoke;
 }
+table {
+    border-spacing: 2px;
+}
 th, td {
   border: 1px;
   border-color: gray;
+  border-collapse: collapse;
   text-align: left;
   padding: 2px;
 }
@@ -321,7 +325,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Overview</th>
-                        <td>${d.Overview}</td>
+                        <td>$ ${d.Overview}</td>
                     </tr>
                 </table>
             `);
