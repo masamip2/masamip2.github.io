@@ -13,11 +13,11 @@ table {
     border-color: red;
 }
 tbody {
-    margin: 5px;
+    margin: 10px;
 }
 th, td {
     text-align: left;
-    padding: 4px;
+    padding: 2px;
 }
 th {
     width: 120px;
@@ -313,7 +313,7 @@ async function plot(data) {
                         </tr>
                         <tr>
                             <th>Gross</th>
-                            <td>${d.Gross}</td>
+                            <td>$ ${d.Gross}</td>
                         </tr>
                         <tr>
                             <th>Series_Title</th>
@@ -329,7 +329,7 @@ async function plot(data) {
                         </tr>
                         <tr>
                             <th>Overview</th>
-                            <td>$ ${d.Overview}</td>
+                            <td>${d.Overview}</td>
                         </tr>
                     </tbody>
                 </table>
