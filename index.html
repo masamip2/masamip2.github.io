@@ -83,7 +83,7 @@ td {
     fill: darkorange;
 }
 .mouse-over {
-    fill: gold;
+    fill: orangered;
 }
 
 .track,
@@ -98,7 +98,7 @@ td {
 }
 
 .track-inset {
-    stroke: orange;
+    /*stroke: orange;*/
     stroke-opacity: 0.5;
     stroke-width: 5px;
 }
@@ -221,8 +221,8 @@ slider.append("line")
 
 let handle = slider.append("rect")
     .attr("class", "track-overlay handle")
-    .on("mouseover", function(event, d) { handle.style("fill", "gold") })
-    .on("mouseout", function(event, d) { handle.style("fill", "lightslategray") })
+    //.on("mouseover", function(event, d) { handle.style("fill", "gold") })
+    //.on("mouseout", function(event, d) { handle.style("fill", "lightslategray") })
     .call(d3.drag()
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
