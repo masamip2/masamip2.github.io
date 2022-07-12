@@ -130,7 +130,7 @@ div.tooltip {
     position: absolute;
     text-align: center;
     width: 150px;
-    height: 70px;
+    height: 65px;
     padding: 4px;
     color: white;
     background: lightslategray;
@@ -324,8 +324,8 @@ async function plot(data) {
                 .duration(200)
                 .style("opacity", 1);
             tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`)
-                .style("left", (event.pageX-10) + "px")
-                .style("top", (event.pageY+10) + "px");
+                .style("left", (event.pageX-20) + "px")
+                .style("top", (event.pageY+20) + "px");
         })
         .on("mouseout", function(event, d) {
             tooltip.transition()
