@@ -262,8 +262,8 @@ const color = d3.scaleOrdinal()
     .range(d3.schemeSet3);
 
 function formatNumber(num) {
-    const n = parseInt(num.replace(/,/g,''));
-    if (n >= 1000 && num < 1000000) {
+    const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
+    if (n >= 1000 && n < 1000000) {
         return (n/1000).toFixed(1) + 'K';
     } else if (n >= 1000000) {
         return (n/1000000).toFixed(1) + 'M';
