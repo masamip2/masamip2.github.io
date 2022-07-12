@@ -75,7 +75,7 @@ td {
 }
 .slide-text {
     fill: slategray;
-    opacity: 0.8;
+    /*opacity: 0.8;*/
 }
 
 .year {
@@ -253,6 +253,8 @@ let yearover = slider.append("text")
     .text(d3.max(decades));
 */
 function overDecade(y, opacity) {
+    d3.select(`#_${y}`).style("fill", opacity? "orangered" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
+    /*
     if (typeof(y) != 'string') {
         d3.select(`#_${y}`).style("opacity", opacity === 1? 0 : 1);
         const decade = Math.round(y/10)*10;
@@ -260,6 +262,7 @@ function overDecade(y, opacity) {
     } else {
         d3.select(`#_${y}`).style("fill", opacity? "orangered" : "whitesmoke");
     }
+    */
 }
 
 function changeDecade(y) {
