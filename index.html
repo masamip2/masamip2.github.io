@@ -16,7 +16,7 @@ table {
 th, td {
     text-align: left;
     vertical-align: top;
-    padding: 5px;
+    padding: 2px;
     font-size: 13px;
 }
 th {
@@ -362,10 +362,15 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             info.html(`
-                <div class="img">
-                    <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
-                </div>
+                
                 <table>
+                    <tr>
+                        <td colspan=2>
+                            <div class="img">
+                                <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                            </div>
+                        </td>
+                    </tr>
                     <tr>
                         <th>Released Year</th>
                         <td>${d.Released_Year}</td>
