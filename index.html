@@ -87,16 +87,18 @@ td {
     fill: orangered;
 }
 */
-
+/*
 .track,
 .track-inset,
-.track-overlay {
+.track-handle {
     stroke-linecap: square;
 }
+*/
 
-.track {
-    stroke: gray;
+.track-line {
+    stroke: darkgray;
     stroke-width: 2px;
+    stroke-linecap: square;
 }
 /*
 .track-inset {
@@ -105,7 +107,13 @@ td {
     stroke-width: 5px;
 }
 */
-.track-overlay {
+.track-path {
+    stroke: gray;
+    stroke-width: 5px;
+    stroke-opacity: 0.8;
+    stroke-linecap: square;
+}
+.track-handle {
     pointer-events: stroke;
     stroke-width: 25px;
     cursor: pointer;
@@ -213,16 +221,16 @@ svg.append("g").call(d3.axisBottom(scale).ticks(11));
 
 let slider = svg.append("g");
 slider.append("line")
-    .attr("class", "track")
+    .attr("class", "track-line")
+    .attr("x1", scale.range()[0])
+    .attr("x2", scale.range()[1])
+    .append("path")
+    .attr("class", "track-path")
     .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1]);
-    // .append("line")
-    // .attr("class", "track-inset")
-    // .attr("x1", scale.range()[0])
-    // .attr("x2", scale.range()[1]);
 
 let handle = slider.append("rect")
-    .attr("class", "track-overlay handle")
+    .attr("class", "track-handle handle")
     //.on("mouseover", function(event, d) { handle.style("fill", "gold") })
     //.on("mouseout", function(event, d) { handle.style("fill", "lightslategray") })
     .call(d3.drag()
