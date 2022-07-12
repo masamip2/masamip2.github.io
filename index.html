@@ -8,11 +8,21 @@ body {
 }
 table, th, td {
     border-collapse: collapse;
+    border: 1px dotted;
 }
-table {
-    border: 1px dotted darkgray;
+.table-img {
+    border-color: darkgray;
+    height: 400px;
+}
+.table-info {
     height: 600px;
 }
+/*
+table {
+    border-color: darkgray;
+    height: 600px;
+}
+*/
 th, td {
     text-align: left;
     vertical-align: top;
@@ -20,13 +30,13 @@ th, td {
     font-size: 13px;
 }
 th {
-    border: 1px dotted lightgray;
+    border-color: lightgray;
     width: 130px;
     color: whitesmoke;
     background: darkgray;
 }
 td {
-    border: 1px dotted darkgray;
+    border-color: darkgray;
     width: 200px;
     color: slategray;
 }
@@ -362,12 +372,16 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             info.html(`
-                <table>
-                    <div class="img">
-                        <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
-                    </div>
+                <table class="table-img">
+                    <tr>
+                        <td>
+                            <div class="img">
+                                <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                            </div>
+                        </td>
+                    </tr>
                 </table>
-                <table>
+                <table class="table-info">
                     <tr>
                         <th>Released Year</th>
                         <td>${d.Released_Year}</td>
