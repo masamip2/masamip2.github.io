@@ -7,7 +7,8 @@ body {
     background: whitesmoke;
 }
 th, td {
-  border: 1px solid darkgray;
+  border: 1px;
+  border-color: darkgray;
   text-align: left;
   padding: 8px;
 }
@@ -260,9 +261,8 @@ const color = d3.scaleOrdinal()
 let info = d3.select("#right").append("div")
     .attr("class", "info")
     .attr("width", infosize.width)
-    .attr("height", infosize.height)
-    .append("g").attr("transform", `translate(${margin.left}, ${margin.top+slidesize.height+handlesize.height})`);
-//info.append("g").append("dl").append("dt").append("dd").attr("")
+    .attr("height", infosize.height);
+    //.append("g").attr("transform", `translate(${margin.left}, ${margin.top+slidesize.height+handlesize.height})`);
 
 async function plot(data) {
     d3.selectAll("circle").remove();
