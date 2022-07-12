@@ -254,9 +254,9 @@ let yearover = slider.append("text")
 */
 function overDecade(y, opacity) {
     if (typeof(y) != 'string') {
+        d3.select(`#_${y}`).style("opacity", opacity === 1? 0 : 1);
         const decade = Math.round(y/10)*10;
         year.style("opacity", opacity).text(decade).attr("x", scale(decade));
-        d3.select(`#_${decade}`).style("opacity", opacity? 0 : 1);
     } else {
         d3.select(`#_${y}`).style("fill", opacity? "orangered" : "whitesmoke");
     }
