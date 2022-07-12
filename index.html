@@ -12,15 +12,14 @@ table {
     border-collapse: collapse;
     border-color: red;
 }
-tbody {
-    margin: 10px;
-}
 th, td {
     text-align: left;
-    padding: 2px;
+    padding: 4px;
 }
 th {
     width: 120px;
+    color: lightslategray;
+    background-color: slategray;
 }
 td {
     width: 210px;
@@ -72,8 +71,8 @@ td {
 .year {
     fill: darkorange;
 }
-.yearover {
-    fill: darkkhaki;
+.mouse-over {
+    fill: gold;
 }
 
 .track,
@@ -212,7 +211,7 @@ slider.append("line")
 
 let handle = slider.append("rect")
     .attr("class", "track-overlay handle")
-    .on("mouseover", function(event, d) { handle.style("fill", "darkkhaki") })
+    .on("mouseover", function(event, d) { handle.style("fill", "gold") })
     .on("mouseout", function(event, d) { handle.style("fill", "lightslategray") })
     .call(d3.drag()
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
@@ -230,7 +229,7 @@ let year = slider.append("text")
     .text(d3.max(decades));
 
 let yearover = slider.append("text")
-    .attr("class", "yearover")
+    .attr("class", "mouse-over")
     .attr("x", scale(d3.max(decades)))
     .attr("y", -33)
     .attr("id", "year")
@@ -239,7 +238,8 @@ let yearover = slider.append("text")
 
 function overDecade(y, opacity) {
     if (typeof(y) != 'string') {
-        yearover.style("opacity", opacity).text(y).attr("x", scale(y));
+        const decade = Math.round(y/10)*10;
+        yearover.style("opacity", opacity).text(decade).attr("x", scale(decade));
     }
 }
 
@@ -321,40 +321,38 @@ async function plot(data) {
             info.html(`
                 <center><img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"></center>
                 <table>
-                    <tbody>
-                        <tr>
-                            <th>Released Year</th>
-                            <td>${d.Released_Year}</td>
-                        </tr>
-                        <tr>
-                            <th>IMDB_Rating</th>
-                            <td>${d.IMDB_Rating}</td>
-                        </tr>
-                        <tr>
-                            <th>Number of Votes</th>
-                            <td>${d.No_of_Votes}</td>
-                        </tr>
-                        <tr>
-                            <th>Gross</th>
-                            <td>$ ${d.Gross}</td>
-                        </tr>
-                        <tr>
-                            <th>Series_Title</th>
-                            <td>${d.Series_Title}</td>
-                        </tr>
-                        <tr>
-                            <th>Genre</th>
-                            <td>${d.Genre}</td>
-                        </tr>
-                        <tr>
-                            <th>Director</th>
-                            <td>${d.Director}</td>
-                        </tr>
-                        <tr>
-                            <th>Overview</th>
-                            <td>${d.Overview}</td>
-                        </tr>
-                    </tbody>
+                    <tr>
+                        <th>Released Year</th>
+                        <td>${d.Released_Year}</td>
+                    </tr>
+                    <tr>
+                        <th>IMDB_Rating</th>
+                        <td>${d.IMDB_Rating}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of Votes</th>
+                        <td>${d.No_of_Votes}</td>
+                    </tr>
+                    <tr>
+                        <th>Gross</th>
+                        <td>$ ${d.Gross}</td>
+                    </tr>
+                    <tr>
+                        <th>Series_Title</th>
+                        <td>${d.Series_Title}</td>
+                    </tr>
+                    <tr>
+                        <th>Genre</th>
+                        <td>${d.Genre}</td>
+                    </tr>
+                    <tr>
+                        <th>Director</th>
+                        <td>${d.Director}</td>
+                    </tr>
+                    <tr>
+                        <th>Overview</th>
+                        <td>${d.Overview}</td>
+                    </tr>
                 </table>
             `);
             //info.html(`<img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
