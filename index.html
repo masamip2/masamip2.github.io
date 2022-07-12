@@ -7,7 +7,7 @@ body {
     background: whitesmoke;
 }
 table {
-    border-right: 1px dotted darkgray;
+    border: 1px dotted darkgray;
     border-collapse: collapse;
 }
 th, td {
@@ -228,15 +228,15 @@ let year = slider.append("text")
     .attr("x", scale(d3.max(decades)))
     .attr("y", -33)
     .attr("id", "year")
-    .style("opacity", 0)
+    .style("opacity", 1)
     .text(d3.max(decades));
 
 let yearover = slider.append("text")
     .attr("class", "mouse-over")
-    .attr("x", scale(d3.max(decades)))
+    .attr("x", scale(d3.max(decades))-slidesize.width*0.5)
     .attr("y", -33)
     .attr("id", "year")
-    .style("opacity", 1)
+    .style("opacity", 0)
     .text(d3.max(decades));
 
 function overDecade(y, opacity) {
