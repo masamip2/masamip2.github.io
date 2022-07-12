@@ -102,7 +102,7 @@ td {
 
 .track-inset {
     stroke: orange;
-    stroke-opacity: 0.5;
+    stroke-opacity: 1;
     stroke-width: 5px;
 }
 
@@ -116,7 +116,7 @@ td {
     fill: lightslategray;
     border: 2px;
     border-color: darkslategray;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .bubble {
@@ -203,7 +203,7 @@ slide.append("text")
     .attr("class", function (d, i) { return typeof(d) == 'string'? (d == 'All' ? "slide-all" : "slide-nav") : "slide-text" })
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
-    .attr("id", function (d, i) { return d })
+    .attr("id", function (d, i) { return `_${d}` })
     .text(function (d, i) { return d })
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
@@ -254,9 +254,9 @@ function overDecade(y, opacity) {
     if (typeof(y) != 'string') {
         const decade = Math.round(y/10)*10;
         year.style("opacity", opacity).text(decade).attr("x", scale(decade));
-        d3.select(`#${decade}`).style("opacity", 0);
+        d3.select(`#_${decade}`).style("opacity", 0);
     } else {
-        d3.select(`#${y}`).style("fill", opacity? "orangered" : "whitesmoke");
+        d3.select(`#_${y}`).style("fill", opacity? "orangered" : "whitesmoke");
     }
 }
 
