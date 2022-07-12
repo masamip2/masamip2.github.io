@@ -327,12 +327,6 @@ const color = d3.scaleOrdinal()
     .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
     .range(d3.schemeSet3);
 
-let info = d3.select("#right").append("div")
-    .attr("class", "info")
-    .attr("width", infosize.width)
-    .attr("height", infosize.height);
-    //.append("g").attr("transform", `translate(${margin.left}, ${margin.top+slidesize.height+handlesize.height})`);
-
 function formatNumber(num) {
     const n = parseInt(num.replace(/,/g,''));
     if (n >= 1000 && num < 1000000) {
@@ -342,6 +336,54 @@ function formatNumber(num) {
     }
     return n;
 }
+
+
+
+const grosses = [10000000, 100000000, 1000000000];
+const circlepos = {x: 1200, y: 100};
+    var xCircle = 390
+    var xLabel = 440
+
+let legend = d3.select("#right").append("svg")
+    .attr("width", infosize.width)
+    .attr("height", imgsize.height)
+    .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
+legend.append("text")
+    .attr('x', circlepos.x)
+    .attr("y", circlepos.y-100)
+    .text("Gross $ (M)")
+    .attr("text-anchor", "middle");
+
+diagram = legend.selectAll("legend").data(grosses).enter();
+diagram.append("dot")
+    .attr("cx", circlepos.x)
+    .attr("cy", circlepos.y)
+    .attr("r", function (d) { return z(d) })
+    .style("fill", "none")
+    .attr("stroke", "gray");
+diagram.append("line")
+    .attr("x1", function (d) { return circlepos.x + z(d) })
+    .attr("x2", circlepos.x+50)
+    .attr("y1", function (d) { return circlepos.y + z(d) })
+    .attr("y2", function (d) { return circlepos.y + z(d) })
+    .attr("stroke", 'gray')
+    .style("stroke-dasharray", ("2, 2"));
+diagram.append("text")
+    .attr("x", circlepos.x+50)
+    .attr("y", function (d) { return circlepos.y + z(d) })
+    .text(`${formatNumber(d)}`)
+    .style("font-size", 10)
+    .attr('alignment-baseline', 'middle');
+
+
+
+
+let info = d3.select("#right").append("div")
+    .attr("class", "info")
+    .attr("width", infosize.width)
+    .attr("height", infosize.height);
+
+
 
 async function plot(data) {
     d3.selectAll("circle").remove();
@@ -355,7 +397,7 @@ async function plot(data) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 1);
-            tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}<br>Gross: $ ${formatNumber(d.Gross)}`)
+            tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}<br>Gross: $ ${d.Gross? formatNumber(d.Gross) : 'N/A'}`)
                 .style("left", (event.pageX+20) + "px")
                 .style("top", (event.pageY+20) + "px");
         })
@@ -390,7 +432,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Gross</th>
-                        <td>$ ${d.Gross}</td>
+                        <td>$ ${d.Gross? d.Gross : 'N/A'}</td>
                     </tr>
                     <tr>
                         <th>Series Title</th>
