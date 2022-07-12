@@ -108,10 +108,12 @@ td {
     stroke-width: 5px;
 }
 */
+/*
 .track-path {
     stroke: darkgray;
     stroke-width: 2px;
 }
+*/
 .track-handle {
     pointer-events: stroke;
     stroke-width: 25px;
@@ -120,9 +122,9 @@ td {
 
 .handle {
     fill: lightslategray;
-    border: 2px;
+    border: 4px;
     border-color: darkslategray;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 .bubble {
@@ -222,11 +224,11 @@ let slider = svg.append("g");
 slider.append("line")
     .attr("class", "track-line")
     .attr("x1", scale.range()[0])
-    .attr("x2", scale.range()[1])
-    .append("path")
-    .attr("class", "track-path")
-    .attr("x1", scale.range()[0])
     .attr("x2", scale.range()[1]);
+    // .append("path")
+    // .attr("class", "track-path")
+    // .attr("x1", scale.range()[0])
+    // .attr("x2", scale.range()[1]);
 
 let handle = slider.append("rect")
     .attr("class", "track-handle handle")
