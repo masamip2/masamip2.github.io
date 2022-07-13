@@ -151,8 +151,9 @@ const svgsize = {width: 1220, height: 1000},
     vizsize = {width: svgsize.width - margin.left - margin.right, height: svgsize.height - margin.top - margin.bottom - slidesize.height},
     handlesize = {width: 10, height: 30},
     decades = [1920, 2020],
-    slides = ['All', 'Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next']
-    ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5];
+    slides = ['All', 'Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next'],
+    ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5],
+    genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
 
 function positionYear(decade) { return scale(decade)-20; }
 function positionHandle(decade) { return scale(decade)-handlesize.width/2; }
@@ -250,16 +251,13 @@ function changeSlide(v) {
 let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
+const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.height})`).call(d3.axisBottom(x).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+(margin.bottom*0.25)).text("Votes");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", margin.top*0.5).text("Rating").attr("text-anchor", "start");
-
-const color = d3.scaleOrdinal()
-    .domain(["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"])
-    .range(d3.schemeSet3);
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
@@ -284,7 +282,7 @@ legend.append("text")
     .text("Gross $ (M)")
     .attr("text-anchor", "middle");
 
-diagram = legend.selectAll("legend").data(grosses).enter();
+let diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("circle")
     .attr("cx", circlepos.x)
     .attr("cy", function (d, i) { return circlepos.y - z(d) })
@@ -292,18 +290,33 @@ diagram.append("circle")
     .style("fill", "none")
     .attr("stroke", "darkgray");
 diagram.append("line")
-    .attr("x1", function (d, i) { return circlepos.x + z(d) })
-    .attr("x2", function (d, i) { return circlepos.x + z(d) + 100 })
-    .attr("y1", function (d, i) { return circlepos.y - z(d) })
-    .attr("y2", function (d, i) { return circlepos.y - z(d) })
+    .attr("x1", function (d, i) { return circlepos.x+z(d) })
+    .attr("x2", function (d, i) { return circlepos.x+z(d)+100 })
+    .attr("y1", function (d, i) { return circlepos.y-z(d) })
+    .attr("y2", function (d, i) { return circlepos.y-z(d) })
     .attr("stroke", 'gray')
     .style("stroke-dasharray", ("2, 2"));
 diagram.append("text")
-    .attr("x", function (d, i) { return circlepos.x + z(d) + 100 })
-    .attr("y", function (d, i) { return circlepos.y - z(d) })
+    .attr("x", function (d, i) { return circlepos.x+z(d)+100 })
+    .attr("y", function (d, i) { return circlepos.y-z(d) })
     .text(function (d, i) { return formatNumber(d) })
     .style("font-size", 11)
     .attr('alignment-baseline', 'middle');
+
+const dotpos = {x: 50, y: 200, r:2 };
+let genre = legend.selectAll("legend").data(genres).enter();
+genre.append("circle")
+    .attr("cx", dotpos.x)
+    .attr("cy", function (d, i) { return dotpos.y + (dotpos.r+10)*i })
+    .attr("r", dotpos.r)
+    .style("fill", function (d, i) { return color(d) });
+genre.append("text")
+    .attr("x", dotpos.x+10)
+    .attr("y", function (d, i) { return dotpos.y + (dotpos.r+10)*i })
+    .style("fill", function (d, i) { return color(d) })
+    .text(function (d, i) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle");
 
 let info = d3.select("#right").append("div")
     .attr("class", "info")
@@ -377,10 +390,7 @@ async function plot(data) {
                     </tr>
                 </table>
             `);
-            //info.html(`<img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
         });
 }
-
-
 </script>
 </body>
