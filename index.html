@@ -272,7 +272,7 @@ function formatNumber(num) {
 }
 
 const grosses = [10000000, 100000000, 1000000000];
-const circlepos = {x: 100, y: 100};
+const circlepos = {x: 50, y: 50};
 
 let legend = d3.select("#right").append("svg")
     .attr("width", infosize.width)
@@ -280,7 +280,7 @@ let legend = d3.select("#right").append("svg")
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 legend.append("text")
     .attr('x', circlepos.x)
-    .attr("y", circlepos.y-100)
+    .attr("y", circlepos.y-50)
     .text("Gross $ (M)")
     .attr("text-anchor", "middle");
 
@@ -292,17 +292,17 @@ diagram.append("circle")
     .style("fill", "none")
     .attr("stroke", "darkgray");
 diagram.append("line")
-    .attr("x1", function (d, i) { return circlepos.x + z(d) })
-    .attr("x2", circlepos.x+50)
-    .attr("y1", function (d, i) { return circlepos.y + z(d) })
-    .attr("y2", function (d, i) { return circlepos.y + z(d) })
+    .attr("x1", function (d, i) { return circlepos.x - z(d) })
+    .attr("x2", circlepos.x+100)
+    .attr("y1", function (d, i) { return circlepos.y - z(d) })
+    .attr("y2", function (d, i) { return circlepos.y - z(d) })
     .attr("stroke", 'gray')
     .style("stroke-dasharray", ("2, 2"));
 diagram.append("text")
-    .attr("x", circlepos.x+50)
-    .attr("y", function (d, i) { return circlepos.y + z(d) })
+    .attr("x", circlepos.x+100)
+    .attr("y", function (d, i) { return circlepos.y - z(d) })
     .text(function (d, i) { return formatNumber(d) })
-    .style("font-size", 10)
+    .style("font-size", 11)
     .attr('alignment-baseline', 'middle');
 
 let info = d3.select("#right").append("div")
