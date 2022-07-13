@@ -285,7 +285,7 @@ let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 svg.append("g").attr("transform", `translate(0, ${filtersize.height})`).call(d3.axisLeft(y).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", filtersize.height+margin.bottom*0.5).text("Rating").style("font-color", "darkgray").attr("text-anchor", "start");
 
-svg.append("g").attr("transform", `translate(0, ${vizsize.height-margin.bottom})`).call(d3.axisBottom(x).ticks(5));
+svg.append("g").attr("transform", `translate(0, ${filtersize.height+vizsize.height-margin.top})`).call(d3.axisBottom(x).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-margin.right*0.5).attr("y", vizsize.height-margin.bottom).text("Votes").style("font-color", "darkgray");
 
 function formatNumber(num) {
