@@ -163,7 +163,7 @@ const margin = {top: 60, right: 50, bottom: 25, left: 50},
     ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5],
     genresize = {width: 80, height: 40},
     filtersize = {margin: margin.left+margin.right, height: slidesize.height+handlesize.height+genresize.height},
-    vizsize = {width: svgsize.width-filtersize.margin, height: svgsize.height-filtersize.height},
+    vizsize = {width: svgsize.width-filtersize.margin, height: svgsize.height-filtersize.height-margin.bottom},
     dotpos = {x: 10, y: 25, r:8},
     genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
 
@@ -285,7 +285,7 @@ let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 svg.append("g").attr("transform", `translate(0, ${filtersize.height})`).call(d3.axisLeft(y).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", filtersize.height+margin.bottom*0.5).text("Rating").style("font-color", "darkgray").attr("text-anchor", "start");
 
-svg.append("g").attr("transform", `translate(0, ${filtersize.height+vizsize.height})`).call(d3.axisBottom(x).ticks(5));
+svg.append("g").attr("transform", `translate(0, ${filtersize.height+vizsize.height-margin.bottom})`).call(d3.axisBottom(x).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-margin.right*0.5).attr("y", vizsize.height-margin.bottom).text("Votes").style("font-color", "darkgray");
 
 function formatNumber(num) {
