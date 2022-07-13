@@ -223,12 +223,12 @@ const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
 let genre = svg.append("g").selectAll("legend").data(genres).enter();
 genre.append("circle")
     .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+120)*(i === 0? 0 : i%7) })
-    .attr("cy", dotpos.y*(i === 0? 1 : parseInt(i/7)+1))
+    .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/7)+1) })
     .attr("r", dotpos.r)
     .style("fill", function (d, i) { return color(d) });
 genre.append("text")
     .attr("x", function (d, i) { return dotpos.x+(dotpos.r+140)*(i === 0? 0 : i%7) })
-    .attr("y", dotpos.y*(i === 0? 1 : parseInt(i/7)+1))
+    .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/7)+1) })
     .style("fill", function (d, i) { return color(d) })
     .text(function (d, i) { return d })
     .attr("text-anchor", "left")
