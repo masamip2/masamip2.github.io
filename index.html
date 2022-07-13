@@ -145,7 +145,8 @@ async function filter(val) {
 
 const svgsize = {width: 1220, height: 1000},
     infosize = {width: 330, height: 1000},
-    margin = {top: 100, right: 50, bottom: 50, left: 50},
+    margin = {top: 75, right: 50, bottom: 50, left: 50},
+    legendsize = {width: infosize.width, height: 250},
     imgsize = {width: 280, height: 370},
     slidesize = {width: 80, height: 40},
     vizsize = {width: svgsize.width - margin.left - margin.right, height: svgsize.height - margin.top - margin.bottom - slidesize.height},
@@ -289,8 +290,8 @@ const grosses = [10000000, 100000000, 1000000000];
 const circlepos = {x: 50, y: 75};
 
 let legend = d3.select("#right").append("svg")
-    .attr("width", infosize.width)
-    .attr("height", imgsize.height)
+    .attr("width", legendsize.width)
+    .attr("height", legendsize.height)
     .append("g").attr("transform", `translate(0, ${margin.top})`);
 legend.append("text")
     .attr('x', circlepos.x)
