@@ -212,6 +212,21 @@ let year = slider.append("text")
     .attr("y", -33)
     .attr("id", "year");
 
+const dotpos = {x: 50, y: 50, r:4};
+let genre = svg.append("g").selectAll("legend").data(genres).enter();
+genre.append("circle")
+    .attr("cx", function (d, i) { return dotpos.x + (dotpos.r+50)*i })
+    .attr("cy", dotpos.y)
+    .attr("r", dotpos.r)
+    .style("fill", function (d, i) { return color(d) });
+genre.append("text")
+    .attr("x", function (d, i) { return dotpos.x + (dotpos.r+70)*i })
+    .attr("y", dotpos.y)
+    .style("fill", function (d, i) { return color(d) })
+    .text(function (d, i) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle");
+
 function overDecade(y, opacity) {
     d3.select(`#_${y}`).style("fill", opacity? "darkorange" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
 }
@@ -302,21 +317,6 @@ diagram.append("text")
     .text(function (d, i) { return formatNumber(d) })
     .style("font-size", 11)
     .attr('alignment-baseline', 'middle');
-
-const dotpos = {x: 50, y: 200, r:2 };
-let genre = legend.selectAll("legend").data(genres).enter();
-genre.append("circle")
-    .attr("cx", dotpos.x)
-    .attr("cy", function (d, i) { return dotpos.y + (dotpos.r+10)*i })
-    .attr("r", dotpos.r)
-    .style("fill", function (d, i) { return color(d) });
-genre.append("text")
-    .attr("x", dotpos.x+10)
-    .attr("y", function (d, i) { return dotpos.y + (dotpos.r+10)*i })
-    .style("fill", function (d, i) { return color(d) })
-    .text(function (d, i) { return d })
-    .attr("text-anchor", "left")
-    .style("alignment-baseline", "middle");
 
 let info = d3.select("#right").append("div")
     .attr("class", "info")
