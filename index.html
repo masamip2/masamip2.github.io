@@ -158,7 +158,7 @@ const svgsize = {width: 1220, height: 1000},
     ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5],
     vizsize = {width: svgsize.width-margin.left-margin.right, height: svgsize.height-margin.top-margin.bottom-slidesize.height-handlesize.height},
     genresize = {width: 100, height: 40},
-    dotpos = {x: 10, y: 50, r:8},
+    dotpos = {x: 10, y: 25, r:8},
     genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
 
 function positionYear(decade) { return scale(decade)-20; }
@@ -222,12 +222,12 @@ const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
 
 let genre = svg.append("g").selectAll("legend").data(genres).enter();
 genre.append("circle")
-    .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+120)*(i === 0? 0 : i%7) })
+    .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%7) })
     .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/7)+1) })
     .attr("r", dotpos.r)
     .style("fill", function (d, i) { return color(d) });
 genre.append("text")
-    .attr("x", function (d, i) { return dotpos.x+(dotpos.r+140)*(i === 0? 0 : i%7) })
+    .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%7)+20 })
     .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/7)+1) })
     .style("fill", function (d, i) { return color(d) })
     .text(function (d, i) { return d })
