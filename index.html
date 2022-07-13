@@ -282,7 +282,7 @@ let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
-svg.append("g").attr("transform", `translate(0, handlesize.height+genresize.height*2)`).call(d3.axisLeft(y).ticks(5)); // ${filtersize.height}
+svg.append("g").attr("transform", `translate(0, ${handlesize.height+genresize.height*2})`).call(d3.axisLeft(y).ticks(5)); // ${filtersize.height}
 svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", filtersize.height+margin.bottom*0.5).text("Rating").style("font-color", "darkgray").attr("text-anchor", "start");
 
 svg.append("g").attr("transform", `translate(0, ${filtersize.height+vizsize.height+margin.bottom-margin.top})`).call(d3.axisBottom(x).ticks(5));
