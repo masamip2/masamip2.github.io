@@ -43,6 +43,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     display: flex;
 }
 .info {
+    top: 500px;
     background-color: lightgray;
 }
 .img {
@@ -271,51 +272,10 @@ function formatNumber(num) {
     return n;
 }
 
-
-
-const grosses = [10000000, 100000000, 1000000000];
-const circlepos = {x: 100, y: 100};
-
-let legend = d3.select("#right").append("svg")
-    .attr("width", infosize.width)
-    .attr("height", imgsize.height)
-    .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
-legend.append("text")
-    .attr('x', circlepos.x)
-    .attr("y", circlepos.y-100)
-    .text("Gross $ (M)")
-    .attr("text-anchor", "middle");
-
-diagram = legend.selectAll("legend").data(grosses).enter();
-diagram.append("dot")
-    .attr("cx", circlepos.x)
-    .attr("cy", circlepos.y)
-    .attr("r", function (d, i) { return z(d) })
-    .style("fill", "none")
-    .attr("stroke", "gray");
-diagram.append("line")
-    .attr("x1", function (d, i) { return circlepos.x + z(d) })
-    .attr("x2", circlepos.x+50)
-    .attr("y1", function (d, i) { return circlepos.y + z(d) })
-    .attr("y2", function (d, i) { return circlepos.y + z(d) })
-    .attr("stroke", 'gray')
-    .style("stroke-dasharray", ("2, 2"));
-diagram.append("text")
-    .attr("x", circlepos.x+50)
-    .attr("y", function (d, i) { return circlepos.y + z(d) })
-    .text(function (d, i) { return formatNumber(d) })
-    .style("font-size", 10)
-    .attr('alignment-baseline', 'middle');
-
-
-
-
 let info = d3.select("#right").append("div")
     .attr("class", "info")
     .attr("width", infosize.width)
     .attr("height", infosize.height);
-
-
 
 async function plot(data) {
     d3.selectAll("circle").remove();
@@ -387,5 +347,39 @@ async function plot(data) {
             //info.html(`<img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image"><br>Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}`);
         });
 }
+
+const grosses = [10000000, 100000000, 1000000000];
+const circlepos = {x: 100, y: 100};
+
+let legend = d3.select("#right").append("svg")
+    .attr("width", infosize.width)
+    .attr("height", imgsize.height)
+    .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
+legend.append("text")
+    .attr('x', circlepos.x)
+    .attr("y", circlepos.y-100)
+    .text("Gross $ (M)")
+    .attr("text-anchor", "middle");
+
+diagram = legend.selectAll("legend").data(grosses).enter();
+diagram.append("circle")
+    .attr("cx", circlepos.x)
+    .attr("cy", circlepos.y)
+    .attr("r", function (d, i) { return z(d) })
+    .style("fill", "none")
+    .attr("stroke", "darkgray");
+diagram.append("line")
+    .attr("x1", function (d, i) { return circlepos.x + z(d) })
+    .attr("x2", circlepos.x+50)
+    .attr("y1", function (d, i) { return circlepos.y + z(d) })
+    .attr("y2", function (d, i) { return circlepos.y + z(d) })
+    .attr("stroke", 'gray')
+    .style("stroke-dasharray", ("2, 2"));
+diagram.append("text")
+    .attr("x", circlepos.x+50)
+    .attr("y", function (d, i) { return circlepos.y + z(d) })
+    .text(function (d, i) { return formatNumber(d) })
+    .style("font-size", 10)
+    .attr('alignment-baseline', 'middle');
 </script>
 </body>
