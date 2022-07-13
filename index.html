@@ -143,8 +143,8 @@ async function filter(val) {
     }
 }
 
-const svgsize = {width: 1220, height: 1000},
-    infosize = {width: 330, height: 1000},
+const svgsize = {width: 1220, height: 1200},
+    infosize = {width: 330, height: 1200},
     margin = {top: 70, right: 50, bottom: 50, left: 50},
     legendsize = {width: infosize.width, height: 150},
     imgsize = {width: 280, height: 370},
@@ -275,7 +275,7 @@ svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.heigh
 svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+genresize.height+(margin.bottom*0.25)).text("Votes");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+genresize.height).text("Rating").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
