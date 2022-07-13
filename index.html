@@ -12,7 +12,7 @@ table, th, td {
 }
 table {
     border-color: darkgray;
-    height: 850px; /* infosize.height */
+    height: 1000px;
 }
 .tr-img {
     height: 400px;
@@ -151,19 +151,18 @@ async function filter(val) {
     }
 }
 
-const margin = {top: 60, right: 50, bottom: 25, left: 50},
-    svgsize = {width: 1220, height: 960},
-    legendsize = {width: 330, height: 150},
-    infosize = {width: legendsize.width, height: svgsize.height-legendsize.height},
+const svgsize = {width: 1220, height: 1000},
+    infosize = {width: 330, height: svgsize.height},
+    margin = {top: 60, right: 50, bottom: 50, left: 50},
+    legendsize = {width: infosize.width, height: 150},
     imgsize = {width: 280, height: 370},
     slidesize = {width: 80, height: 40},
     handlesize = {width: 10, height: 30},
     decades = [1920, 2020],
     slides = ['All', 'Prev', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next'],
     ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5],
-    genresize = {width: 80, height: 40},
-    filtersize = {margin: margin.left+margin.right, height: slidesize.height+handlesize.height+genresize.height},
-    vizsize = {width: svgsize.width-filtersize.margin, height: svgsize.height-filtersize.height-margin.bottom},
+    vizsize = {width: svgsize.width-margin.left-margin.right, height: svgsize.height-margin.top-margin.bottom-slidesize.height-handlesize.height},
+    genresize = {width: 100, height: 40},
     dotpos = {x: 10, y: 25, r:8},
     genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
 
@@ -282,11 +281,11 @@ let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
-svg.append("g").attr("transform", `translate(0, ${handlesize.height+genresize.height*2})`).call(d3.axisLeft(y).ticks(5)); // ${filtersize.height}
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", filtersize.height+margin.bottom*0.5).text("Rating").style("font-color", "darkgray").attr("text-anchor", "start");
+svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.height+genresize.height})`).call(d3.axisBottom(x).ticks(5));
+svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+genresize.height+(margin.bottom*0.25)).text("Votes");
 
-svg.append("g").attr("transform", `translate(0, ${filtersize.height+vizsize.height+margin.bottom-margin.top})`).call(d3.axisBottom(x).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-margin.right*0.5).attr("y", vizsize.height-margin.bottom).text("Votes").style("font-color", "darkgray");
+svg.append("g").attr("transform", `translate(0, ${slidesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height).text("Rating").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
@@ -339,7 +338,7 @@ let info = d3.select("#right").append("div")
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
-    svg.append('g').attr("transform", `translate(0, ${genresize.height})`).selectAll("circle").data(data).enter().append("circle") // ${margin.top*0.5}
+    svg.append('g').attr("transform", `translate(0, ${dotpos.y*2})`).selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
