@@ -339,7 +339,7 @@ let info = d3.select("#right").append("div")
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
-    svg.append('g').attr("transform", `translate(0, genresize.height)`).selectAll("circle").data(data).enter().append("circle") // ${margin.top*0.5}
+    svg.append('g').attr("transform", `translate(0, ${genresize.height})`).selectAll("circle").data(data).enter().append("circle") // ${margin.top*0.5}
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
