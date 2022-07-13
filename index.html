@@ -274,8 +274,8 @@ let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.height+genresize.height})`).call(d3.axisBottom(x).ticks(5));
 svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+genresize.height+(margin.bottom*0.25)).text("Votes");
 
-svg.append("g").attr("transform", `translate(0, ${slidesize.height})`).call(d3.axisLeft(y).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", margin.top*0.5).text("Rating").attr("text-anchor", "start");
+svg.append("g").attr("transform", `translate(0, ${slidesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", margin.top).text("Rating").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
