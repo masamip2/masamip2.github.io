@@ -282,10 +282,10 @@ let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+handlesize.height+genresize.height+vizsize.height})`).call(d3.axisBottom(x).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", slidesize.height+handlesize.height+genresize.height*2+vizsize.height).text("Votes");
+svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", slidesize.height+handlesize.height+genresize.height*2+vizsize.height-margin.bottom).text("Votes");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+handlesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height).text("Rating").attr("text-anchor", "start");
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height-margin.bottom*0.5).text("Rating").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
@@ -338,7 +338,7 @@ let info = d3.select("#right").append("div")
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
-    svg.append('g').attr("transform", `translate(0, ${dotpos.y*2})`).selectAll("circle").data(data).enter().append("circle")
+    svg.append('g').attr("transform", `translate(0, ${genresize.height*1.5})`).selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
