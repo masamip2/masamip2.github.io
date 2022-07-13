@@ -152,7 +152,7 @@ async function filter(val) {
 }
 
 const margin = {top: 60, right: 50, bottom: 20, left: 50},
-    svgsize = {width: 1220, height: 1000},
+    svgsize = {width: 1220, height: 1050},
     legendsize = {width: 330, height: 150},
     infosize = {width: legendsize.width, height: svgsize.height-legendsize.height},
     imgsize = {width: 280, height: 370},
@@ -338,7 +338,7 @@ let info = d3.select("#right").append("div")
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
-    svg.append('g').attr("transform", `translate(0, ${dotpos.y*2})`).selectAll("circle").data(data).enter().append("circle")
+    svg.append('g').attr("transform", `translate(0, ${genresize.height})`).selectAll("circle").data(data).enter().append("circle")
         .attr("class", "bubble")
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
