@@ -101,7 +101,11 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     cursor: pointer;
 }
 
-
+.circle, .genre {
+    stroke: gray;
+    stroke-width: 1px;
+    font-size: 11px;
+}
 .bubble {
     stroke: white;
     stroke-width: 1px;
@@ -223,12 +227,14 @@ const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${dotpos.y})`).selectAll("legend").data(genres).enter();
 genre.append("circle")
+    .attr("class", "circle")
     .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11) })
     .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .attr("r", dotpos.r)
     .style("fill", function (d, i) { return color(d) });
 genre.append("text")
-    .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11)+20 })
+    .attr("class", "genre")
+    .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11)+15 })
     .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .style("fill", function (d, i) { return color(d) })
     .text(function (d, i) { return d })
