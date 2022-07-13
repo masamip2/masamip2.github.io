@@ -168,7 +168,7 @@ let tooltip = d3.select("body").append("div")
 let svg = d3.select("#left").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
-    .append("g").attr("transform", `translate(${margin.left}, 0)`);
+    .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
