@@ -101,6 +101,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     cursor: pointer;
 }
 
+
 .bubble {
     stroke: white;
     stroke-width: 1px;
@@ -220,15 +221,15 @@ let year = slider.append("text")
 
 const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
 
-let genre = svg.append("g").selectAll("legend").data(genres).enter();
+let genre = svg.append("g").attr("transform", `translate(0, ${dotpos.y})`).selectAll("legend").data(genres).enter();
 genre.append("circle")
-    .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%7) })
-    .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/7)+1) })
+    .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11) })
+    .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .attr("r", dotpos.r)
     .style("fill", function (d, i) { return color(d) });
 genre.append("text")
-    .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%7)+20 })
-    .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/7)+1) })
+    .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11)+20 })
+    .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .style("fill", function (d, i) { return color(d) })
     .text(function (d, i) { return d })
     .attr("text-anchor", "left")
