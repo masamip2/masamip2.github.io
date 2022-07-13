@@ -36,7 +36,7 @@ td {
 }
 g.tick text { font-size: 14px; } /* d3 axis tick */
 .title {
-    margin-top: 50px;
+    margin-top: 25px;
     margin-left: 50px;
 }
 #wrapper {
@@ -168,7 +168,7 @@ let tooltip = d3.select("body").append("div")
 let svg = d3.select("#left").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
-    .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .append("g").attr("transform", `translate(${margin.left}, ${margin.top*-1})`);
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
