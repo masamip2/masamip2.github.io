@@ -151,7 +151,7 @@ async function filter(val) {
     }
 }
 
-const svgsize = {width: 1220, height: 950},
+const svgsize = {width: 1220, height: 1000},
     infosize = {width: 330, height: svgsize.height},
     margin = {top: 60, right: 50, bottom: 50, left: 50},
     legendsize = {width: infosize.width, height: 150},
@@ -281,11 +281,11 @@ let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
-svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.height+genresize.height+dotpos.y*2})`).call(d3.axisBottom(x).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+genresize.height+(margin.bottom*0.25)+dotpos.y*2).text("Votes");
+svg.append("g").attr("transform", `translate(0, ${slidesize.height+vizsize.height+genresize.height})`).call(d3.axisBottom(x).ticks(5));
+svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", vizsize.height+genresize.height+(margin.bottom*0.25)).text("Votes");
 
-svg.append("g").attr("transform", `translate(0, ${slidesize.height+genresize.height+dotpos.y*2})`).call(d3.axisLeft(y).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height+dotpos.y*2).text("Rating").attr("text-anchor", "start");
+svg.append("g").attr("transform", `translate(0, ${slidesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height).text("Rating").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
