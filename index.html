@@ -287,7 +287,7 @@ legend.append("text")
 diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("circle")
     .attr("cx", circlepos.x)
-    .attr("cy", circlepos.y - z(d))
+    .attr("cy", function (d, i) { return circlepos.y - z(d) })
     .attr("r", function (d, i) { return z(d) })
     .style("fill", "none")
     .attr("stroke", "darkgray");
