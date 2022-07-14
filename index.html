@@ -259,7 +259,7 @@ genre.append("text")
     .on("click", function(event, d) { changeGenre(d) });
 
 function overDecade(y, o) {
-    if (y != 'All' && d3.select("#_All").style("fill") != 'orangered') {
+    if (!(y == 'All' && d3.select("#_All").style("fill") == 'orangered')) {
         d3.select(`#_${y}`).style("fill", o? "darkorange" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
     }
 }
