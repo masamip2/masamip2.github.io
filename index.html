@@ -265,10 +265,10 @@ function overDecade(y, o) {
 function changeDecade(y) {
     console.log(`year: ${y}`);
 
-    d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
+    //d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
-    year.attr("x", scale(decade)).style("opacity", y == 'All'? 0 : 1).text(y == 'All'? '' : decade);
+    year.attr("x", scale(decade)-(y == 'All'? slidesize.width*1.5: 0)).style("opacity", 1).text(y == 'All'? 'All' : decade);
     filter(y == 'All'? null : decade, 'year');
 }
 
