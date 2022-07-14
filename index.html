@@ -104,7 +104,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .circle, .genre {
     stroke: gray;
     stroke-width: 1px;
-    color: gray;
+    color: darkgray;
     font-size: 11px;
     opacity: .8
 }
@@ -294,7 +294,7 @@ function changeSlide(v) {
 
 function overGenre(g, o) {
     d3.select(`#${g}`).style("opacity", o? 1 : 0.8).style("stroke-width", o? 2 : 1);
-    d3.select(`#_${g}`).style("opacity", o? 1 : 0.8).style("fill", o? "darkgray" : "gray");
+    d3.select(`#_${g}`).style("opacity", o? 1 : 0.8);
 }
 
 function changeGenre(g) {
