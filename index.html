@@ -294,7 +294,7 @@ function changeSlide(v) {
 
 function overGenre(g, o) {
     d3.select(`#${g}`).style("opacity", o? 1 : 0.8).style("stroke-width", o? 2 : 1);
-    d3.select(`#_${g}`).style("opacity", o? 1 : 0.8);
+    d3.select(`#_${g}`).style("opacity", o? 1 : 0.8).style("fill", o? "darkgray" : "gray");
 }
 
 function changeGenre(g) {
