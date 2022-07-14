@@ -222,7 +222,7 @@ let handle = slider.append("rect")
         .on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
     .attr("width", handlesize.width)
     .attr("height", handlesize.height)
-    .attr("x", positionHandle(d3.max(decades)))
+    .attr("x", positionHandle(d3.min(decades)))
     .attr("y", -15);
 
 let year = slider.append("text")
@@ -268,7 +268,7 @@ function changeDecade(y) {
     //d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
-    year.attr("x", scale(decade)-(y == 'All'? slidesize.width*1.5: 0)).style("opacity", 1).text(y == 'All'? 'All' : decade);
+    year.attr("x", scale(decade)-(y == 'All'? slidesize.width: 0)).style("opacity", 1).text(y == 'All'? 'All' : decade);
     filter(y == 'All'? null : decade, 'year');
 }
 
