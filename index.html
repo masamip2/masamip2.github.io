@@ -104,6 +104,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .circle, .genre {
     stroke: gray;
     stroke-width: 1px;
+    color: gray;
     font-size: 11px;
     opacity: .8
 }
@@ -247,10 +248,9 @@ genre.append("text")
     .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11)+15 })
     .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .attr("id", function (d, i) { return `_${d}` })
-    .style("opacity", 1)
-    .style("fill", function (d, i) { return color(d) })
-    .text(function (d, i) { return d })
     .attr("text-anchor", "left")
+    .text(function (d, i) { return d })
+    .style("opacity", 1)
     .style("alignment-baseline", "middle")
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
@@ -307,10 +307,10 @@ let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
 let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+handlesize.height+genresize.height+vizsize.height})`).call(d3.axisBottom(x).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", slidesize.height+handlesize.height+genresize.height*2+vizsize.height-margin.bottom*1.5).text("Votes").attr("font-color", "darkgray");
+svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", slidesize.height+handlesize.height+genresize.height*2+vizsize.height-margin.bottom*1.5).text("Votes").attr("color", "darkgray");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+handlesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height+margin.bottom*0.5).text("Rating").attr("font-color", "darkgray").attr("text-anchor", "start");
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height+margin.bottom*0.5).text("Rating").attr("color", "darkgray").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
