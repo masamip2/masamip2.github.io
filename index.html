@@ -203,7 +203,6 @@ slide.append("text")
     .attr("x", function(d, i) { return slidesize.width*(i) + slidesize.width*0.5 })
     .attr("y", slidesize.height*-0.8)
     .attr("id", function (d, i) { return `_${d}` })
-    .style("alignment-baseline", "middle")
     .text(function (d, i) { return d })
     .on("mouseover", function(event, d) { overDecade(d, 1) })
     .on("mouseout", function(event, d) { overDecade(d, 0) })
@@ -230,8 +229,7 @@ let year = slider.append("text")
     .attr("class", "year")
     .attr("x", scale(d3.min(decades)))
     .attr("y", -33)
-    .attr("id", "year")
-    .style("alignment-baseline", "middle");
+    .attr("id", "year");
 
 const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
 
@@ -267,10 +265,10 @@ function overDecade(y, o) {
 function changeDecade(y) {
     console.log(`year: ${y}`);
 
-    //d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
+    d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
-    year.attr("x", scale(decade)-(y == 'All'? slidesize.width: 0)).style("opacity", 1).text(y == 'All'? 'All' : decade);
+    year.attr("x", scale(decade)).style("opacity", 1).text(decade);
     filter(y == 'All'? null : decade, 'year');
 }
 
