@@ -227,7 +227,7 @@ let handle = slider.append("rect")
 
 let year = slider.append("text")
     .attr("class", "year")
-    .attr("x", scale(d3.max(decades)))
+    .attr("x", scale(d3.min(decades)))
     .attr("y", -33)
     .attr("id", "year");
 
