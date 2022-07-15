@@ -47,7 +47,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 }
 .info {
     background-color: lightgray;
-    opacity: 0.8;
+    opacity: 1;
 }
 .img {
     text-align: center;
@@ -232,7 +232,7 @@ let year = slider.append("text")
     .attr("y", -33)
     .attr("id", "year");
 
-const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet3);
+const color = d3.scaleOrdinal().domain(genres).range(d3.schemeSet2+d3.schemeSet3);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${dotpos.y})`).selectAll("legend").data(genres).enter();
 genre.append("circle")
