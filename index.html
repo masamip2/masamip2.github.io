@@ -164,15 +164,15 @@ function dictGenres(arr) {
 let dataset = [];
 async function init() {
 
-    //dataset = await d3.csv('imdb_top_1000.csv');
-    await d3.csv('imdb_top_1000.csv', function(data) {
+    data = await d3.csv('imdb_top_1000.csv');
+    //await d3.csv('imdb_top_1000.csv', function(data) {
         for (let i = 0; i < data.length; i++) {
             const elms = (data[i].Genre).split(',').map(elm => elm.trim())
             const dict1 = dictOriginal(data[i])
             const dict2 = dictGenres(elms)
             dataset.push({...dict1, ...dict2})
         }
-    });
+    //});
     for (let i = 0; i < dataset.length; i++) {
         if (i == 0) console.log(dataset[0]['Genre']);
     }
