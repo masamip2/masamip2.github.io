@@ -235,7 +235,7 @@ let year = slider.append("text")
 console.log(d3.schemeSet1);
 console.log(d3.schemeSet2);
 console.log(d3.schemeSet3);
-const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet2),...(d3.schemeSet3),...(d3.schemeSet1)]);
+const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet1),...(d3.schemeSet3),...(d3.schemeSet2)]);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${dotpos.y})`).selectAll("legend").data(genres).enter();
 genre.append("circle")
