@@ -163,18 +163,12 @@ function dictGenres(arr) {
 
 let dataset = [];
 async function init() {
-
     data = await d3.csv('imdb_top_1000.csv');
-    //await d3.csv('imdb_top_1000.csv', function(data) {
-        for (let i = 0; i < data.length; i++) {
-            const elms = (data[i].Genre).split(',').map(elm => elm.trim())
-            const dict1 = dictFields(data[i])
-            const dict2 = dictGenres(elms)
-            dataset.push({...dict1, ...dict2})
-        }
-    //});
-    for (let i = 0; i < dataset.length; i++) {
-        if (i == 0) console.log(dataset[0]['Genre']);
+    for (let i = 0; i < data.length; i++) {
+        const elms = (data[i].Genre).split(',').map(elm => elm.trim())
+        const dict1 = dictFields(data[i])
+        const dict2 = dictGenres(elms)
+        dataset.push({...dict1, ...dict2})
     }
     changeSlide('All');
 }
@@ -189,10 +183,10 @@ async function filter(val, by) {
                 const dict = dictGenres(val)
                 let cnt = val.length
                 genres.forEach (g => {
-                    console.log(`${g}: d=${d[g]}, dict=${dict[g]}`)
-                    if (d[g] == dict[g]) cnt--
+                    //console.log(`${g}: d=${d[g]}, dict=${dict[g]}`)
+                    if (d[g] == 1 && dict[g] == 1) cnt--
                 })
-                console.log(`cnt = ${cnt}`)
+                //console.log(`cnt = ${cnt}`)
                 return cnt == 0? d : null
             }));
         }
