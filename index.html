@@ -345,9 +345,8 @@ function changeGenre(g) {
     overGenre(g, 1);
     let gs = [];
     genres.forEach (v => {
-        if (d3.select(`#-${v}`).style("opacity") == 1) gs.append(v);
+        if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
     });
-    
     filter(gs, 'genre');
 }
 
