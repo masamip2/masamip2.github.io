@@ -167,9 +167,9 @@ const margin = {top: 60, right: 50, bottom: 50, left: 50},
     imgsize = {width: 210, height: 277},
     slidesize = {width: 80, height: 40},
     handlesize = {width: 10, height: 30},
-    checkboxsize = {width: 10, height: 10},
+    boxsize = {width: 15, height: 15},
     genresize = {width: 100, height: 40},
-    boxpos = {x: 10, y: 25, distance: 180},
+    boxpos = {x: 10, y: 20, distance: 180},
     decades = [1920, 2020],
     slides = ['Prev', 'All', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next'],
     ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5],
@@ -240,10 +240,11 @@ genre.append("rect")
     .attr("class", "checkbox")
     .attr("x", function (d, i) { return boxpos.x+(boxpos.distance)*(i === 0? 0 : i%11) })
     .attr("y", function (d, i) { return boxpos.y*(i === 0? 1 : parseInt(i/11)+1) })
-    .attr("width", checkboxsize.width)
-    .attr("height", checkboxsize.height)
+    .attr("width", boxsize.width)
+    .attr("height", boxsize.height)
     .attr("id", function (d, i) { return `${d}` })
     .style("opacity", 1)
+    .style("fill", function (d, i) { return color(d) })
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
     .on("click", function(event, d) { changeGenre(d) });
