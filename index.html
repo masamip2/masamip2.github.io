@@ -349,7 +349,7 @@ function changeSlide(v) {
 }
 
 function overGenre(g, o) {
-    if (!(d3.select(`#-${g}`).style("opacity") < 1)) {
+    if (d3.select(`#-${g}`).style("opacity") == 0) {
         d3.select(`#${g}`).style("opacity", o? 1 : 0.8).style("stroke-width", o? 2 : 1);
         d3.select(`#_${g}`).style("opacity", o? 1 : 0.8);
     }
@@ -358,12 +358,13 @@ function overGenre(g, o) {
 function changeGenre(g) {
     let o = d3.select(`#-${g}`).style("opacity");
     console.log(`o = ${o}`)
+    d3.select(`#-${g}`).style("opacity", o == 1? 0 : 1);
+    
     let gs = [];
     genres.forEach (v => {
         console.log(`${v} = ${d3.select(`#-${v}`).style("opacity")}`)
         if (v == g || d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
     });
-    d3.select(`#-${g}`).style("opacity", o? 0 : 1);
     filter(gs, 'genre');
 }
 
