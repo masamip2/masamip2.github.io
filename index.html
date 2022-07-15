@@ -235,7 +235,7 @@ let year = slider.append("text")
 
 const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet2),...(d3.schemeSet3),...([(d3.schemeSet1)[2]])]);
 
-let genre = svg.append("g").attr("transform", `translate(0, ${dotpos.y})`).selectAll("legend").data(genres).enter();
+let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
 genre.append("rect")
     .attr("class", "checkbox")
     .attr("x", function(d, i) { return checkboxsize.width*(i) })
