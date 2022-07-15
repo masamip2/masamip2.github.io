@@ -163,6 +163,7 @@ async function init() {
             const gs = dict(elms)
             genres.forEach (g => { data[i][g] = gs[g] })
         }
+        return data
     });
     changeSlide('All');
 }
