@@ -168,7 +168,7 @@ async function init() {
     //await d3.csv('imdb_top_1000.csv', function(data) {
         for (let i = 0; i < data.length; i++) {
             const elms = (data[i].Genre).split(',').map(elm => elm.trim())
-            const dict1 = dictOriginal(data[i])
+            const dict1 = dictFields(data[i])
             const dict2 = dictGenres(elms)
             dataset.push({...dict1, ...dict2})
         }
