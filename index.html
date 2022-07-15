@@ -158,12 +158,13 @@ let dataset;
 async function init() {
     //dataset = await d3.csv('imdb_top_1000.csv');
     dataset = await d3.csv('imdb_top_1000.csv', function(data) {
-        for (let i = 0; i < data.length; i++) {
-            const elms = (data[i].Genre).split(',').map(elm => elm.trim())
+        let dt = data
+        for (let i = 0; i < dt.length; i++) {
+            const elms = (dt[i].Genre).split(',').map(elm => elm.trim())
             const gs = dict(elms)
-            genres.forEach (g => { data[i][g] = gs[g] })
+            genres.forEach (g => { dt[i][g] = gs[g] })
         }
-        return data
+        return dt
     });
     changeSlide('All');
 }
