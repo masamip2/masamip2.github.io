@@ -154,7 +154,7 @@ async function init() {
 
 async function filter(val, by) {
     console.log(val);
-    if (val || val.length > 0) {
+    if (val || (val && val.length > 0)) {
         if (by == 'year') {
             await plot(dataset.filter(function(d) { return d.Released_Year >= val && d.Released_Year < val+10 }));
         } else if (by == 'genre') {
