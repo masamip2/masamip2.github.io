@@ -238,7 +238,7 @@ let year = slider.append("text")
     .attr("id", "year");
 
 const coordinates = [{x: 2.5, y: 2.7}, {x: 9, y: 15}, {x: 17.5, y: 2}];
-const checkmark = d3.line(coordinates).interpolate("basic");
+const checkmark = d3.line(coordinates);
 const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet2),...(d3.schemeSet3),...([(d3.schemeSet1)[2]])]);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
