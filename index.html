@@ -237,8 +237,8 @@ let year = slider.append("text")
     .attr("y", -33)
     .attr("id", "year");
 
-var coordinates = [{x: 2.5, y: 2.7}, {x: 9, y: 15}, {x: 17.5, y: 2}];
-const line = d3.line().x(function(d) { return d.x }).y(function(d) { return d.y }).interpolate("basic");
+const coordinates = [{x: 2.5, y: 2.7}, {x: 9, y: 15}, {x: 17.5, y: 2}];
+const checkmark = d3.line(coordinates).interpolate("basic");
 const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet2),...(d3.schemeSet3),...([(d3.schemeSet1)[2]])]);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -256,7 +256,7 @@ genre.append("rect")
     .on("click", function(event, d) { changeGenre(d) });
 genre.append("path")
     .attr("class", "checkmark")
-    .attr("d", line(coordinates));
+    .attr("d", checkmark);
 genre.append("text")
     .attr("class", "genre")
     .attr("x", function (d, i) { return boxpos.x+20+(boxpos.distance)*(i === 0? 0 : i%11) })
