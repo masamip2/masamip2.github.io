@@ -112,6 +112,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 }
 .checkmark {
     stroke: darkgray;
+    stroke-width: 1px;
     fill: none;
 }
 .bubble {
@@ -261,7 +262,8 @@ genre.append("polyline")
         const ox = boxpos.x+(boxpos.distance)*(i === 0? 0 : i%11)
         const oy = boxpos.y*(i === 0? 1 : parseInt(i/11)+1)+boxsize.height*-0.5
         return `${ox+polyline.p1.x},${oy+polyline.p1.y}, ${ox+polyline.p2.x},${oy+polyline.p2.y}, ${ox+polyline.p3.x},${oy+polyline.p3.y}`
-    });
+    })
+    .style("opacity", 1);
 genre.append("text")
     .attr("class", "genre")
     .attr("x", function (d, i) { return boxpos.x+20+(boxpos.distance)*(i === 0? 0 : i%11) })
