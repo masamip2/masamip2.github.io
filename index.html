@@ -161,7 +161,7 @@ function dictGenres(arr) {
     return dict;
 }
 
-let dataset;
+let dataset = [];
 async function init() {
     //dataset = await d3.csv('imdb_top_1000.csv');
     dataset = await d3.csv('imdb_top_1000.csv', function(data) {
