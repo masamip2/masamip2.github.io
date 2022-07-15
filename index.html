@@ -164,6 +164,25 @@ function dictGenres(arr) {
     return dict;
 }
 
+function selectedGenres() {
+    let gs = [];
+    genres.forEach (v => {
+        if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
+    });
+    return gs;
+}
+
+function findCnt(gs) {
+    let cnt = 0;
+    if (gs.length > 0) {
+        const dict = dictGenres(gs);
+        genres.forEach (g => {
+            if (d[g] == 1 && dict[g] == 1) cnt++
+        })
+    }
+    return cnt == gs.length;
+}
+
 let dataset = [];
 async function init() {
     data = await d3.csv('imdb_top_1000.csv');
@@ -176,8 +195,28 @@ async function init() {
     changeSlide('All');
 }
 
+async function filter() {
+    const all = d3.select('#_All').style("fill") == 'orangered'? 1 : 0;
+    const year = d3.select('#year').text();
+    const gs = selectedGenres();
+
+    if (all) {
+        await plot(dataset);
+    } else {
+        await plot(dataset.filter(function(d) {
+            let d_year = true;
+            let d_genre = true;
+            if (year) d_year = d.Released_Year >= year && d.Released_Year < year+10
+            if (gs.length > 0) d_genre = findCnt(gs)
+            return d_year && d_genre
+        }));
+    }
+}
+
+/*
 async function filter(val, by) {
     if (val || (val && val.length > 0)) {
+
         if (by == 'year') {
             await plot(dataset.filter(function(d) { return d.Released_Year >= val && d.Released_Year < val+10 }));
         } else if (by == 'genre') {
@@ -194,6 +233,7 @@ async function filter(val, by) {
         await plot(dataset);
     }
 }
+*/
 
 const margin = {top: 60, right: 50, bottom: 50, left: 50},
     svgsize = {width: 1220, height: 1000},
@@ -318,12 +358,14 @@ function overDecade(y, o) {
 
 function changeDecade(y) {
     console.log(`year: ${y}`);
+    if (y == 'All') genres.forEach (v => { d3.select(`#-${v}`).style("opacity") = 0 });
 
     d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
     year.attr("x", scale(decade)).style("opacity", y == 'All'? 0 : 1).text(y == 'All'? '' : decade);
-    filter(y == 'All'? null : decade, 'year');
+    filter();
+    //filter(y == 'All'? null : decade, 'year');
 }
 
 function changeSlide(v) {
@@ -367,12 +409,9 @@ function overGenre(g, o) {
 function changeGenre(g) {
     let o = d3.select(`#-${g}`).style("opacity");
     d3.select(`#-${g}`).style("opacity", o == 1? 0 : 1);
-    
-    let gs = [];
-    genres.forEach (v => {
-        if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
-    });
-    filter(gs, 'genre');
+    let gs = selectedGenres();
+    filter();
+    //filter(gs, 'genre');
 }
 
 let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
