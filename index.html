@@ -146,23 +146,31 @@ div.tooltip {
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
+const fields = ["Poster_Link","Series_Title","Released_Year","Runtime","Genre","IMDB_Rating","Overview","Meta_score","Director","Star1","Star2","Star3","Star4","No_of_Votes","Gross"];
+function dictFields(data) {
+    const dict = {};
+    fields.forEach (f => { dict[f] = data[f] });
+    return dict;
+}
+
 genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
-function dict(arr) {
-    const gs = {};
-    genres.forEach (g => { gs[g] = 0 });
-    arr.forEach (elm => { gs[elm] = 1 });
-    return gs;
+function dictGenres(arr) {
+    const dict = {};
+    genres.forEach (g => { dict[g] = 0 });
+    arr.forEach (elm => { dict[elm] = 1 });
+    return dict;
 }
 
 let dataset;
 async function init() {
     //dataset = await d3.csv('imdb_top_1000.csv');
     dataset = await d3.csv('imdb_top_1000.csv', function(data) {
-        let dt = data
-        for (let i = 0; i < dt.length; i++) {
-            const elms = (dt[i].Genre).split(',').map(elm => elm.trim())
-            const gs = dict(elms)
-            genres.forEach (g => { dt[i][g] = gs[g] })
+        let dt = []
+        for (let i = 0; i < data.length; i++) {
+            const elms = (data[i].Genre).split(',').map(elm => elm.trim())
+            const dict1 = dictOriginal(data[i])
+            const dict2 = dictGenres(elms)
+            dt.push({...dict1, ...dict2})
         }
         return dt
     });
@@ -176,11 +184,11 @@ async function filter(val, by) {
             await plot(dataset.filter(function(d) { return d.Released_Year >= val && d.Released_Year < val+10 }));
         } else if (by == 'genre') {
             await plot(dataset.filter(function(d) {
-                const gs = dict(val)
+                const dict = dictGenres(val)
                 let cnt = val.length
                 genres.forEach (g => {
-                    console.log(`${g}: d=${d[g]}, gs=${gs[g]}`)
-                    if (d[g] == gs[g]) cnt--
+                    console.log(`${g}: d=${d[g]}, dict=${dict[g]}`)
+                    if (d[g] == dict[g]) cnt--
                 })
                 console.log(`cnt = ${cnt}`)
                 return cnt == 0? d : null
