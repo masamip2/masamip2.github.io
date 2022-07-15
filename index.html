@@ -440,7 +440,7 @@ async function plot(data) {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : none
+            return gs.length == 1? color(gs[0]) : "Gainsboro"
         })
         .on("mouseover", function(event, d) {
             tooltip.transition()
