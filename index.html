@@ -102,7 +102,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     cursor: pointer;
 }
 
-.circle, .genre {
+.checkbox, .genre {
     stroke: gray;
     stroke-width: 1px;
     color: darkgray;
@@ -232,23 +232,20 @@ let year = slider.append("text")
     .attr("y", -33)
     .attr("id", "year");
 
-console.log(d3.schemeSet1);
-console.log(d3.schemeSet2);
-console.log(d3.schemeSet3);
 const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet2),...(d3.schemeSet3),...([(d3.schemeSet1)[2]])]);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${dotpos.y})`).selectAll("legend").data(genres).enter();
-genre.append("circle")
-    .attr("class", "circle")
+genre.append("input")
+    .attr("class", "checkbox")
     .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11) })
     .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
-    .attr("r", dotpos.r)
+    //.attr("r", dotpos.r)
     .attr("id", function (d, i) { return `${d}` })
     .style("opacity", 1)
     .style("fill", function (d, i) { return color(d) })
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
-    .on("click", function(event, d) { changeGenre(d) });
+    .on("checked", function(event, d) { changeGenre(d) });
 genre.append("text")
     .attr("class", "genre")
     .attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11)+15 })
