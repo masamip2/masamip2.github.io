@@ -177,7 +177,11 @@ async function filter(val, by) {
             await plot(dataset.filter(function(d) {
                 const gs = dict(val)
                 let cnt = val.length
-                genres.forEach (g => { if (d[g] == gs[g]) cnt-- })
+                genres.forEach (g => {
+                    console.log(`${g}: d=${d[g]}, gs=${gs[g]}`)
+                    if (d[g] == gs[g]) cnt--
+                })
+                console.log(`cnt = ${cnt}`)
                 return cnt == 0? d : null
             }));
         }
@@ -193,7 +197,7 @@ const margin = {top: 60, right: 50, bottom: 50, left: 50},
     imgsize = {width: 210, height: 277},
     slidesize = {width: 80, height: 40},
     handlesize = {width: 10, height: 30},
-    polyline = {p1: {x: 0, y: 10}, p2: {x: 5, y: 15}, p3: {x: 15, y: 0}},
+    polyline = {p1: {x: 0, y: 8}, p2: {x: 5, y: 13}, p3: {x: 15, y: 0}},
     boxsize = {width: 15, height: 15},
     genresize = {width: 100, height: 40},
     boxpos = {x: 10, y: 25, distance: 105},
@@ -363,7 +367,7 @@ function changeGenre(g) {
     let gs = [];
     genres.forEach (v => {
         console.log(`${v} = ${d3.select(`#-${v}`).style("opacity")}`)
-        if (v == g || d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
+        if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
     });
     filter(gs, 'genre');
 }
