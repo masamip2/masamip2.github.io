@@ -110,6 +110,10 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     opacity: .8;
     cursor: pointer;
 }
+.checkmark {
+    stroke: darkgray;
+    stroke-width: 1px;
+}
 .bubble {
     stroke: white;
     stroke-width: 1px;
@@ -233,6 +237,8 @@ let year = slider.append("text")
     .attr("y", -33)
     .attr("id", "year");
 
+var coordinates = [{x: 2.5, y: 2.7}, {x: 9, y: 15}, {x: 17.5, y: 2}];
+const line = d3.svg.line().x(function(d) { return d.x }).y(function(d) { return d.y }).interpolate("basic");
 const color = d3.scaleOrdinal().domain(genres).range([...(d3.schemeSet2),...(d3.schemeSet3),...([(d3.schemeSet1)[2]])]);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -248,22 +254,13 @@ genre.append("rect")
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
     .on("click", function(event, d) { changeGenre(d) });
-
-    // .attr("cx", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11) })
-    // .attr("cy", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
-    // .attr("r", dotpos.r)
-    // .attr("id", function (d, i) { return `${d}` })
-    // .style("opacity", 1)
-    // .style("fill", function (d, i) { return color(d) })
-    // .on("mouseover", function(event, d) { overGenre(d, 1) })
-    // .on("mouseout", function(event, d) { overGenre(d, 0) })
-    // .on("click", function(event, d) { changeGenre(d) });
+genre.append("path")
+    .attr("class", "checkmark")
+    .attr("d", line(coordinates));
 genre.append("text")
     .attr("class", "genre")
     .attr("x", function (d, i) { return boxpos.x+20+(boxpos.distance)*(i === 0? 0 : i%11) })
     .attr("y", function (d, i) { return boxpos.y*(i === 0? 1 : parseInt(i/11)+1) })
-    //.attr("x", function (d, i) { return dotpos.x+(dotpos.r+100)*(i === 0? 0 : i%11)+15 })
-    //.attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .attr("id", function (d, i) { return `_${d}` })
     .attr("text-anchor", "left")
     .style("opacity", 1)
