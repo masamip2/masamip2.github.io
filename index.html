@@ -239,7 +239,7 @@ let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selec
 genre.append("rect")
     .attr("class", "checkbox")
     .attr("x", function (d, i) { return boxpos.x+(boxpos.distance)*(i === 0? 0 : i%11) })
-    .attr("y", function (d, i) { return dotpos.y*(i === 0? 1 : parseInt(i/11)+1) })
+    .attr("y", function (d, i) { return boxpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .attr("width", checkboxsize.width)
     .attr("height", checkboxsize.height)
     .attr("id", function (d, i) { return `${d}` })
