@@ -177,6 +177,8 @@ async function init() {
     changeSlide('All');
 }
 
+console.log(dataset[0].Genre);
+
 async function filter(val, by) {
     console.log(val);
     if (val || (val && val.length > 0)) {
