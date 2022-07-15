@@ -171,6 +171,7 @@ const margin = {top: 60, right: 50, bottom: 50, left: 50},
     imgsize = {width: 210, height: 277},
     slidesize = {width: 80, height: 40},
     handlesize = {width: 10, height: 30},
+    polyline = {p1: {x: 0, y: 10}, p2: {x: 5, y: 15}, p3: {x: 15, y: 0}},
     boxsize = {width: 15, height: 15},
     genresize = {width: 100, height: 40},
     boxpos = {x: 10, y: 25, distance: 105},
@@ -256,7 +257,11 @@ genre.append("rect")
     .on("click", function(event, d) { changeGenre(d) });
 genre.append("polyline")
     .attr("class", "checkmark")
-    .attr("points", "0,10, 5,15, 15,0");
+    .attr("points", function (d, i) {
+        const ox = boxpos.x+(boxpos.distance)*(i === 0? 0 : i%11)
+        const oy = boxpos.y*(i === 0? 1 : parseInt(i/11)+1)
+        return `${ox+polyline.p1.x},${oy+polyline.p1.y}, ${ox+polyline.p2.x},${oy+polyline.p2.y}, ${ox+polyline.p3.x},${oy+polyline.p3.y}`
+    });
 genre.append("text")
     .attr("class", "genre")
     .attr("x", function (d, i) { return boxpos.x+20+(boxpos.distance)*(i === 0? 0 : i%11) })
