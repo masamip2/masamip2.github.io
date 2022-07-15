@@ -357,9 +357,11 @@ function overGenre(g, o) {
 
 function changeGenre(g) {
     let o = d3.select(`#-${g}`).style("opacity");
+    console.log(`o = ${o}`)
     d3.select(`#-${g}`).style("opacity", o? 0 : 1);
     let gs = [];
     genres.forEach (v => {
+        console.log(`${v} = ${d3.select(`#-${v}`).style("opacity")}`)
         if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
     });
     filter(gs, 'genre');
