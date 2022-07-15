@@ -111,7 +111,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     cursor: pointer;
 }
 .checkmark {
-    stroke: darkgray;
+    stroke: darkslategray;
     stroke-width: 2px;
     fill: none;
 }
@@ -146,9 +146,24 @@ div.tooltip {
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
+genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
+function dict(arr) {
+    const gs = {};
+    genres.forEach (g => { gs[g] = 0 });
+    arr.forEach (elm => { gs[elm] = 1 });
+    return gs;
+}
+
 let dataset;
 async function init() {
-    dataset = await d3.csv('imdb_top_1000.csv');
+    //dataset = await d3.csv('imdb_top_1000.csv');
+    dataset = await d3.csv('imdb_top_1000.csv', function(error, data) {
+        data.forEach(function(d) {
+            const elms = (d.Genre).split(',').map(elm => elm.trim())
+            const gs = dict(elms)
+            genres.forEach (g => { d[g] = gs[g] })
+        })
+    });
     changeSlide('All');
 }
 
@@ -159,11 +174,10 @@ async function filter(val, by) {
             await plot(dataset.filter(function(d) { return d.Released_Year >= val && d.Released_Year < val+10 }));
         } else if (by == 'genre') {
             await plot(dataset.filter(function(d) {
-                let where;
-                for (let i; i < val.length; i++) {
-                    where += `d.Genre == "${val[i]}"}` + (i-1 < val.length? ' || ' : '')
-                }
-                return (where)
+                const gs = dict(val)
+                let cnt = val.length
+                genres.forEach (g => { if (d[g] == gs[g]) cnt-- })
+                return cnt == 0? d : null
             }));
         }
     } else {
@@ -185,8 +199,7 @@ const margin = {top: 60, right: 50, bottom: 50, left: 50},
     decades = [1920, 2020],
     slides = ['Prev', 'All', 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 'Next'],
     ranges = [slidesize.width*2+slidesize.width*0.5, slidesize.width*(slides.length-1)-slidesize.width*0.5],
-    vizsize = {width: svgsize.width-margin.left-margin.right, height: svgsize.height-margin.top-margin.bottom-slidesize.height-handlesize.height-genresize.height},
-    genres = ["Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical", "Mystery", "Romance", "Sci-Fi", "Sport", "Thriller", "War", "Western"];
+    vizsize = {width: svgsize.width-margin.left-margin.right, height: svgsize.height-margin.top-margin.bottom-slidesize.height-handlesize.height-genresize.height};
 
 function positionYear(decade) { return scale(decade)-20; }
 function positionHandle(decade) { return scale(decade)-handlesize.width/2; }
@@ -270,7 +283,7 @@ genre.append("polyline")
         return `${ox+polyline.p1.x},${oy+polyline.p1.y}, ${ox+polyline.p2.x},${oy+polyline.p2.y}, ${ox+polyline.p3.x},${oy+polyline.p3.y}`
     })
     .attr("id", function (d, i) { return `-${d}` })
-    .style("opacity", 1)
+    .style("opacity", 0)
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
     .on("click", function(event, d) { changeGenre(d) });
@@ -342,7 +355,8 @@ function overGenre(g, o) {
 }
 
 function changeGenre(g) {
-    overGenre(g, 1);
+    let o = d3.select(`#-${g}`).style("opacity");
+    d3.select(`#-${g}`).style("opacity", o? 0 : 1);
     let gs = [];
     genres.forEach (v => {
         if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
