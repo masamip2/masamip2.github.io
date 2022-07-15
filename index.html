@@ -45,6 +45,9 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 #right {
     margin-left: 25px;
 }
+.circle {
+    fill: "Gainsboro";
+}
 .info {
     background-color: lightgray;
     opacity: 1;
@@ -407,6 +410,7 @@ legend.append("text")
 
 let diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("circle")
+    .attr("class", "circle")
     .attr("cx", circlepos.x)
     .attr("cy", function (d, i) { return circlepos.y - z(d) })
     .attr("r", function (d, i) { return z(d) })
