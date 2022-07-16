@@ -501,6 +501,7 @@ async function plot(data) {
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
+        .transition().duration(500)
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
             return gs.length == 1? color(gs[0]) : "gainsboro"
