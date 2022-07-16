@@ -558,10 +558,10 @@ const annotations2 = [{
         wrap: 200,
         align: "left" },
     connector: { end: "arrow" },
-    x: 110,
-    y: -15,
+    x: 100,
+    y: 0,
     dx: 50,
-    dy: -30
+    dy: -40
 }, {
     note: {
         title: "Movie Info",
@@ -570,9 +570,9 @@ const annotations2 = [{
         align: "middle" },
     connector: { end: "arrow" },
     x: 200,
-    y: 0,
+    y: 100,
     dx: 0,
-    dy: 10
+    dy: 20
 }].map(function(d){ d.color = "fuchsia"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
