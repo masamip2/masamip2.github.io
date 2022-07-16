@@ -204,7 +204,7 @@ async function filter() {
         await plot(dataset);
     } else {
         await plot(dataset.filter(function(d) {
-            let d_year = year? d.Released_Year >= year && d.Released_Year < year+10 : true;
+            let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
             let d_genre = gs.length > 0? findCnt(d, gs) : true;
             console.log(`d_year = ${d_year}`)
             console.log(`d_genre = ${d_genre}`)
