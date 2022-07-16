@@ -159,6 +159,21 @@ div.tooltip {
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
+const annotations = [{
+    note: {
+        title: "Overview",
+        label: "Click 'All' to see all the movies",
+        wrap: 150,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 170,
+    y: 150,
+    dx: -162,
+    dy: 137
+}].map(function(d){ d.color = "#E8336D"; return d });
+
+const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
+
 const fields = ["Poster_Link","Series_Title","Released_Year","Runtime","Genre","IMDB_Rating","Overview","Meta_score","Director","Star1","Star2","Star3","Star4","No_of_Votes","Gross"];
 function dictFields(data) {
     const dict = {};
@@ -248,6 +263,8 @@ let svg = d3.select("#left").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+let annotation = svg.append('g').attr("class", "annotation-group").call(makeAnnotations);
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
