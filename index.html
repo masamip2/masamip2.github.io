@@ -340,6 +340,15 @@ genre.append("text")
     .on("mouseout", function(event, d) { overGenre(d, 0) })
     .on("click", function(event, d) { changeGenre(d) });
 
+let multi = svg.append("g").append("rect")
+    .attr("class", "checkbox")
+    .attr("x", 900)
+    .attr("y", 200)
+    .attr("width", boxsize.width)
+    .attr("height", boxsize.height)
+    //.style("opacity", 1)
+    .style("fill", "gainsboro");
+
 function overDecade(y, o) {
     if (!(y == 'All' && d3.select("#_All").style("fill") == 'orangered')) {
         d3.select(`#_${y}`).style("fill", o? "darkorange" : (typeof(y) == 'string'? "whitesmoke" : "slategray"));
