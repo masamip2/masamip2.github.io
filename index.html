@@ -417,13 +417,13 @@ function changeGenre(g) {
 
 let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
 let y = d3.scaleLinear().domain([7.5, 9.5]).range([vizsize.height, 0]);
-let z = d3.scaleSqrt().domain([1, 1000000000]).range([3, 50]);
+let z = d3.scaleSqrt().domain([1, 1000000000]).range([5, 50]);
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+handlesize.height+genresize.height+vizsize.height})`).call(d3.axisBottom(x).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", slidesize.height+handlesize.height+genresize.height*2+vizsize.height-margin.bottom*1.5).text("Votes").attr("color", "darkgray");
+svg.append("text").attr("text-anchor", "end").attr("x", vizsize.width-(margin.right*0.5)).attr("y", slidesize.height+handlesize.height+genresize.height*2+vizsize.height-margin.bottom*1.5).text("Votes").attr("color", "gray");
 
 svg.append("g").attr("transform", `translate(0, ${slidesize.height+handlesize.height+genresize.height})`).call(d3.axisLeft(y).ticks(5));
-svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height+margin.bottom*0.5).text("Rating").attr("color", "darkgray").attr("text-anchor", "start");
+svg.append("text").attr("text-anchor", "end").attr("x", margin.left*0.5).attr("y", slidesize.height+handlesize.height+genresize.height+margin.bottom*0.5).text("Rating").attr("color", "gray").attr("text-anchor", "start");
 
 function formatNumber(num) {
     const n = typeof(num) == 'string'? parseInt(num.replace(/,/g,'')) : num;
