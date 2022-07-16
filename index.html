@@ -46,7 +46,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     margin-left: 25px;
 }
 .circle {
-    fill: ghostwhite;
+    fill: lightsteelblue;
     stroke: darkgray;
 }
 .circle-line {
@@ -159,31 +159,6 @@ div.tooltip {
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
-const annotations = [{
-    note: {
-        title: "Overview",
-        label: "click 'All' for all data",
-        wrap: 200,
-        align: "middle" },
-    connector: { end: "arrow" },
-    x: 120,
-    y: -15,
-    dx: -50,
-    dy: 5
-}, {
-    note: {
-        title: "Filter by Decade",
-        label: "",
-        wrap: 120,
-        align: "left" },
-    connector: { end: "arrow" },
-    x: 1020,
-    y: -5,
-    dx: 20,
-    dy: 20
-}].map(function(d){ d.color = "fuchsia"; return d });
-
-const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
 
 const fields = ["Poster_Link","Series_Title","Released_Year","Runtime","Genre","IMDB_Rating","Overview","Meta_score","Director","Star1","Star2","Star3","Star4","No_of_Votes","Gross"];
 function dictFields(data) {
@@ -487,7 +462,7 @@ async function plot(data) {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : "ghostwhite"
+            return gs.length == 1? color(gs[0]) : "lightsteelblue"
         })
         .on("mouseover", function(event, d) {
             tooltip.transition()
@@ -550,5 +525,32 @@ async function plot(data) {
             `);
         });
 }
+
+const annotations = [{
+    note: {
+        title: "Overview",
+        label: "all data",
+        wrap: 150,
+        align: "middle" },
+    connector: { end: "arrow" },
+    x: 120,
+    y: -15,
+    dx: -50,
+    dy: 5
+}, {
+    note: {
+        title: "Filter by Decade",
+        label: "",
+        wrap: 150,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 1020,
+    y: -5,
+    dx: 20,
+    dy: 10
+}].map(function(d){ d.color = "fuchsia"; return d });
+
+const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
+
 </script>
 </body>
