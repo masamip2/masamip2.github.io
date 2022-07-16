@@ -451,13 +451,13 @@ legend.append("text")
 legend.append("line")
     .attr("class", "circle-line")
     .attr("x1", circlepos.x)
-    .attr("x2", circlepos.x+90)
+    .attr("x2", circlepos.x+70)
     .attr("y1", circlepos.y-80)
     .attr("y2", circlepos.y-80);
 legend.append("text")
     .attr("class", "circle-text")
-    .attr('x', circlepos.x+125)
-    .attr("y", circlepos.y-75)
+    .attr('x', circlepos.x+135)
+    .attr("y", circlepos.y-80)
     .text("gray: multiple genres");
 
 let info = d3.select("#right").append("div")
@@ -548,7 +548,7 @@ const annotations1 = [{
         wrap: 150,
         align: "middle" },
     connector: { end: "arrow" },
-    x: 110,
+    x: 100,
     y: -15,
     dx: -50,
     dy: 15
