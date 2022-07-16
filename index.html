@@ -163,8 +163,8 @@ const annotations = [{
     note: {
         title: "Overview",
         label: "click 'All' for all data",
-        wrap: 150,
-        align: "left" },
+        wrap: 200,
+        align: "center" },
     connector: { end: "arrow" },
     x: 120,
     y: -15,
@@ -173,14 +173,14 @@ const annotations = [{
 }, {
     note: {
         title: "Filter by Decade",
-        label: "click or slide",
+        label: "",
         wrap: 150,
         align: "left" },
     connector: { end: "arrow" },
-    x: 1000,
+    x: 1010,
     y: -15,
     dx: 20,
-    dy: 5
+    dy: 20
 }].map(function(d){ d.color = "fuchsia"; return d });
 
 const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
