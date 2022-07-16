@@ -55,7 +55,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 }
 .circle-text {
     font: 11px;
-    text-anchor: bottom;
+    text-anchor: middle;
 }
 .info {
     background-color: lightgray;
@@ -436,13 +436,13 @@ diagram.append("circle")
 diagram.append("line")
     .attr("class", "circle-line")
     .attr("x1", function (d, i) { return circlepos.x+z(d) })
-    .attr("x2", function (d, i) { return circlepos.x+z(d)+50 })
+    .attr("x2", function (d, i) { return circlepos.x+z(d)+80 })
     .attr("y1", function (d, i) { return circlepos.y-z(d) })
     .attr("y2", function (d, i) { return circlepos.y-z(d) });
 diagram.append("text")
     .attr("class", "circle-text")
     .attr("x", function (d, i) { return circlepos.x+z(d)+100 })
-    .attr("y", function (d, i) { return circlepos.y-z(d) })
+    .attr("y", function (d, i) { return circlepos.y-z(d)+5 })
     .text(function (d, i) { return `$ ${formatNumber(d)}` });
 
 let info = d3.select("#right").append("div")
