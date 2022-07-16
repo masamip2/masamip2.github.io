@@ -166,10 +166,21 @@ const annotations = [{
         wrap: 150,
         align: "left" },
     connector: { end: "arrow" },
-    x: 170,
-    y: 150,
-    dx: -162,
-    dy: 137
+    x: 150,
+    y: 0,
+    dx: -20,
+    dy: 10
+}, {
+    note: {
+        title: "Filter by Decade",
+        label: "Click or slide each year to narrow down the movies",
+        wrap: 150,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 1000,
+    y: 0,
+    dx: 10,
+    dy: 10
 }].map(function(d){ d.color = "#E8336D"; return d });
 
 const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
