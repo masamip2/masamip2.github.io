@@ -46,7 +46,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     margin-left: 25px;
 }
 .circle {
-    fill: Gainsboro;
+    fill: ghostwhite;
     stroke: darkgray;
 }
 .circle-line {
@@ -487,7 +487,7 @@ async function plot(data) {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : "Gainsboro"
+            return gs.length == 1? color(gs[0]) : "ghostwhite"
         })
         .on("mouseover", function(event, d) {
             tooltip.transition()
