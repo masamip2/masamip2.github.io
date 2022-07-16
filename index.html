@@ -421,24 +421,25 @@ let legend = d3.select("#right").append("svg")
     .attr("height", legendsize.height)
     .append("g").attr("transform", `translate(0, ${margin.top})`);
 legend.append("text")
+    .attr("class", "circle-text")
     .attr('x', circlepos.x)
     .attr("y", circlepos.y-115)
-    .text("Gross $ (M)")
-    .attr("text-anchor", "middle");
+    .text("Gross $ (M)");
+
 let diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("circle")
     .attr("class", "circle")
     .attr("cx", circlepos.x)
     .attr("cy", function (d, i) { return circlepos.y - z(d) })
     .attr("r", function (d, i) { return z(d) })
-diagram.append("circle-line")
-    .attr("class", "line")
+diagram.append("line")
+    .attr("class", "circle-line")
     .attr("x1", function (d, i) { return circlepos.x+z(d) })
     .attr("x2", function (d, i) { return circlepos.x+z(d)+100 })
     .attr("y1", function (d, i) { return circlepos.y-z(d) })
     .attr("y2", function (d, i) { return circlepos.y-z(d) });
-diagram.append("circle-text")
-    .attr("class", "line")
+diagram.append("text")
+    .attr("class", "circle-text")
     .attr("x", function (d, i) { return circlepos.x+z(d)+100 })
     .attr("y", function (d, i) { return circlepos.y-z(d) })
     .text(function (d, i) { return `$ ${formatNumber(d)}` });
