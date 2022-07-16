@@ -200,14 +200,14 @@ async function filter() {
     const year = d3.select('#year').text();
     const gs = selectedGenres();
 
-    if (all) {
+    if (all && gs.length == 0) {
         await plot(dataset);
     } else {
         await plot(dataset.filter(function(d) {
-            let d_year = true;
-            let d_genre = true;
-            if (year) d_year = d.Released_Year >= year && d.Released_Year < year+10
-            if (gs.length > 0) d_genre = findCnt(gs)
+            let d_year = year? d.Released_Year >= year && d.Released_Year < year+10 : true;
+            let d_genre = gs.length > 0? findCnt(gs) : true;
+            console.log(`d_year = ${d_year}`)
+            console.log(`d_genre = ${d_genre}`)
             return d_year && d_genre
         }));
     }
