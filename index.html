@@ -124,6 +124,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     opacity: .8;
     cursor: pointer;
     text-anchor: start;
+    vertical-align: middle;
 }
 .checkmark {
     stroke: darkslategray;
@@ -345,7 +346,7 @@ let multi = svg.append("g");
 multi.append("rect")
     .attr("class", "checkbox")
     .attr("x", boxpos.x+boxpos.distance*10)
-    .attr("y", boxpos.y*2+boxsize.height*-0.5)
+    .attr("y", boxpos.y*(2+1)+boxsize.height*-0.5)
     .attr("width", boxsize.width)
     .attr("height", boxsize.height)
     //.style("opacity", 1)
