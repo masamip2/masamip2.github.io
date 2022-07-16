@@ -473,7 +473,7 @@ legend.append("text")
     .attr("class", "circle-text")
     .attr('x', circlepos.x)
     .attr("y", circlepos.y-115)
-    .text("Gross $(M) / Genre");
+    .text("Gross $(M)/Genre");
 legend.append("line")
     .attr("class", "circle-line")
     .attr("x1", circlepos.x)
@@ -586,14 +586,14 @@ const annotations1 = [{
         align: "left" },
     connector: { end: "arrow" },
     x: 1015,
-    y: -13,
+    y: -14,
     dx: 10,
     dy: 12
 }, {
     note: {
         title: "Filter by Genre",
         label: "'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres while further filtering by specific genres is available",
-        wrap: 900,
+        wrap: 500,
         align: "center" },
     connector: { end: "arrow" },
     x: 1060,
