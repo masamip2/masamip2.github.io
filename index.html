@@ -115,16 +115,19 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     opacity: 0.6;
     cursor: pointer;
 }
-
-.checkbox, .genre {
+.checkbox, .checkbox-multi, .genre, .genre-multi {
     stroke: gray;
     stroke-width: 1px;
     color: darkgray;
     font-size: 11px;
+    text-anchor: start;
+}
+.checkbox, .genre {
     opacity: .8;
     cursor: pointer;
-    text-anchor: start;
-    vertical-align: baseline;
+}
+.checkbox-multi, .genre-multi {
+    opacity: 1;
 }
 .checkmark {
     stroke: darkslategray;
@@ -312,7 +315,6 @@ genre.append("rect")
     .attr("width", boxsize.width)
     .attr("height", boxsize.height)
     .attr("id", function (d, i) { return `${d}` })
-    //.style("opacity", 1)
     .style("fill", function (d, i) { return color(d) })
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
@@ -334,9 +336,7 @@ genre.append("text")
     .attr("x", function (d, i) { return boxpos.x+20+(boxpos.distance)*(i === 0? 0 : i%11) })
     .attr("y", function (d, i) { return boxpos.y*(i === 0? 1 : parseInt(i/11)+1) })
     .attr("id", function (d, i) { return `_${d}` })
-    //.attr("text-anchor", "left")
-    //.style("opacity", 1)
-    //.style("alignment-baseline", "middle")
+    .style("alignment-baseline", "middle")
     .text(function (d, i) { return d })
     .on("mouseover", function(event, d) { overGenre(d, 1) })
     .on("mouseout", function(event, d) { overGenre(d, 0) })
@@ -344,12 +344,11 @@ genre.append("text")
 
 let multi = svg.append("g");
 multi.append("rect")
-    .attr("class", "checkbox")
+    .attr("class", "checkbox-multi")
     .attr("x", boxpos.x+boxpos.distance*10)
     .attr("y", boxpos.y*(2+1)+boxsize.height*-0.5)
     .attr("width", boxsize.width)
     .attr("height", boxsize.height)
-    //.style("opacity", 1)
     .style("fill", "gainsboro");
 multi.append("polyline")
     .attr("class", "checkmark")
@@ -360,12 +359,10 @@ multi.append("polyline")
     })
     .style("opacity", 1);
 multi.append("text")
-    .attr("class", "genre")
+    .attr("class", "genre-multi")
     .attr("x", boxpos.x+20+(boxpos.distance)*10)
     .attr("y", boxpos.y*(2+1))
-    //.attr("text-anchor", "left")
-    //.style("opacity", 1)
-    //.style("alignment-baseline", "middle")
+    .style("alignment-baseline", "middle")
     .text("Multi");
 
 function overDecade(y, o) {
