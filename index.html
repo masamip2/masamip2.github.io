@@ -301,8 +301,9 @@ const coordinates = [{x: 0, y: 10}, {x: 5, y: 15}, {x: 15, y: 0}];
 const checkmark = d3.line(coordinates);
 const schemeset1 = [(d3.schemeSet1)[1], (d3.schemeSet1)[2], (d3.schemeSet1)[6]];
 const schemeset2 = (d3.schemeSet2).splice(0, 7);
-const schemeset3 = [...((d3.schemeSet3).splice(0, 8)),...((d3.schemeSet3).splice(9, 3))];
-const schemesets = [...(schemeset2),...(schemeset3),...(schemeset1)];
+const schemeset3_1 = (d3.schemeSet3).splice(0, 8);
+const schemeset3_2 = (d3.schemeSet3).splice(9, 3);
+const schemesets = [...(schemeset2),...(schemeset3_1),...(schemeset3_2),...(schemeset1)];
 const color = d3.scaleOrdinal().domain(genres).range(schemesets);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
