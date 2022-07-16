@@ -524,7 +524,10 @@ async function plot(data) {
         });
 }
 
-const annotations = [{
+const makeAnnotations = (annts) => {
+    return d3.annotation().type(d3.annotationLabel).annotations(annts);
+}
+const annotations1 = [{
     note: {
         title: "Overview",
         label: "",
@@ -548,9 +551,31 @@ const annotations = [{
     dy: 10
 }].map(function(d){ d.color = "fuchsia"; return d });
 
-const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
+const annotations2 = [{
+    note: {
+        title: "Genres",
+        label: "contains multiple genres",
+        wrap: 200,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 110,
+    y: -15,
+    dx: 50,
+    dy: -30
+}, {
+    note: {
+        title: "Movie Info",
+        label: "movie details",
+        wrap: 150,
+        align: "middle" },
+    connector: { end: "arrow" },
+    x: 200,
+    y: 0,
+    dx: 0,
+    dy: 10
+}].map(function(d){ d.color = "fuchsia"; return d });
 
-let annotation = svg.append('g').attr("class", "annotation-group").call(makeAnnotations);
-
+let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
+let annt2 = legend.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
 </script>
 </body>
