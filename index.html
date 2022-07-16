@@ -560,8 +560,8 @@ const annotations2 = [{
     connector: { end: "arrow" },
     x: 110,
     y: -15,
-    dx: 50,
-    dy: -30
+    dx: 25,
+    dy: -15
 }, {
     note: {
         title: "Movie Info",
@@ -570,10 +570,10 @@ const annotations2 = [{
         align: "middle" },
     connector: { end: "arrow" },
     x: 200,
-    y: 0,
+    y: 50,
     dx: 0,
-    dy: 10
-}].map(function(d){ d.color = "fuchsia"; return d });
+    dy: -10
+}].map(function(d){ d.color = "deeppink"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 let annt2 = legend.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
