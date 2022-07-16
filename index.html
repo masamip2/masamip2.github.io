@@ -250,8 +250,6 @@ let svg = d3.select("#left").append("svg")
     .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-let annotation = svg.append('g').attr("class", "annotation-group").call(makeAnnotations);
-
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
 let slide = svg.append('g').selectAll("rect").data(slides).enter();
@@ -551,6 +549,8 @@ const annotations = [{
 }].map(function(d){ d.color = "fuchsia"; return d });
 
 const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
+
+let annotation = svg.append('g').attr("class", "annotation-group").call(makeAnnotations);
 
 </script>
 </body>
