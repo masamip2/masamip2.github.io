@@ -167,9 +167,9 @@ const annotations = [{
         align: "left" },
     connector: { end: "arrow" },
     x: 120,
-    y: -8,
-    dx: -150,
-    dy: 0
+    y: -10,
+    dx: -100,
+    dy: 5
 }, {
     note: {
         title: "Filter by Decade",
@@ -178,9 +178,9 @@ const annotations = [{
         align: "left" },
     connector: { end: "arrow" },
     x: 1010,
-    y: -8,
+    y: -10,
     dx: 20,
-    dy: 0
+    dy: 5
 }].map(function(d){ d.color = "fuchsia"; return d });
 
 const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations);
