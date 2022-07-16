@@ -302,7 +302,7 @@ const checkmark = d3.line(coordinates);
 const schemeset1 = [(d3.schemeSet1)[1], (d3.schemeSet1)[2], (d3.schemeSet1)[6]];
 const schemeset2 = (d3.schemeSet2).splice(0, 7);
 const schemeset3_1 = (d3.schemeSet3).splice(0, 8);
-const schemeset3_2 = (d3.schemeSet3).splice(9, 3);
+const schemeset3_2 = [(d3.schemeSet3)[9], (d3.schemeSet3)[10], (d3.schemeSet3)[11]];
 const schemesets = [...(schemeset2),...(schemeset3_1),...(schemeset3_2),...(schemeset1)];
 const color = d3.scaleOrdinal().domain(genres).range(schemesets);
 
