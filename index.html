@@ -424,22 +424,6 @@ let legend = d3.select("#right").append("svg")
     .attr("width", legendsize.width)
     .attr("height", legendsize.height)
     .append("g").attr("transform", `translate(0, ${margin.top})`);
-legend.append("text")
-    .attr("class", "circle-text")
-    .attr('x', circlepos.x)
-    .attr("y", circlepos.y-115)
-    .text("Gross $ (M)");
-legend.append("text")
-    .attr("class", "circle-text")
-    .attr('x', circlepos.x+100)
-    .attr("y", circlepos.y-75)
-    .text("gray: multiple genres");
-legend.append("line")
-    .attr("class", "circle-line")
-    .attr("x1", circlepos.x)
-    .attr("x2", circlepos.x+90)
-    .attr("y1", circlepos.y-75)
-    .attr("y2", circlepos.y-75);
 
 let diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("circle")
@@ -458,6 +442,23 @@ diagram.append("text")
     .attr("x", function (d, i) { return circlepos.x+z(d)+100 })
     .attr("y", function (d, i) { return circlepos.y-z(d)+5 })
     .text(function (d, i) { return `$ ${formatNumber(d)}` });
+
+legend.append("text")
+    .attr("class", "circle-text")
+    .attr('x', circlepos.x)
+    .attr("y", circlepos.y-115)
+    .text("Gross $ (M)");
+legend.append("line")
+    .attr("class", "circle-line")
+    .attr("x1", circlepos.x)
+    .attr("x2", circlepos.x+90)
+    .attr("y1", circlepos.y-80)
+    .attr("y2", circlepos.y-80);
+legend.append("text")
+    .attr("class", "circle-text")
+    .attr('x', circlepos.x+125)
+    .attr("y", circlepos.y-75)
+    .text("gray: multiple genres");
 
 let info = d3.select("#right").append("div")
     .attr("class", "info")
