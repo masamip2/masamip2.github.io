@@ -157,6 +157,7 @@ div.tooltip {
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
 const fields = ["Poster_Link","Series_Title","Released_Year","Runtime","Genre","IMDB_Rating","Overview","Meta_score","Director","Star1","Star2","Star3","Star4","No_of_Votes","Gross"];
 function dictFields(data) {
@@ -413,7 +414,7 @@ function formatNumber(num) {
     return n;
 }
 
-const grosses = [10000000, 100000000, 1000000000];
+const grosses = [1000000000, 100000000, 10000000];
 const circlepos = {x: 50, y: 75};
 
 let legend = d3.select("#right").append("svg")
