@@ -166,9 +166,10 @@ function dictGenres(arr) {
 
 function selectedGenres() {
     let gs = [];
-    genres.forEach (v => {
-        if (d3.select(`#-${v}`).style("opacity") == 1) gs.push(v);
+    genres.forEach (g => {
+        if (d3.select(`#-${g}`).style("opacity") == 1) gs.push(g);
     });
+    console.log(`gs = ${gs.length}`);
     return gs;
 }
 
@@ -206,8 +207,8 @@ async function filter() {
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
             let d_genre = gs.length > 0? findCnt(d, gs) : true;
-            console.log(`d_year = ${d_year}`)
-            console.log(`d_genre = ${d_genre}`)
+            //console.log(`d_year = ${d_year}`)
+            //console.log(`d_genre = ${d_genre}`)
             return d_year && d_genre
         }));
     }
