@@ -363,7 +363,7 @@ multi.append("text")
     .attr("x", boxpos.x+20+(boxpos.distance)*10)
     .attr("y", boxpos.y*(2+1))
     .style("alignment-baseline", "middle")
-    .text("Multi");
+    .text("Multi-Genre");
 
 function overDecade(y, o) {
     if (!(y == 'All' && d3.select("#_All").style("fill") == 'orangered')) {
@@ -484,7 +484,7 @@ legend.append("text")
     .attr("class", "circle-text")
     .attr('x', circlepos.x+135)
     .attr("y", circlepos.y-80)
-    .text("gray: multiple genres");
+    .text("color: representing genre");
 
 let info = d3.select("#right").append("div")
     .attr("class", "info")
