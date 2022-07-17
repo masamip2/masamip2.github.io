@@ -142,6 +142,10 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .bubble:hover {
     stroke: gray;
 }
+.button {
+    border: 2px solid;
+    border-color: orangered;
+}
 div.tooltip {
     position: absolute;
     text-align: center;
@@ -494,12 +498,15 @@ function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function indicateDirector(director) {
     let bubbles = d3.selectAll("circle").filter(`.${convertDirector(director)}`);
+    bubbles.style("stroke", bubbles.style("stroke") == "white"? "orangered" : "white").style("stroke-width", bubbles.style("stroke-width") == 1? 2 : 1);
+    /*
     if (bubbles.style("stroke") == "white") {
         bubbles.style("stroke", "orangered").style("stroke-width", 2);
     } else {
         bubbles.style("stroke", "white").style("stroke-width", 1);
     }
     //d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "orangered").style("stroke-width", 2);
+    */
 }
 
 async function plot(data) {
@@ -565,7 +572,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Director</th>
-                        <td><input type="button" onclick="indicateDirector('${d.Director}')" value="${d.Director}" style="border: 2px solid orengered;"></td>
+                        <td><input type="button" class="button" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
                     </tr>
                     <tr>
                         <th>Overview</th>
