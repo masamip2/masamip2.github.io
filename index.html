@@ -659,8 +659,8 @@ const annotations3 = [{
     "className": "grade",
     "connector": { "end": "arrow" },
     "subject": { "radius": 50 },
-    "note": { "label": "A" }
-}].map(function(d){ d.color = "chartreuse"; return d });
+    //"note": { "label": "A" }
+}].map(function(d){ d.color = "chartreuse"; d.annotationLabel = "chartreuse"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 //let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
