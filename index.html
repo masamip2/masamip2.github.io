@@ -501,11 +501,12 @@ function convertDirector(str) { return str.replace(/\s/g, '_') }
 function overDirector(o) {
     console.log(d3.select('.button').style("border-color"));
     console.log(d3.select('.button').style("border-width"));
-    if (d3.select('.button').style("border-width")==1) console.log('aaa');
+    console.log(d3.select('.button').style("opacity"));
+    if (d3.select('.button').style("opacity")==0.8) console.log('aaa');
 
     //console.log(d3.select('.button').style("opacity"));
-    if (d3.select('.button').style("border-color") == 'slategray') {
-        d3.select('.button').style("border-color", "orangered").style("border-width", o? 2 : 1).style("opacity", o? 1 : 0.8);
+    if (d3.select('.button').style("opacity") == 0.8) {
+        d3.select('.button').style("border-color", o? "orangered" : "white").style("border-width", o? 2 : 1);
     }
 }
 
