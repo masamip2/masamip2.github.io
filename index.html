@@ -500,14 +500,14 @@ function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function overDirector(o) {
     console.log(d3.select('.button').style("stroke-width"));
-    if (d3.select('.button').style("stroke-width") == 1) {
+    if (d3.select('.button').style("stroke-width") == '1px') {
         d3.select('.button').style("opacity", o? 1 : 0.8);
     }
 }
 
 function indicateDirector(director) {
     console.log(director);
-    if (d3.select('.button').style("stroke-width") == 1) {
+    if (d3.select('.button').style("stroke-width") == '1px') {
         d3.select('.button').style("stroke-width", 2);
         d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "orangered").style("stroke-width", 2);
     } else {
