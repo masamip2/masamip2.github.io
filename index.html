@@ -145,6 +145,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .button {
     border: 2px solid;
     border-color: orangered;
+    cursor: pointer;
 }
 div.tooltip {
     position: absolute;
@@ -497,15 +498,22 @@ let info = d3.select("#right").append("div")
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function indicateDirector(director) {
+    if (d3.select('.button').style("stroke-width") == 1) {
+        d3.select('.button').style("stroke-width", 2);
+        d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "orangered").style("stroke-width", 2);
+    } else {
+        d3.select('.button').style("stroke-width", 1);
+        d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "white").style("stroke-width", 1);
+    }
+    /*
     let bubbles = d3.selectAll("circle").filter(`.${convertDirector(director)}`);
     bubbles.style("stroke", bubbles.style("stroke") == "white"? "orangered" : "white").style("stroke-width", bubbles.style("stroke-width") == 1? 2 : 1);
-    /*
+
     if (bubbles.style("stroke") == "white") {
         bubbles.style("stroke", "orangered").style("stroke-width", 2);
     } else {
         bubbles.style("stroke", "white").style("stroke-width", 1);
     }
-    //d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "orangered").style("stroke-width", 2);
     */
 }
 
