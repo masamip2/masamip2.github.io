@@ -304,7 +304,7 @@ let year = slider.append("text")
 
 const coordinates = [{x: 0, y: 10}, {x: 5, y: 15}, {x: 15, y: 0}];
 const checkmark = d3.line(coordinates);
-const schemeset = ["darkred", "tomato", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "limegreen", "darkseagreen", "olive", "teal", "navy", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "slateblue", "darkorchid"];
+const schemeset = ["sienna", "tomato", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "limegreen", "darkseagreen", "olive", "teal", "navy", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "slateblue", "darkorchid"];
 const color = d3.scaleOrdinal().domain(genres).range(schemeset);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -565,7 +565,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Director</th>
-                        <td><input type="button" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
+                        <td><input type="button" onclick="indicateDirector('${d.Director}')" value="${d.Director}" style="border-color: orengered"></td>
                     </tr>
                     <tr>
                         <th>Overview</th>
