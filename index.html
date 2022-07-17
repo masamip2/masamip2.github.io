@@ -499,17 +499,21 @@ let info = d3.select("#right").append("div")
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function overDirector(o) {
-    console.log(d3.select('.button').style("opacity"));
-    if (d3.select('.button').style("opacity") == 0.8) {
-        d3.select('.button').style("border", o? 2 : 1);
+    console.log(d3.select('.button').style("border"));
+
+    //console.log(d3.select('.button').style("opacity"));
+    if (d3.select('.button').style("border") == '1px') {
+        d3.select('.button').style("border", o? "2px" : "1px");
     }
 }
 
 function indicateDirector(director) {
     console.log(director);
-    let o = d3.select('.button').style("opacity");
-    d3.select('.button').style("opacity", o == 1? 0.8 : 1).style("border",  o == 1? 2 : 1);
-    d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "orangered" : "white").style("stroke-width", o == 1? 2 : 1);
+    
+    let o = d3.select('.button').style("border");
+    console.log(o);
+    d3.select('.button').style("border", o == '1px'? "2px" : "1px");
+    d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == '1px'? "orangered" : "white").style("stroke-width", o == '1px'? 2 : 1);
 }
 
 async function plot(data) {
