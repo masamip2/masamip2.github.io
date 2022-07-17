@@ -419,7 +419,6 @@ function overGenre(g, o) {
 function changeGenre(g) {
     let o = d3.select(`#-${g}`).style("opacity");
     d3.select(`#-${g}`).style("opacity", o == 1? 0 : 1);
-    let gs = selectedGenres();
     filter();
 }
 
@@ -491,10 +490,18 @@ let info = d3.select("#right").append("div")
     .attr("width", infosize.width)
     .attr("height", infosize.height);
 
+function convertDirector(str) { return str.replace(/\s/g, '_') }
+
+function indicateDirector(director) {
+    //const director = d3.select('#director').value();
+    d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "red").style("stroke-width", 2);
+}
+
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
-    svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter().append("circle")
-        .attr("class", "bubble")
+    let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
+    bubble.append("circle")
+        .attr("class", `bubble ${convertDirector(d.director)}`)
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
@@ -553,7 +560,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Director</th>
-                        <td>${d.Director}</td>
+                        <td><input type="button" onclick="indicateDirector(${d.Director})" value="${d.Director}"></td>
                     </tr>
                     <tr>
                         <th>Overview</th>
