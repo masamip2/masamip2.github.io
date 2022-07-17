@@ -144,7 +144,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 }
 .button {
     border-color: slategray;
-    border-width: 1px;
+    border-width: 2px;
     opacity: .8;
     cursor: pointer;
 }
@@ -499,11 +499,8 @@ let info = d3.select("#right").append("div")
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function overDirector(o) {
-    console.log(d3.select('.button').style("border-color"));
-    console.log(d3.select('.button').style("border-width"));
-    console.log(d3.select('.button').style("opacity"));
     if (d3.select('.button').style("opacity") == 0.8) {
-        d3.select('.button').style("border-color", o? "orangered" : "slategray").style("border-width", o? "2px" : "1px");
+        d3.select('.button').style("border-color", o? "orangered" : "slategray").style("opacity", o? 1 : 0.8);
     }
 }
 
