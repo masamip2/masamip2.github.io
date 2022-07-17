@@ -481,7 +481,7 @@ legend.append("line")
     .attr("y2", circlepos.y-80);
 legend.append("text")
     .attr("class", "circle-text")
-    .attr('x', circlepos.x+135)
+    .attr("x", circlepos.x+135)
     .attr("y", circlepos.y-80)
     .text("color: indicating genre");
 
@@ -493,6 +493,7 @@ let info = d3.select("#right").append("div")
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function indicateDirector(director) {
+    console.log(director);
     //const director = d3.select('#director').value();
     d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", "red").style("stroke-width", 2);
 }
