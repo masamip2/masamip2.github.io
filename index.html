@@ -631,38 +631,25 @@ const annotations1 = [{
         align: "left" },
     connector: { end: "arrow" },
     x: 800,
-    y: 900,
+    y: 600,
     dx: 20,
     dy: 10
 }].map(function(d){ d.color = "deeppink"; return d });
 
-/*
 const annotations2 = [{
     note: {
-        title: "",
-        label: "multiple genres contained",
-        wrap: 150,
+        title: "Drill-Down into Movie Detail",
+        label: "hover the cursor over each circle for the basic information of the movie, and click it to drill-down for finding out more details about the selected movie",
+        wrap: 300,
         align: "left" },
     connector: { end: "arrow" },
-    x: 110,
-    y: -5,
-    dx: 25,
-    dy: -5
-}, {
-    note: {
-        title: "Movie Info",
-        label: "movie details",
-        wrap: 150,
-        align: "middle" },
-    connector: { end: "arrow" },
-    x: 200,
-    y: 150,
-    dx: 0,
-    dy: -10
+    x: 800,
+    y: 600,
+    dx: 20,
+    dy: 10
 }].map(function(d){ d.color = "limegreen"; return d });
-*/
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-//let annt2 = legend.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
+//let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
 </script>
 </body>
