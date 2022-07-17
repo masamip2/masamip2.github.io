@@ -630,8 +630,8 @@ const annotations1 = [{
         wrap: 300,
         align: "left" },
     connector: { end: "arrow" },
-    x: 850,
-    y: 750,
+    x: 800,
+    y: 700,
     dx: 20,
     dy: 10
 }].map(function(d){ d.color = "deeppink"; return d });
@@ -639,7 +639,7 @@ const annotations1 = [{
 const annotations2 = [{
     note: {
         title: "Drill-Down into Director's Movies",
-        label: "hover the cursor over each circle for the basic information of the movie, and click it to drill-down for finding out more details about the selected movie",
+        label: "click the director's name to see where the director's movies are positioned in the scatter plot",
         wrap: 300,
         align: "right" },
     connector: { end: "arrow" },
@@ -650,6 +650,6 @@ const annotations2 = [{
 }].map(function(d){ d.color = "limegreen"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-//let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
+let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
 </script>
 </body>
