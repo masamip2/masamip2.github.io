@@ -501,7 +501,7 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
-        .attr("class", `bubble ${convertDirector(d.director)}`)
+        .attr("class", function (d) { return `bubble ${convertDirector(d.director)}` } )
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
