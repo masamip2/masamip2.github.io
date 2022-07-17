@@ -449,7 +449,7 @@ function formatNumber(num) {
 }
 
 const grosses = [1000000000, 100000000, 10000000];
-const circlepos = {x: 50, y: 75};
+const circlepos = {x: 55, y: 75};
 
 let legend = d3.select("#right").append("svg")
     .attr("width", legendsize.width)
@@ -622,6 +622,17 @@ const annotations1 = [{
     x: 1060,
     y: 90,
     dx: -220,
+    dy: 10
+}, {
+    note: {
+        title: "Drill-Down into Movie Detail",
+        label: "hover the cursor over each circle for the basic information of the movie, and click it to drill-down for finding out more details about the selected movie",
+        wrap: 300,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 800,
+    y: 900,
+    dx: 20,
     dy: 10
 }].map(function(d){ d.color = "deeppink"; return d });
 
