@@ -541,6 +541,7 @@ async function plot(data) {
         .on("mousemove", function(event, d) {
         })
         .on("click", function(event, d) {
+            svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
             info.html(`
                 <table>
                     <tr class="tr-img">
@@ -662,7 +663,7 @@ const annotations3 = [{
 }].map(function(d){ d.color = "limegreen"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
+//let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
 let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation3(annotations3));
 </script>
 </body>
