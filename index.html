@@ -449,7 +449,7 @@ function formatNumber(num) {
 }
 
 const grosses = [1000000000, 100000000, 10000000];
-const circlepos = {x: 55, y: 75};
+const circlepos = {x: 60, y: 75};
 
 let legend = d3.select("#right").append("svg")
     .attr("width", legendsize.width)
@@ -478,7 +478,7 @@ legend.append("text")
     .attr("class", "circle-text")
     .attr('x', circlepos.x)
     .attr("y", circlepos.y-115)
-    .text("Gross $(M)/Genre");
+    .text("Gross $(M) & Genre");
 legend.append("line")
     .attr("class", "circle-line")
     .attr("x1", circlepos.x)
