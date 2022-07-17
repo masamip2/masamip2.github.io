@@ -500,7 +500,7 @@ function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function overDirector(o) {
     if (d3.select('.button').style("opacity") == 0.8) {
-        d3.select('.button').style("border-color", o? "orangered" : "slategray").style("opacity", o? 1 : 0.8);
+        d3.select('.button').style("border-color", o? "orangered" : "slategray");
     }
 }
 
