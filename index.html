@@ -227,6 +227,7 @@ async function filter() {
     const gs = selectedGenres();
 
     if (all && gs.length == 0) {
+        annotate();
         await plot(dataset);
     } else {
         await plot(dataset.filter(function(d) {
@@ -264,7 +265,6 @@ let svg = d3.select("#left").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
-
 
 
 const makeAnnotations = (annts) => {
@@ -367,8 +367,10 @@ const annotations3 = [{
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1)).style("opacity", 0);
 let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3)).style("opacity", 0);
-function annotate() {
 
+function annotate() {
+    annt1.style("opacity", 1);
+    annt3.style("opacity", 1);
 }
 
 
