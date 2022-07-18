@@ -165,12 +165,6 @@ div.tooltip {
     --annotation-color: chartreuse;
 }
 /*
-.annotation path {
-    stroke: var(--annotation-color);
-    fill: var(--annotation-color);
-}
-*/
-/*
 .annotation text {
     fill: var(--annotation-color);
 }
@@ -680,5 +674,6 @@ const annotations3 = [{
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 //let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
 let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation3(annotations3));
+svg.selectAll(".annotation-note text").style("fill", "chartreuse");
 </script>
 </body>
