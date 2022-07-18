@@ -659,7 +659,7 @@ const annotations3 = [{
     note: {
         title: "Trend 1",
         label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
-        wrap: 500 },
+        wrap: 400 },
     subject: { "radius": 150 },
     x: 1000,
     y: 350,
@@ -670,7 +670,7 @@ const annotations3 = [{
     note: {
         title: "Trend 2",
         label: "The gross is high for good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and very higher rating.",
-        wrap: 500 },
+        wrap: 400 },
     subject: { "radius": 200 },
     x: 700,
     y: 600,
@@ -685,8 +685,8 @@ const annotations3 = [{
     subject: { "radius": 200 },
     x: 200,
     y: 700,
-    dx: 0,
-    dy: -150
+    dx: 200,
+    dy: 150
 }].map(function(d){ d.color = "darkturquoise"; return d });
 
 function annotate() {
