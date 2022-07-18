@@ -45,7 +45,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 #right {
     margin-left: 25px;
 }
-.circle {
+.circle-shape {
     fill: gainsboro;
     stroke: darkgray;
 }
@@ -460,7 +460,7 @@ let legend = d3.select("#right").append("svg")
 
 let diagram = legend.selectAll("legend").data(grosses).enter();
 diagram.append("circle")
-    .attr("class", "circle")
+    .attr("class", "circle-shape")
     .attr("cx", circlepos.x)
     .attr("cy", function (d, i) { return circlepos.y - z(d) })
     .attr("r", function (d, i) { return z(d) })
