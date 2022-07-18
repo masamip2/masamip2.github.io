@@ -161,6 +161,9 @@ div.tooltip {
     border-radius: 2px;
     pointer-events: none;
 }
+:root {
+    --annotation-color: chartreuse;
+}
 </style>
 <body onload="init()">
 <div class="title"><h1>Top 1000 Movies over 100 Years (1920 - 2020) by IMDB Rating</h1></div>
@@ -659,8 +662,8 @@ const annotations3 = [{
     "className": "grade",
     "connector": { "end": "arrow" },
     "subject": { "radius": 50 },
-    //"note": { "label": "A" }
-}].map(function(d){ d.color = "chartreuse"; d.annotationLabel = "chartreuse"; return d });
+    "note": { "label": "A" }
+}].map(function(d){ d.color = "chartreuse"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 //let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
