@@ -164,11 +164,6 @@ div.tooltip {
 :root {
     --annotation-color: chartreuse;
 }
-/*
-.annotation text {
-    fill: var(--annotation-color);
-}
-*/
 
 </style>
 <body onload="init()">
@@ -668,12 +663,12 @@ const annotations3 = [{
     "className": "grade",
     "connector": { "end": "arrow" },
     "subject": { "radius": 50 },
-    "note": { "label": "A" }
+    "note": { "label": "A", fill: "chartreuse" }
 }].map(function(d){ d.color = "chartreuse"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 //let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
 let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation3(annotations3));
-svg.selectAll(".annotation-note text").style("fill", "chartreuse");
+
 </script>
 </body>
