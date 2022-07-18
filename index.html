@@ -235,6 +235,7 @@ async function filter() {
             return d_year && d_genre
         }));
     }
+    annotate();
 }
 
 const margin = {top: 60, right: 50, bottom: 50, left: 50},
@@ -658,18 +659,18 @@ const annotations3 = [{
     note: {
         title: "Trend",
         label: "the more votes, the higher rating",
-        wrap: 100,
-        align: "right" },
-    connector: { end: "arrow" },
-    subject: { "radius": 100 },
+        wrap: 500 },
+    subject: { "radius": 150 },
     x: 1000,
     y: 350,
-    dx: -600,
-    dy: 0
+    dx: -900,
+    dy: -200
 }].map(function(d){ d.color = "darkturquoise"; return d });
 
-let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
+function annotate() {
+    svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
+    svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
+}
 
 </script>
 </body>
