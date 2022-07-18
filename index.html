@@ -617,15 +617,8 @@ function indicateDirector(director) {
     
     let o = d3.select('.button').style("opacity");
     console.log(o);
-    d3.selectAll("circle").filter(`.${convertDirector(director)}`)
-        .transition().duration(100)
-        .style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2)
-        .transition().duration(1200)
-        .style("stroke", o == 1? "orangered" : "white").style("stroke-width", o == 1? 2 : 1);
-    d3.select('.button')
-        .style("opacity", o == 1? 0.8 : 1)
-        .transition().duration(200)
-        .style("opacity", o == 1? 1 : 0.8);
+    d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2);
+    d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
 async function plot(data) {
@@ -656,6 +649,7 @@ async function plot(data) {
         .on("mousemove", function(event, d) {
         })
         .on("click", function(event, d) {
+            d3.selectAll("circle").filter('.bubble').style("stroke", "white").style("stroke-width", 1);
             svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
             info.html(`
                 <table>
