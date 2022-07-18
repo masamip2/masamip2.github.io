@@ -164,9 +164,19 @@ div.tooltip {
 :root {
     --annotation-color: chartreuse;
 }
+.annotation path {
+    stroke: var(--annotation-color);
+    /*fill: rgba(0,0,0,0);*/
+}
+
+.annotation path.connector-arrow{
+    fill: var(--annotation-color);
+}
+/*
 .annotation text {
     fill: var(--annotation-color);
 }
+*/
 </style>
 <body onload="init()">
 <div class="title"><h1>Top 1000 Movies over 100 Years (1920 - 2020) by IMDB Rating</h1></div>
