@@ -163,7 +163,6 @@ div.tooltip {
     pointer-events: none;
 }
 
-
 </style>
 <body onload="init()">
 <div class="title"><h1>Top 1000 Movies over 100 Years (1920 - 2020) by IMDB Rating</h1></div>
@@ -364,7 +363,7 @@ const annotations3 = [{
     y: 700,
     dx: 0,
     dy: -210
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "forestgreen"; return d });
 
 svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
