@@ -363,7 +363,7 @@ const annotations3 = [{
     y: 700,
     dx: 0,
     dy: -210
-}].map(function(d){ d.color = "yellowgreen"; return d });
+}].map(function(d){ d.color = "lawngreen"; return d });
 
 svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
 svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
@@ -618,14 +618,13 @@ function indicateDirector(director) {
     let o = d3.select('.button').style("opacity");
     console.log(o);
     d3.selectAll("circle").filter(`.${convertDirector(director)}`)
-        .transition().duration(200)
+        .transition().duration(100)
         .style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2)
-        .transition().duration(1000)
+        .transition().duration(1200)
         .style("stroke", o == 1? "orangered" : "white").style("stroke-width", o == 1? 2 : 1);
     d3.select('.button')
-        .transition().duration(200)
         .style("opacity", o == 1? 0.8 : 1)
-        .transition().duration(1000)
+        .transition().duration(200)
         .style("opacity", o == 1? 1 : 0.8);
 }
 
