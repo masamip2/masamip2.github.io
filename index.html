@@ -658,7 +658,7 @@ const annotations3 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 1",
-        label: "The more votes, the higher rating, when the number of votes is around 2 million.",
+        label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
         wrap: 500 },
     subject: { "radius": 150 },
     x: 1000,
@@ -669,13 +669,13 @@ const annotations3 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 2",
-        label: "the more votes, the higher rating",
+        label: "The gross is high for good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and very higher rating.",
         wrap: 500 },
     subject: { "radius": 200 },
-    x: 750,
-    y: 550,
+    x: 700,
+    y: 600,
     dx: -300,
-    dy: -150
+    dy: -250
 }, {
     type: d3.annotationCalloutCircle,
     note: {
@@ -683,9 +683,9 @@ const annotations3 = [{
         label: "the more votes, the higher rating",
         wrap: 500 },
     subject: { "radius": 200 },
-    x: 1000,
-    y: 350,
-    dx: -650,
+    x: 250,
+    y: 700,
+    dx: 0,
     dy: -150
 }].map(function(d){ d.color = "darkturquoise"; return d });
 
