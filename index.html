@@ -235,7 +235,6 @@ async function filter() {
             return d_year && d_genre
         }));
     }
-    annotate();
 }
 
 const margin = {top: 60, right: 50, bottom: 50, left: 50},
@@ -265,6 +264,112 @@ let svg = d3.select("#left").append("svg")
     .attr("width", svgsize.width)
     .attr("height", svgsize.height)
     .append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
+
+const makeAnnotations = (annts) => {
+    return d3.annotation().type(d3.annotationLabel).annotations(annts);
+}
+
+const annotations1 = [{
+    note: {
+        title: "Overview",
+        label: "Visualize all the datapoints",
+        wrap: 250,
+        align: "middle" },
+    connector: { end: "arrow" },
+    x: 105,
+    y: -15,
+    dx: -35,
+    dy: 5
+}, {
+    note: {
+        title: "Filter by Decade",
+        label: "Clicking or sliding.",
+        wrap: 150,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 1015,
+    y: -15,
+    dx: 10,
+    dy: 12
+}, {
+    note: {
+        title: "Filter by Genre",
+        label: "'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres while further filtering by specific genres is available.",
+        wrap: 600,
+        align: "middle" },
+    connector: { end: "arrow" },
+    x: 1060,
+    y: 90,
+    dx: -220,
+    dy: 10
+}, {
+    note: {
+        title: "Drill-Down into Movie Detail",
+        label: "Hover the cursor over each circle for the basic information of the movie, and click it to drill-down for more details about the movie.",
+        wrap: 300,
+        align: "left" },
+    connector: { end: "arrow" },
+    x: 800,
+    y: 750,
+    dx: 20,
+    dy: 10
+}].map(function(d){ d.color = "deeppink"; return d });
+
+const annotations2 = [{
+    note: {
+        title: "Drill-Down into Director's Movies",
+        label: "Click the director's name to indicate each position of the director's movies in the scatter plot.",
+        wrap: 300,
+        align: "right" },
+    connector: { end: "arrow" },
+    x: 1165,
+    y: 640,
+    dx: -20,
+    dy: 10
+}].map(function(d){ d.color = "deeppink"; return d });
+
+const annotations3 = [{
+    type: d3.annotationCalloutCircle,
+    note: {
+        title: "Trend 1",
+        label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
+        wrap: 450 },
+    subject: { "radius": 150 },
+    x: 1000,
+    y: 350,
+    dx: -470,
+    dy: -150
+}, {
+    type: d3.annotationCalloutCircle,
+    note: {
+        title: "Trend 2",
+        label: "The gross is high for some of the good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and very higher rating.",
+        wrap: 420 },
+    subject: { "radius": 160 },
+    x: 690,
+    y: 600,
+    dx: -260,
+    dy: -250
+}, {
+    type: d3.annotationCalloutCircle,
+    note: {
+        title: "Trend 3",
+        label: "The less votes, the lower rating, when the number of votes is less than a half million. Smaller gross indicates less votes and lower rating.",
+        wrap: 400 },
+    subject: { "radius": 140 },
+    x: 150,
+    y: 700,
+    dx: 0,
+    dy: -210
+}].map(function(d){ d.color = "darkturquoise"; return d });
+
+svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
+svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
+
+
+
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
 
@@ -589,109 +694,6 @@ async function plot(data) {
                 </table>
             `);
         });
-}
-
-const makeAnnotations = (annts) => {
-    return d3.annotation().type(d3.annotationLabel).annotations(annts);
-}
-
-const annotations1 = [{
-    note: {
-        title: "Overview",
-        label: "Visualize all the datapoints",
-        wrap: 250,
-        align: "middle" },
-    connector: { end: "arrow" },
-    x: 105,
-    y: -15,
-    dx: -35,
-    dy: 5
-}, {
-    note: {
-        title: "Filter by Decade",
-        label: "Clicking or sliding.",
-        wrap: 150,
-        align: "left" },
-    connector: { end: "arrow" },
-    x: 1015,
-    y: -15,
-    dx: 10,
-    dy: 12
-}, {
-    note: {
-        title: "Filter by Genre",
-        label: "'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres while further filtering by specific genres is available.",
-        wrap: 600,
-        align: "middle" },
-    connector: { end: "arrow" },
-    x: 1060,
-    y: 90,
-    dx: -220,
-    dy: 10
-}, {
-    note: {
-        title: "Drill-Down into Movie Detail",
-        label: "Hover the cursor over each circle for the basic information of the movie, and click it to drill-down for more details about the movie.",
-        wrap: 300,
-        align: "left" },
-    connector: { end: "arrow" },
-    x: 800,
-    y: 750,
-    dx: 20,
-    dy: 10
-}].map(function(d){ d.color = "deeppink"; return d });
-
-const annotations2 = [{
-    note: {
-        title: "Drill-Down into Director's Movies",
-        label: "Click the director's name to indicate each position of the director's movies in the scatter plot.",
-        wrap: 300,
-        align: "right" },
-    connector: { end: "arrow" },
-    x: 1165,
-    y: 640,
-    dx: -20,
-    dy: 10
-}].map(function(d){ d.color = "deeppink"; return d });
-
-const annotations3 = [{
-    type: d3.annotationCalloutCircle,
-    note: {
-        title: "Trend 1",
-        label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
-        wrap: 450 },
-    subject: { "radius": 150 },
-    x: 1000,
-    y: 350,
-    dx: -470,
-    dy: -150
-}, {
-    type: d3.annotationCalloutCircle,
-    note: {
-        title: "Trend 2",
-        label: "The gross is high for some of the good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and very higher rating.",
-        wrap: 420 },
-    subject: { "radius": 160 },
-    x: 690,
-    y: 600,
-    dx: -260,
-    dy: -250
-}, {
-    type: d3.annotationCalloutCircle,
-    note: {
-        title: "Trend 3",
-        label: "The less votes, the lower rating, when the number of votes is less than a half million. Smaller gross indicates less votes and lower rating.",
-        wrap: 400 },
-    subject: { "radius": 140 },
-    x: 150,
-    y: 700,
-    dx: 0,
-    dy: -210
-}].map(function(d){ d.color = "darkturquoise"; return d });
-
-function annotate() {
-    svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-    svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
 }
 
 </script>
