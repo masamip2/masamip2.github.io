@@ -228,6 +228,7 @@ async function filter() {
 
     if (all && gs.length == 0) {
         await plot(dataset);
+        annotate();
     } else {
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
