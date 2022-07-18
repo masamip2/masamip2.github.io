@@ -48,7 +48,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .circle-shape {
     fill: gainsboro;
     stroke: darkgray;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 .circle-line, .circle-line-dash {
     stroke: gray;
@@ -113,7 +113,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     fill: lightslategray;
     stroke: darkslategray;
     stroke-width: 2px;
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: pointer;
 }
 .checkbox, .checkbox-multi, .genre, .genre-multi {
@@ -138,7 +138,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .bubble {
     stroke: white;
     stroke-width: 1px;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 .bubble:hover {
     stroke: gray;
@@ -617,7 +617,7 @@ function indicateDirector(director) {
     
     let o = d3.select('.button').style("opacity");
     console.log(o);
-    d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2);
+    d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2).style("opacity", o == 1? 0.6 : 1);
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
@@ -649,7 +649,7 @@ async function plot(data) {
         .on("mousemove", function(event, d) {
         })
         .on("click", function(event, d) {
-            d3.selectAll("circle").filter('.bubble').style("stroke", "white").style("stroke-width", 1);
+            d3.selectAll("circle").filter('.bubble').style("stroke", "white").style("stroke-width", 1).style("opacity", 0.6);
             svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
             info.html(`
                 <table>
