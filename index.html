@@ -365,10 +365,11 @@ const annotations3 = [{
     dy: -210
 }].map(function(d){ d.color = "darkturquoise"; return d });
 
-svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
+let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1)).style("opacity", 0);
+let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3)).style("opacity", 0);
+function annotate() {
 
-
+}
 
 
 const scale = d3.scaleLinear().domain(decades).range(ranges).clamp(true);
