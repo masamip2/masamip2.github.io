@@ -1,6 +1,64 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+body {
+    font-family: Verdana, Helvetica, Arial;
+    color: gray;
+    background: whitesmoke;
+}
+table, th, td {
+    border-collapse: collapse;
+    border: 1px dotted;
+}
+table {
+    border-color: darkgray;
+    height: 850px; /* infosize.height */
+}
+.tr-img {
+    height: 300px;
+}
+th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 2px;
+    font-size: 13px;
+}
+th {
+    border-color: lightgray;
+    width: 130px;
+    color: whitesmoke;
+    background: darkgray;
+}
+td {
+    border-color: darkgray;
+    width: 170px;
+    color: darkslategray;
+}
+g.tick text { font-size: 14px; } /* d3 axis tick */
+.title {
+    margin-top: 25px;
+    margin-left: 50px;
+}
+#wrapper {
+    display: flex;
+}
+#right {
+    margin-left: 25px;
+}
+.circle {
+    fill: gainsboro;
+    stroke: darkgray;
+}
+.circle-line, .circle-line-dash {
+    stroke: gray;
+}
+.circle-line-dash {
+    stroke-dasharray: 2 2;
+}
+.circle-text {
+    font-size: 12px;
+    text-anchor: middle;
+}
 
 
 
