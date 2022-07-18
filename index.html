@@ -658,12 +658,18 @@ const annotations2 = [{
 }].map(function(d){ d.color = "deeppink"; return d });
 
 const annotations3 = [{
-    "x": 150, "y": 150,
-    "dx": -100, "dy": 0,
-    "className": "grade",
-    "connector": { "end": "arrow" },
-    "subject": { "radius": 50 },
-    "note": { "label": "A", fill: "chartreuse" }
+    note: {
+        title: "Hello",
+        label: "i'm fine",
+        wrap: 100,
+        align: "right" },
+    connector: { end: "arrow" },
+    x: 150,
+    y: 150,
+    dx: -100,
+    dy: 0,
+    className: "grade",
+    subject: { "radius": 50 }
 }].map(function(d){ d.color = "chartreuse"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
