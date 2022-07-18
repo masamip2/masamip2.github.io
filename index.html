@@ -595,9 +595,7 @@ async function plot(data) {
 const makeAnnotations = (annts) => {
     return d3.annotation().type(d3.annotationLabel).annotations(annts);
 }
-const makeAnnotation3 = (annts) => {
-    return d3.annotation().type(d3.annotationLabel).annotations(annts);
-}
+
 const annotations1 = [{
     note: {
         title: "Overview",
@@ -668,12 +666,12 @@ const annotations3 = [{
     y: 150,
     dx: -100,
     dy: 0,
+    type: d3.annotationCalloutCircle,
     subject: { "radius": 50 }
 }].map(function(d){ d.color = "chartreuse"; return d });
 
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations1));
-//let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations2));
-let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation3(annotations3));
+let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotations(annotations3));
 
 </script>
 </body>
