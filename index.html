@@ -661,9 +661,9 @@ const annotations3 = [{
         label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
         wrap: 400 },
     subject: { "radius": 150 },
-    x: 650,
+    x: 1000,
     y: 350,
-    dx: -650,
+    dx: -450,
     dy: -150
 }, {
     type: d3.annotationCalloutCircle,
@@ -672,21 +672,21 @@ const annotations3 = [{
         label: "The gross is high for good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and very higher rating.",
         wrap: 400 },
     subject: { "radius": 200 },
-    x: 650,
+    x: 700,
     y: 600,
-    dx: -300,
+    dx: -200,
     dy: -250
 }, {
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 3",
         label: "The less votes, the lower rating, when the number of votes is less than a half million. Smaller gross possiblly means less votes and lower rating.",
-        wrap: 500 },
-    subject: { "radius": 180 },
-    x: 250,
+        wrap: 400 },
+    subject: { "radius": 160 },
+    x: 200,
     y: 700,
     dx: -50,
-    dy: -50
+    dy: 50
 }].map(function(d){ d.color = "darkturquoise"; return d });
 
 function annotate() {
