@@ -745,7 +745,7 @@ let info = d3.select("#right").append("div")
     .attr("width", infosize.width)
     .attr("height", infosize.height);
 
-function convertDirector(str) { return str.replace(/\s/g, '_') }
+function convertString(str) { return str.replace(/\s/g, '_') }
 
 function clearDirector() {
     d3.selectAll("circle").filter('.bubble-bg').style("stroke", "orangered").style("opacity", 0);
@@ -766,7 +766,7 @@ function indicateDirector(director) {
 
     //clearDirector();
 
-    d3.selectAll("circle").filter(`.${convertDirector(director)}`)
+    d3.selectAll("circle").filter(`.${convertString(director)}`)
         //.style("stroke", o == 1? "white" : "orangered")
         //.style("stroke-width", o == 1? 1 : 2)
         .style("opacity", o == 1? 0 : 1);
@@ -786,11 +786,11 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
-        .attr("class", function (d) { return `bubble-bg ${convertDirector(d.Director)}` })
+        .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
+        .attr("id", function (d) { return convertString(d.Series_Title) })
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
-        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
-        .on("click", function(event, d) { d3.select(this).style("stroke", "gray") });
+        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
     bubble.append("circle")
         .attr("class", 'bubble')
         .attr("cx", function (d) { return x(d.No_of_Votes) })
@@ -820,6 +820,7 @@ async function plot(data) {
         .on("click", function(event, d) {
             annotate(2);
             clearDirector();
+            d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray");
             
             /*
             console.log(d3.select('#director'));
