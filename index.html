@@ -748,7 +748,7 @@ let info = d3.select("#right").append("div")
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function clearDirector() {
-    d3.selectAll("circle").filter('.bubble-bg').style("opacity", 0);
+    d3.selectAll("circle").filter('.bubble-bg').style("stroke", "orangered").style("opacity", 0);
 }
 
 function overDirector(o) {
@@ -789,7 +789,8 @@ async function plot(data) {
         .attr("class", function (d) { return `bubble-bg ${convertDirector(d.Director)}` })
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
-        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
+        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
+        .on("click", function(event, d) { d3.select(this).style("stroke", "gray") });
     bubble.append("circle")
         .attr("class", 'bubble')
         .attr("cx", function (d) { return x(d.No_of_Votes) })
@@ -819,7 +820,7 @@ async function plot(data) {
         .on("click", function(event, d) {
             annotate(2);
             clearDirector();
-            d3.select(this).style("stroke", "gray");
+            
             /*
             console.log(d3.select('#director'));
             if (d3.select('#director') != null) {
