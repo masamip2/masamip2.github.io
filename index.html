@@ -785,6 +785,14 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
+            let bubbles = d3.selectAll("circle").filter('.bubble');
+            if (bubbles.style("stroke") == 'orangered') {
+                bubbles.style("stroke", "white")
+                .style("stroke-width", 1)
+                .style("opacity", 0.6);
+                //.on("mouseover", function () { d3.select(this).style("stroke", "gray") })
+                //.on("mouseout", function () { d3.select(this).style("stroke", "white") });
+            }
             info.html(`
                 <table>
                     <tr class="tr-img">
