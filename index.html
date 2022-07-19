@@ -764,7 +764,7 @@ function indicateDirector(title, director) {
     console.log(o);
 
     d3.selectAll("circle").filter(`.${convertString(director)}`).style("opacity", o == 1? 0 : 1);
-    d3.selectAll("circle").filter(`#${convertString(title)}`).style("opacity", 1);
+    d3.select(`#${convertString(title)}`).style("stroke", "gray").style("opacity", 1);
 
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
