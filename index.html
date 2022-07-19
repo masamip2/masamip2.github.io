@@ -228,6 +228,7 @@ async function filter() {
     console.log(`all = ${d3.select('#_All').style("fill")}`);
     console.log(`gen = ${gs.length}`);
 
+    d3.selectAll("table").remove();
     if (all && gs.length == 0) {
         console.log(`gen1 = ${gs.length}`);
         annotate(1);
@@ -734,7 +735,7 @@ function indicateDirector(director) {
     annotate(0);
     let o = d3.select('.button').style("opacity");
     console.log(o);
-    d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
+    //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
     d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2).style("opacity", o == 1? 0.6 : 1);
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
