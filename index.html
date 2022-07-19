@@ -772,25 +772,6 @@ function indicateDirector(title, director) {
 }
 
 
-function updateChart() {
-    let newX = d3.event.transform.rescaleX(x);
-    let newY = d3.event.transform.rescaleY(y);
-
-    xAxis.call(d3.axisBottom(newX))
-    yAxis.call(d3.axisLeft(newY))
-
-// update circle position
-scatter
-  .selectAll("circle")
-  .attr('cx', function(d) {return newX(d.Sepal_Length)})
-  .attr('cy', function(d) {return newY(d.Petal_Length)});
-}
-
-const zoom = d3.zoom()
-    .scaleExtent([.5, 20])  // unzoom (x0.5), zoom (x20)
-    .extent([[0, 0], [vizsize.width, vizsize.height]])
-    .on("zoom", updateChart);
-
 const clip = svg.append("defs").append("svg:clipPath")
     .attr("id", "clip")
     .append("svg:rect")
@@ -799,13 +780,30 @@ const clip = svg.append("defs").append("svg:clipPath")
     .attr("x", 0)
     .attr("y", 0);
 
-let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).attr("clip-path", "url(#clip)");
+let scatter = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).attr("clip-path", "url(#clip)");
+
+function updateChart() {
+    let newX = d3.event.transform.rescaleX(x);
+    let newY = d3.event.transform.rescaleY(y);
+
+    xAxis.call(d3.axisBottom(newX));
+    yAxis.call(d3.axisLeft(newY));
+
+    scatter.selectAll("circle")
+        .attr('cx', function(d) {return newX(d.Sepal_Length)})
+        .attr('cy', function(d) {return newY(d.Petal_Length)});
+}
+
+const zoom = d3.zoom()
+    .scaleExtent([.5, 20])  // unzoom (x0.5), zoom (x20)
+    .extent([[0, 0], [vizsize.width, vizsize.height]])
+    .on("zoom", updateChart);
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble-bg').remove();
     d3.selectAll("circle").filter('.bubble').remove();
 
-    bubble.selectAll("circle").data(data).enter();
+    let bubble = scatter.selectAll("circle").data(data).enter();
     //let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
