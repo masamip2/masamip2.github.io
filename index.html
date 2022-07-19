@@ -726,6 +726,15 @@ let info = d3.select("#right").append("div")
 
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
+function clearDirector() {
+    d3.selectAll("circle").filter('.bubble')
+        .style("stroke", "white")
+        .style("stroke-width", 1)
+        .style("opacity", 0.6)
+        .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
+        .on("mouseout", function () { d3.select(this).style("stroke", "white") });
+}
+
 function overDirector(o) {
     if (d3.select('.button').style("opacity") == 0.8) {
         d3.select('.button').style("border-color", o? "orangered" : "slategray");
@@ -739,12 +748,7 @@ function indicateDirector(director) {
     console.log(o);
     //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
 
-    d3.selectAll("circle").filter('.bubble')
-        .style("stroke", "white")
-        .style("stroke-width", 1)
-        .style("opacity", 0.6)
-        .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
-        .on("mouseout", function () { d3.select(this).style("stroke", "white") });
+
 
     d3.selectAll("circle").filter(`.${convertDirector(director)}`)
         .style("stroke", o == 1? "white" : "orangered")
@@ -793,6 +797,7 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
+            clearDirector();
             /*
             console.log(d3.select('#director'));
             if (d3.select('#director') != null) {
