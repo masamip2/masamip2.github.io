@@ -785,6 +785,7 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
+            /*
             console.log(d3.select('#director'));
             if (d3.select('#director') != null) {
                 let director = d3.selectAll('#director').property("value");
@@ -796,6 +797,7 @@ async function plot(data) {
                     .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
                     .on("mouseout", function () { d3.select(this).style("stroke", "white") });
             }
+            */
             info.html(`
                 <table>
                     <tr class="tr-img">
