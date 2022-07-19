@@ -783,8 +783,8 @@ const clip = svg.append("defs").append("svg:clipPath")
 let scatter = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`); //.attr("clip-path", "url(#clip)");
 
 function updateChart(event) {
-    let newX = d3.event.transform.rescaleX(x); // x(event.x); //d3.event.transform.rescaleX(x);
-    let newY = d3.event.transform.rescaleY(y); // y(event.y); //d3.event.transform.rescaleY(y);
+    let newX = event.transform.rescaleX(x); // x(event.x); //d3.event.transform.rescaleX(x);
+    let newY = event.transform.rescaleY(y); // y(event.y); //d3.event.transform.rescaleY(y);
 
     xAxis.call(d3.axisBottom(newX));
     yAxis.call(d3.axisLeft(newY));
