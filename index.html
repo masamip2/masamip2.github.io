@@ -748,7 +748,7 @@ function indicateDirector(director) {
     console.log(o);
     //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
 
-
+    clearDirector();
 
     d3.selectAll("circle").filter(`.${convertDirector(director)}`)
         .style("stroke", o == 1? "white" : "orangered")
@@ -797,7 +797,7 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
-            clearDirector();
+            //clearDirector();
             /*
             console.log(d3.select('#director'));
             if (d3.select('#director') != null) {
