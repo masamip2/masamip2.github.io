@@ -785,13 +785,14 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
-            let bubbles = d3.selectAll("circle").filter('.bubble');
-            if (bubbles.style("stroke") == 'orangered') {
-                bubbles.style("stroke", "white")
-                .style("stroke-width", 1)
-                .style("opacity", 0.6);
-                //.on("mouseover", function () { d3.select(this).style("stroke", "gray") })
-                //.on("mouseout", function () { d3.select(this).style("stroke", "white") });
+            let director = d3.select('#director').value();
+            if (director) {
+                d3.selectAll("circle").filter(`.${convertDirector(director)}`)
+                    .style("stroke", "white")
+                    .style("stroke-width", 1)
+                    .style("opacity", 0.6)
+                    .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
+                    .on("mouseout", function () { d3.select(this).style("stroke", "white") });
             }
             info.html(`
                 <table>
@@ -828,7 +829,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Director</th>
-                        <td><input type="button" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
+                        <td><input type="button" id="director" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
                     </tr>
                     <tr>
                         <th>Overview</th>
