@@ -369,7 +369,20 @@ const annotation1 = [{
 const annotation2 = [{
     note: {
         title: "Drill-Down into Director's Movies",
-        label: "Click the director's name to indicate each position of the director's movies in the scatter plot, and click it again to deselect.",
+        label: "Click the director's name to indicate each position of the director's movies in the scatter plot.",
+        wrap: 300,
+        align: "right" },
+    connector: { end: "arrow" },
+    x: 1165,
+    y: 640,
+    dx: -20,
+    dy: 10
+}].map(function(d){ d.color = "deeppink"; return d });
+
+const annotation3 = [{
+    note: {
+        title: "Drill-Down into Director's Movies",
+        label: "Either click the director's name again or any of the other movies to remove the indications.",
         wrap: 300,
         align: "right" },
     connector: { end: "arrow" },
@@ -460,6 +473,7 @@ const annotation2020 = [{
 let annt0 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation0)).style("opacity", 0);
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1)).style("opacity", 0);
 let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation2));
+let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation3));
 let annt1920_1950 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1920_1950)).style("opacity", 0);
 let annt1960 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1960)).style("opacity", 0);
 let annt1970_1980 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1970_1980)).style("opacity", 0);
@@ -478,6 +492,7 @@ function annotate(annt) {
     annt0.style("opacity", annt === 1? 1 : 0);
     annt1.style("opacity", annt === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
+    annt3.style("opacity", annt === 3? 1 : 0);
     
     if (annt > 2) {
         if (annt >= 1920 && annt <= 1950) {
@@ -744,7 +759,7 @@ function overDirector(o) {
 
 function indicateDirector(director) {
     console.log(director);
-    annotate(0);
+    annotate(3);
     let o = d3.select('.button').style("opacity");
     console.log(o);
     //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
@@ -804,6 +819,7 @@ async function plot(data) {
         .on("click", function(event, d) {
             annotate(2);
             clearDirector();
+            d3.select(this).style("stroke", "gray");
             /*
             console.log(d3.select('#director'));
             if (d3.select('#director') != null) {
