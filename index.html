@@ -740,7 +740,7 @@ function indicateDirector(director) {
         .style("stroke", o == 1? "white" : "orangered")
         .style("stroke-width", o == 1? 1 : 2)
         .style("opacity", o == 1? 0.6 : 1)
-        .on("mouseover", function () { d3.select(this).style("stroke", "gray") });
+        .on("mouseover", function () { d3.select(this).style("stroke", o == 1? "gray" : "white") });
 
 
     //let circles = d3.selectAll("circle").filter(`.${convertDirector(director)}`).attr("class", `bubble ${convertDirector(director)}`);
@@ -755,7 +755,7 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
-        .attr("class", function (d) { return `bubble ${convertDirector(d.Director)}` } )
+        .attr("class", function (d) { return `bubble ${convertDirector(d.Director)}` })
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
