@@ -766,6 +766,7 @@ async function plot(data) {
             return gs.length == 1? color(gs[0]) : "gainsboro"
         })
         .on("mouseover", function(event, d) {
+            d3.select(this).style("stroke", "gray");
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 1);
@@ -774,6 +775,7 @@ async function plot(data) {
                 .style("top", (event.pageY+20) + "px");
         })
         .on("mouseout", function(event, d) {
+            d3.select(this).style("stroke", "white");
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
