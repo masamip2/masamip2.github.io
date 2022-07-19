@@ -742,7 +742,8 @@ function indicateDirector(director) {
         .style("stroke", o == 1? "white" : "orangered")
         .style("stroke-width", o == 1? 1 : 2)
         .style("opacity", o == 1? 0.6 : 1)
-        .on("mouseover", function () { d3.select(this).style("stroke", o == 1? "gray" : none) });
+        .on("mouseover", function () { d3.select(this).style("stroke", o == 1? "gray" : "white") })
+        .on("mouseout", function () { d3.select(this).style("stroke", o == 1? "white" : "orangered") });
 
 
     //let circles = d3.selectAll("circle").filter(`.${convertDirector(director)}`).attr("class", `bubble ${convertDirector(director)}`);
