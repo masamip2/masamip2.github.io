@@ -794,10 +794,7 @@ function updateChart() {
         .attr('cy', function(d) {return newY(d.Petal_Length)});
 }
 
-const zoom = d3.zoom()
-    .scaleExtent([.5, 20])  // unzoom (x0.5), zoom (x20)
-    .extent([[0, 0], [vizsize.width, vizsize.height]])
-    .on("zoom", updateChart);
+function zoom() { return d3.zoom().scaleExtent([.5, 20]).extent([[0, 0], [vizsize.width, vizsize.height]]).on("zoom", updateChart);} // unzoom (x0.5), zoom (x20)
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble-bg').remove();
@@ -841,7 +838,8 @@ async function plot(data) {
             annotate(2);
             clearDirector();
             d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray").style("opacity", 1);
-            d3.select(this).call(d3.zoom().scaleExtent([.5, 20]).extent([[0, 0], [vizsize.width, vizsize.height]]).on("zoom", updateChart));
+            zoom();
+            //d3.select(this).call(d3.zoom().scaleExtent([.5, 20]).extent([[0, 0], [vizsize.width, vizsize.height]]).on("zoom", updateChart));
 
             info.html(`
                 <table>
