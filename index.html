@@ -225,12 +225,14 @@ async function filter() {
     const all = d3.select('#_All').style("fill") == 'orangered'? 1 : 0;
     const year = d3.select('#year').text();
     const gs = selectedGenres();
-    console.log(gs.length);
+    console.log(`gen = ${gs.length}`);
 
     if (all && gs.length == 0) {
+        console.log(`gen1 = ${gs.length}`);
         annotate();
         await plot(dataset);
     } else {
+        console.log(`gen2 = ${gs.length}`);
         if (gs.length == 0) annotate(year);
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
