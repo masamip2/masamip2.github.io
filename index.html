@@ -820,7 +820,7 @@ async function plot(data) {
         .on("click", function(event, d) {
             annotate(2);
             clearDirector();
-            d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray");
+            d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray").style("opacity", 1);
             
             /*
             console.log(d3.select('#director'));
