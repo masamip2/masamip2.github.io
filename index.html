@@ -757,29 +757,16 @@ function overDirector(o) {
     }
 }
 
-function indicateDirector(director) {
+function indicateDirector(title, director) {
     console.log(director);
     annotate(3);
     let o = d3.select('.button').style("opacity");
     console.log(o);
-    //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
 
-    //clearDirector();
-
-    d3.selectAll("circle").filter(`.${convertString(director)}`)
-        //.style("stroke", o == 1? "white" : "orangered")
-        //.style("stroke-width", o == 1? 1 : 2)
-        .style("opacity", o == 1? 0 : 1);
-        //.on("mouseover", function () { d3.select(this).style("stroke", o == 1? "gray" : "white") })
-        //.on("mouseout", function () { d3.select(this).style("stroke", o == 1? "white" : "orangered") });
-
-
-    //let circles = d3.selectAll("circle").filter(`.${convertDirector(director)}`).attr("class", `bubble ${convertDirector(director)}`);
-    //if (o != 1) circles.style("stroke", "orangered").style("stroke-width", 2).style("opacity", 1);
+    d3.selectAll("circle").filter(`.${convertString(director)}`).style("opacity", o == 1? 0 : 1);
+    d3.selectAll("circle").filter(`#${convertString(title)}`).style("opacity", 1);
 
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
-
-    //d3.selectAll("circle").filter('.bubble').style("stroke", "white").style("stroke-width", 1).style("opacity", 0.6);
 }
 
 async function plot(data) {
@@ -870,7 +857,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Director</th>
-                        <td><input type="button" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
+                        <td><input type="button" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Series_Title}', '${d.Director}')" value="${d.Director}"></td>
                     </tr>
                     <tr>
                         <th>Overview</th>
