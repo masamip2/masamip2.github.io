@@ -785,7 +785,7 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
-            let director = d3.select('#director').value();
+            let director = d3.select('#director').property("value");
             if (director) {
                 d3.selectAll("circle").filter(`.${convertDirector(director)}`)
                     .style("stroke", "white")
