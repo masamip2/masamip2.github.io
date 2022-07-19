@@ -738,6 +738,8 @@ function indicateDirector(director) {
     //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
     d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2).style("opacity", o == 1? 0.6 : 1);
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
+
+    //d3.selectAll("circle").filter('.bubble').style("stroke", "white").style("stroke-width", 1).style("opacity", 0.6);
 }
 
 async function plot(data) {
@@ -768,8 +770,7 @@ async function plot(data) {
         .on("mousemove", function(event, d) {
         })
         .on("click", function(event, d) {
-            annotate(2);
-            //d3.selectAll("circle").filter('.bubble').style("stroke", "white").style("stroke-width", 1).style("opacity", 0.6);
+            //annotate(2);
             info.html(`
                 <table>
                     <tr class="tr-img">
