@@ -225,6 +225,7 @@ async function filter() {
     const all = d3.select('#_All').style("fill") == 'orangered'? 1 : 0;
     const year = d3.select('#year').text();
     const gs = selectedGenres();
+    console.log(gs.length);
 
     if (all && gs.length == 0) {
         annotate();
