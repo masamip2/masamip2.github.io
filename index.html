@@ -145,6 +145,11 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
     stroke: gray;
 }
 */
+.bubble-bg {
+    stroke: orangered;
+    stroke-width: 2px;
+    opacity: 0;
+}
 .button {
     border-color: slategray;
     border-width: 2px;
@@ -727,12 +732,7 @@ let info = d3.select("#right").append("div")
 function convertDirector(str) { return str.replace(/\s/g, '_') }
 
 function clearDirector() {
-    d3.selectAll("circle").filter('.bubble')
-        .style("stroke", "white")
-        .style("stroke-width", 1)
-        .style("opacity", 0.6)
-        .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
-        .on("mouseout", function () { d3.select(this).style("stroke", "white") });
+    d3.selectAll("circle").filter('.bubble-bg').style("opacity", 0);
 }
 
 function overDirector(o) {
@@ -748,14 +748,14 @@ function indicateDirector(director) {
     console.log(o);
     //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
 
-    clearDirector();
+    //clearDirector();
 
     d3.selectAll("circle").filter(`.${convertDirector(director)}`)
-        .style("stroke", o == 1? "white" : "orangered")
-        .style("stroke-width", o == 1? 1 : 2)
-        .style("opacity", o == 1? 0.6 : 1)
-        .on("mouseover", function () { d3.select(this).style("stroke", o == 1? "gray" : "white") })
-        .on("mouseout", function () { d3.select(this).style("stroke", o == 1? "white" : "orangered") });
+        //.style("stroke", o == 1? "white" : "orangered")
+        //.style("stroke-width", o == 1? 1 : 2)
+        .style("opacity", o == 1? 0 : 1);
+        //.on("mouseover", function () { d3.select(this).style("stroke", o == 1? "gray" : "white") })
+        //.on("mouseout", function () { d3.select(this).style("stroke", o == 1? "white" : "orangered") });
 
 
     //let circles = d3.selectAll("circle").filter(`.${convertDirector(director)}`).attr("class", `bubble ${convertDirector(director)}`);
@@ -770,7 +770,12 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
-        .attr("class", function (d) { return `bubble ${convertDirector(d.Director)}` })
+        .attr("class", function (d) { return `bubble-bg ${convertDirector(d.Director)}` })
+        .attr("cx", function (d) { return x(d.No_of_Votes) })
+        .attr("cy", function (d) { return y(d.IMDB_Rating) })
+        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
+    bubble.append("circle")
+        .attr("class", 'bubble')
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
@@ -797,7 +802,7 @@ async function plot(data) {
         })
         .on("click", function(event, d) {
             annotate(2);
-            //clearDirector();
+            clearDirector();
             /*
             console.log(d3.select('#director'));
             if (d3.select('#director') != null) {
