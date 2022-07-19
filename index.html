@@ -225,6 +225,7 @@ async function filter() {
     const all = d3.select('#_All').style("fill") == 'orangered'? 1 : 0;
     const year = d3.select('#year').text();
     const gs = selectedGenres();
+    console.log(`all = ${d3.select('#_All').style("fill")}`);
     console.log(`gen = ${gs.length}`);
 
     if (all && gs.length == 0) {
