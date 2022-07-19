@@ -237,6 +237,8 @@ async function filter() {
     console.log(`gen = ${gs.length}`);
 
     d3.selectAll("table").remove();
+    clearDirector();
+    
     if (all && gs.length == 0) {
         console.log(`gen1 = ${gs.length}`);
         annotate(1);
@@ -382,7 +384,7 @@ const annotation2 = [{
 const annotation3 = [{
     note: {
         title: "Director's Movie Indicators",
-        label: "Either click the director's name again or any of the other movies to remove the indicators.",
+        label: "Click either the director's name again or any of the other movies to remove the indicators.",
         wrap: 300,
         align: "right" },
     connector: { end: "arrow" },
@@ -808,20 +810,7 @@ async function plot(data) {
             annotate(2);
             clearDirector();
             d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray").style("opacity", 1);
-            
-            /*
-            console.log(d3.select('#director'));
-            if (d3.select('#director') != null) {
-                let director = d3.selectAll('#director').property("value");
-                d3.selectAll("circle").filter(`.${convertDirector(director)}`)
-                //d3.selectAll("circle").filter('.bubble').style("stroke")
-                    .style("stroke", "white")
-                    .style("stroke-width", 1)
-                    .style("opacity", 0.6)
-                    .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
-                    .on("mouseout", function () { d3.select(this).style("stroke", "white") });
-            }
-            */
+
             info.html(`
                 <table>
                     <tr class="tr-img">
