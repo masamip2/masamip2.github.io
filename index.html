@@ -780,7 +780,7 @@ const clip = svg.append("defs").append("svg:clipPath")
     .attr("x", 0)
     .attr("y", 0);
 
-let scatter = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).attr("clip-path", "url(#clip)");
+let scatter = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`); //.attr("clip-path", "url(#clip)");
 
 function updateChart() {
     let newX = d3.event.transform.rescaleX(x);
