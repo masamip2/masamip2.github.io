@@ -782,16 +782,16 @@ const clip = svg.append("defs").append("svg:clipPath")
 
 let scatter = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`); //.attr("clip-path", "url(#clip)");
 
-function updateChart() {
-    let newX = d3.event.transform.rescaleX(x);
-    let newY = d3.event.transform.rescaleY(y);
+function updateChart(event) {
+    let newX = d3.event.transform.rescaleX(x); // x(event.x); //d3.event.transform.rescaleX(x);
+    let newY = d3.event.transform.rescaleY(y); // y(event.y); //d3.event.transform.rescaleY(y);
 
     xAxis.call(d3.axisBottom(newX));
     yAxis.call(d3.axisLeft(newY));
 
     scatter.selectAll("circle")
-        .attr('cx', function(d) {return newX(d.Sepal_Length)})
-        .attr('cy', function(d) {return newY(d.Petal_Length)});
+        .attr('cx', function(d) {return newX(event.x)})
+        .attr('cy', function(d) {return newY(event.y)});
 }
 
 function zoom() { return d3.zoom().scaleExtent([.5, 20]).extent([[0, 0], [vizsize.width, vizsize.height]]).on("zoom", updateChart);} // unzoom (x0.5), zoom (x20)
@@ -838,7 +838,11 @@ async function plot(data) {
             annotate(2);
             clearDirector();
             d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray").style("opacity", 1);
-            zoom();
+            updateChart(event);
+
+            //.call(d3.drag()
+            //.on("start drag", function(event) { changeDecade(parseInt(scale.invert(event.x))) }))
+
             //d3.select(this).call(d3.zoom().scaleExtent([.5, 20]).extent([[0, 0], [vizsize.width, vizsize.height]]).on("zoom", updateChart));
 
             info.html(`
