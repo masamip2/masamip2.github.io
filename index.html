@@ -739,7 +739,7 @@ function indicateDirector(director) {
     d3.selectAll("circle").filter(`.${convertDirector(director)}`).style("stroke", o == 1? "white" : "orangered").style("stroke-width", o == 1? 1 : 2).style("opacity", o == 1? 0.6 : 1);
 
 
-    let circles = d3.selectAll("circle").filter(`.${convertDirector(director)}`).attr("class", `bubble ${convertDirector(d.Director)}`);
+    let circles = d3.selectAll("circle").filter(`.${convertDirector(director)}`).attr("class", `bubble ${convertDirector(director)}`);
     if (o == 0) circles.style("stroke", "orangered").style("stroke-width", 2).style("opacity", 1);
 
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
