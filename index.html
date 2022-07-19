@@ -738,6 +738,14 @@ function indicateDirector(director) {
     let o = d3.select('.button').style("opacity");
     console.log(o);
     //d3.selectAll("circle").filter('.bubble').style("opacity", o == 1? 0.6 : 0);
+
+    d3.selectAll("circle").filter('.bubble')
+        .style("stroke", "white")
+        .style("stroke-width", 1)
+        .style("opacity", 0.6)
+        .on("mouseover", function () { d3.select(this).style("stroke", "gray") })
+        .on("mouseout", function () { d3.select(this).style("stroke", "white") });
+
     d3.selectAll("circle").filter(`.${convertDirector(director)}`)
         .style("stroke", o == 1? "white" : "orangered")
         .style("stroke-width", o == 1? 1 : 2)
@@ -833,7 +841,7 @@ async function plot(data) {
                     </tr>
                     <tr>
                         <th>Director</th>
-                        <td><input type="button" id="director" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
+                        <td><input type="button" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Director}')" value="${d.Director}"></td>
                     </tr>
                     <tr>
                         <th>Overview</th>
