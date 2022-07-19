@@ -237,8 +237,8 @@ async function filter() {
     console.log(`gen = ${gs.length}`);
 
     d3.selectAll("table").remove();
-    clearDirector();
-    
+    //clearDirector();
+
     if (all && gs.length == 0) {
         console.log(`gen1 = ${gs.length}`);
         annotate(1);
