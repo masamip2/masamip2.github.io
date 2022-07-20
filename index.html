@@ -173,7 +173,7 @@ div.tooltip {
 
 </style>
 <body onload="init()">
-<div class="title"><h1>Top 1000 Movies over 100 Years (1920 - 2020) by IMDB Rating</h1></div>
+<div class="title"><h1>Top 1000 Movies over 10 Decades (1920 - 2010) and the Year 2020 by IMDB Rating</h1></div>
 <div id="wrapper">
     <div id="left"></div>
     <div id="right"></div>
@@ -366,7 +366,7 @@ const annotation1 = [{
     y: 700,
     dx: 0,
     dy: -210
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 const annotation2 = [{
     note: {
@@ -405,7 +405,7 @@ const annotation1920_1950 = [{
     y: 600,
     dx: 0,
     dy: -210
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 const annotation1960 = [{
     type: d3.annotationCalloutCircle,
@@ -418,7 +418,7 @@ const annotation1960 = [{
     y: 440,
     dx: 0,
     dy: -230
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 const annotation1970_1980 = [{
     type: d3.annotationCalloutCircle,
@@ -431,7 +431,7 @@ const annotation1970_1980 = [{
     y: 420,
     dx: -200,
     dy: -150
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 const annotation1990_2000 = [{
     type: d3.annotationCalloutCircle,
@@ -444,7 +444,7 @@ const annotation1990_2000 = [{
     y: 350,
     dx: -450,
     dy: -150
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 const annotation2010 = [{
     type: d3.annotationCalloutCircle,
@@ -457,7 +457,7 @@ const annotation2010 = [{
     y: 710,
     dx: 0,
     dy: -320
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 const annotation2020 = [{
     type: d3.annotationCalloutCircle,
@@ -470,7 +470,7 @@ const annotation2020 = [{
     y: 700,
     dx: 0,
     dy: -210
-}].map(function(d){ d.color = "darkturquoise"; return d });
+}].map(function(d){ d.color = "darkorange"; return d });
 
 let annt0 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation0)).style("opacity", 0);
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1)).style("opacity", 0);
