@@ -747,7 +747,7 @@ let info = d3.select("#right").append("div")
     .attr("width", infosize.width)
     .attr("height", infosize.height);
 
-function convertString(str, prepend) { return `${prepend? '_' : ''}${str.replace(/\s/g, '_')}` }
+function convertString(str, prepend) { return `${prepend? '_' : ''}${str.replace(/\s:/g, '_')}` }
 
 function clearDirector() {
     d3.selectAll("circle").filter('.bubble-bg').style("stroke", "orangered").style("opacity", 0);
