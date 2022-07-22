@@ -747,7 +747,7 @@ let info = d3.select("#right").append("div")
     .attr("width", infosize.width)
     .attr("height", infosize.height);
 
-function convertString(str) { return str.replace(/\s/g, '_') }
+function convertString(str, prepend) { return `${prepend? '_' : ''}${str.replace(/\s/g, '_')}` }
 
 function clearDirector() {
     d3.selectAll("circle").filter('.bubble-bg').style("stroke", "orangered").style("opacity", 0);
@@ -766,7 +766,7 @@ function indicateDirector(title, director) {
     console.log(o);
 
     d3.selectAll("circle").filter(`.${convertString(director)}`).style("opacity", o == 1? 0 : 1);
-    d3.select(`#${convertString(title)}`).style("stroke", "gray").style("opacity", 1);
+    d3.select(`#${convertString(title, 1)}`).style("stroke", "gray").style("opacity", 1);
 
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
@@ -778,7 +778,7 @@ async function plot(data) {
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
-        .attr("id", function (d) { return convertString(d.Series_Title) })
+        .attr("id", function (d) { return convertString(d.Series_Title, 1) })
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
@@ -811,7 +811,7 @@ async function plot(data) {
         .on("click", function(event, d) {
             annotate(2);
             clearDirector();
-            d3.select(`#${convertString(d.Series_Title)}`).style("stroke", "gray").style("opacity", 1);
+            d3.select(`#${convertString(d.Series_Title, 1)}`).style("stroke", "gray").style("opacity", 1);
 
             info.html(`
                 <table>
