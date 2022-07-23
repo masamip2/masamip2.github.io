@@ -48,18 +48,13 @@ async function filter() {
     const all = d3.select('#_All').style("fill") == 'orangered'? 1 : 0;
     const year = d3.select('#year').text();
     const gs = selectedGenres();
-    console.log(`all = ${d3.select('#_All').style("fill")}`);
-    console.log(`gen = ${gs.length}`);
 
     d3.selectAll("table").remove();
-    //clearDirector();
 
     if (all && gs.length == 0) {
-        console.log(`gen1 = ${gs.length}`);
         annotate(1);
         await plot(dataset);
     } else {
-        console.log(`gen2 = ${gs.length}`);
         annotate(gs.length > 0? 0 : year);
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
@@ -575,14 +570,11 @@ function overDirector(o) {
 }
 
 function indicateDirector(title, director) {
-    console.log(director);
     annotate(3);
     let o = d3.select('.button').style("opacity");
-    console.log(o);
 
     d3.selectAll("circle").filter(`.${convertString(director)}`).style("opacity", o == 1? 0 : 1);
     d3.select(`#${convertString(title, 1)}`).style("stroke", "gray").style("opacity", 1);
-
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
