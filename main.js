@@ -159,7 +159,7 @@ const annotation1 = [{
     note: {
         title: "Trend 2",
         label: "The gross is high for some of the good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and a higher rating.",
-        wrap: 450 },
+        wrap: 420 },
     subject: { "radius": 160 },
     x: 690,
     y: 600,
