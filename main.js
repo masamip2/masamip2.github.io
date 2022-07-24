@@ -260,7 +260,7 @@ const annotation2010 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 2010",
-        label: "The number of votes around a half million clearly shows ok ratings in the 2010's.",
+        label: "The number of votes around half a million clearly shows ok ratings in the 2010's.",
         wrap: 400 },
     subject: { "radius": 140 },
     x: 450,
@@ -274,7 +274,7 @@ const annotation2020 = [{
     note: {
         title: "Analysis for 2020",
         label: "The original dataset does not seem to cover the entire year 2020.",
-        wrap: 500 },
+        wrap: 520 },
     subject: { "radius": 140 },
     x: 150,
     y: 700,
