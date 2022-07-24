@@ -163,14 +163,14 @@ const annotation1 = [{
     subject: { "radius": 160 },
     x: 690,
     y: 600,
-    dx: -270,
+    dx: -260,
     dy: -250
 }, {
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 3",
-        label: "The fewer votes, lower the lower rating, when the number of votes is less than half a million. Smaller gross indicates fewer votes and a lower rating.",
-        wrap: 400 },
+        label: "The fewer votes, the lower rating, when the number of votes is less than half a million. Smaller gross indicates fewer votes and a lower rating.",
+        wrap: 390 },
     subject: { "radius": 120 },
     x: 130,
     y: 700,
