@@ -152,7 +152,7 @@ const annotation1 = [{
     subject: { "radius": 150 },
     x: 1000,
     y: 350,
-    dx: -470,
+    dx: -465,
     dy: -150
 }, {
     type: d3.annotationCalloutCircle,
