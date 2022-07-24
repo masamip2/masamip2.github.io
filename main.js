@@ -148,7 +148,7 @@ const annotation1 = [{
     note: {
         title: "Trend 1",
         label: "The more votes, the higher rating, when the number of votes is around 2 million, even though the gross is not huge.",
-        wrap: 435 },
+        wrap: 430 },
     subject: { "radius": 150 },
     x: 1000,
     y: 350,
