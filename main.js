@@ -235,7 +235,7 @@ const annotation1970_1980 = [{
     note: {
         title: "Analysis for 1970 - 1980",
         label: "More votes seem to lead to higher ratings in the 1970's and 1980's.",
-        wrap: 420 },
+        wrap: 400 },
     subject: { "radius": 160 },
     x: 720,
     y: 420,
