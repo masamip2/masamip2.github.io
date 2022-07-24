@@ -209,7 +209,7 @@ const annotation1920_1950 = [{
     note: {
         title: "Analysis for 1920 - 1950",
         label: "Fewer votes, lower ratings and smaller gross amounts seem reasonable due to the limited audience from 1920 to 1950.",
-        wrap: 450 },
+        wrap: 500 },
     subject: { "radius": 100 },
     x: 150,
     y: 600,
