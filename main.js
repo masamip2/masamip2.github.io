@@ -147,7 +147,7 @@ const annotation1 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 1",
-        label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
+        label: "The more votes, higher the rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
         wrap: 450 },
     subject: { "radius": 150 },
     x: 1000,
@@ -158,7 +158,7 @@ const annotation1 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 2",
-        label: "The gross is high for some of the good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and very higher rating.",
+        label: "The gross is high for some of the good rating movies, when the number of votes is around 1 million. Larger gross does not require more votes and a higher rating.",
         wrap: 420 },
     subject: { "radius": 160 },
     x: 690,
@@ -169,7 +169,7 @@ const annotation1 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 3",
-        label: "The fewer votes, the lower rating, when the number of votes is less than a half million. Smaller gross indicates fewer votes and lower rating.",
+        label: "The fewer votes, lower the rating, when the number of votes is less than half a million. Smaller gross indicates fewer votes and lower ratings.",
         wrap: 400 },
     subject: { "radius": 120 },
     x: 130,
@@ -208,7 +208,7 @@ const annotation1920_1950 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 1920 - 1950",
-        label: "Fewer votes, lower rating and smaller gross seem reasonable as being from 1920 to 1950.",
+        label: "Fewer votes, lower ratings and smaller gross amounts seem reasonable due to the limited audience from 1920 to 1950.",
         wrap: 400 },
     subject: { "radius": 100 },
     x: 150,
@@ -221,7 +221,7 @@ const annotation1960 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 1960",
-        label: "Western movies seem having increased the number of votes and the rating in 1960's.",
+        label: "Western movies seem to have increased the number of votes and ratings in the 1960's.",
         wrap: 450 },
     subject: { "radius": 200 },
     x: 380,
@@ -234,7 +234,7 @@ const annotation1970_1980 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 1970 - 1980",
-        label: "More number of votes represents better rating in 1970's and 1980's.",
+        label: "More votes seem to lead to higher ratings in the 1970's and 1980's.",
         wrap: 420 },
     subject: { "radius": 160 },
     x: 720,
@@ -247,7 +247,7 @@ const annotation1990_2000 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 1990 - 2000",
-        label: "The number of votes around 2 million clearly indicates much higher rating in 1990's and 2000's.",
+        label: "The number of votes around 2 million clearly indicates much higher ratings in the 1990's and 2000's.",
         wrap: 450 },
     subject: { "radius": 150 },
     x: 1000,
@@ -260,7 +260,7 @@ const annotation2010 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 2010",
-        label: "The number of votes around a half million clearly shows ok rating in 2010's.",
+        label: "The number of votes around a half million clearly shows ok ratings in the 2010's.",
         wrap: 400 },
     subject: { "radius": 140 },
     x: 450,
@@ -273,7 +273,7 @@ const annotation2020 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Analysis for 2020",
-        label: "The original dataset does not seem to cover the entire 2020.",
+        label: "The original dataset does not seem to cover the entire year 2020.",
         wrap: 500 },
     subject: { "radius": 140 },
     x: 150,
