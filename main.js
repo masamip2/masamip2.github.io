@@ -147,7 +147,7 @@ const annotation1 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 1",
-        label: "The more votes, higher the rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
+        label: "The more votes, the higher rating. The rating is very good when the number of votes is around 2 million, even though the gross is not huge.",
         wrap: 450 },
     subject: { "radius": 150 },
     x: 1000,
@@ -169,7 +169,7 @@ const annotation1 = [{
     type: d3.annotationCalloutCircle,
     note: {
         title: "Trend 3",
-        label: "The fewer votes, lower the rating, when the number of votes is less than half a million. Smaller gross indicates fewer votes and a lower rating.",
+        label: "The fewer votes, lower the lower rating, when the number of votes is less than half a million. Smaller gross indicates fewer votes and a lower rating.",
         wrap: 400 },
     subject: { "radius": 120 },
     x: 130,
