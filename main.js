@@ -163,7 +163,7 @@ const annotation1 = [{
     subject: { "radius": 160 },
     x: 690,
     y: 600,
-    dx: -230,
+    dx: -220,
     dy: -250
 }, {
     type: d3.annotationCalloutCircle,
@@ -209,7 +209,7 @@ const annotation1920_1950 = [{
     note: {
         title: "Analysis for 1920 - 1950",
         label: "Fewer votes, lower ratings and smaller gross amounts seem reasonable due to the limited audience from 1920 to 1950.",
-        wrap: 500 },
+        wrap: 600 },
     subject: { "radius": 100 },
     x: 150,
     y: 600,
@@ -274,7 +274,7 @@ const annotation2020 = [{
     note: {
         title: "Analysis for 2020",
         label: "The original dataset does not seem to cover the entire year 2020.",
-        wrap: 520 },
+        wrap: 550 },
     subject: { "radius": 140 },
     x: 150,
     y: 700,
