@@ -148,11 +148,11 @@ const annotation1 = [{
     note: {
         title: "Trend 1",
         label: "The more votes, the higher rating, when the number of votes is around 2 million, even though the gross is not huge.",
-        wrap: 450 },
+        wrap: 420 },
     subject: { "radius": 150 },
     x: 1000,
     y: 350,
-    dx: -470,
+    dx: -460,
     dy: -150
 }, {
     type: d3.annotationCalloutCircle,
