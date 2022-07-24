@@ -163,7 +163,7 @@ const annotation1 = [{
     subject: { "radius": 160 },
     x: 690,
     y: 600,
-    dx: -220,
+    dx: -270,
     dy: -250
 }, {
     type: d3.annotationCalloutCircle,
@@ -274,7 +274,7 @@ const annotation2020 = [{
     note: {
         title: "Analysis for 2020",
         label: "The original dataset does not seem to cover the entire year 2020.",
-        wrap: 550 },
+        wrap: 500 },
     subject: { "radius": 140 },
     x: 150,
     y: 700,
