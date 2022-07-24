@@ -170,7 +170,7 @@ const annotation1 = [{
     note: {
         title: "Trend 3",
         label: "The fewer votes, the lower rating, when the number of votes is less than half a million. Smaller gross indicates fewer votes and a lower rating.",
-        wrap: 390 },
+        wrap: 380 },
     subject: { "radius": 120 },
     x: 130,
     y: 700,
