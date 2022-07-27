@@ -294,6 +294,30 @@ let annt2010 = svg.append('g').attr("class", "annotation-group").call(makeAnnota
 let annt2020 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation2020)).style("opacity", 0);
 
 function annotate(annt) {
+
+    let y = d3.select("#year").text();
+    if (y) {
+        y = parseInt(y);
+        if (y >= 1920 && y <= 1950) {
+            annt1920_1950.style("opacity", 1);
+        } else if (y == 1960) {
+            annt1960.style("opacity", 1);
+        } else if (y >= 1970 && y <= 1980) {
+            annt1970_1980.style("opacity", 1);
+        } else if (y >= 1990 && y <= 2000) {
+            annt1990_2000.style("opacity", 1);
+        } else if (y == 2010) {
+            annt2010.style("opacity", 1);
+        } else if (y == 2020) {
+            annt2020.style("opacity", 1);
+        }
+    }
+    annt0.style("opacity", annt === 1? 1 : 0);
+    annt1.style("opacity", annt === 1? 1 : 0);
+    annt2.style("opacity", annt === 2? 1 : 0);
+    annt3.style("opacity", annt === 3? 1 : 0);
+
+    /*
     annt1920_1950.style("opacity", 0);
     annt1960.style("opacity", 0);
     annt1970_1980.style("opacity", 0);
@@ -321,6 +345,7 @@ function annotate(annt) {
             annt2020.style("opacity", 1);
         }
     }
+    */
 }
 
 
@@ -586,7 +611,7 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
 
     if (data) {
-        bubbleBk.style("opacity", 0.6).transition().duration(500).style("opacity", 0);
+        bubbleBk.duration(200).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
     } else {
         data = dataset;
     }
