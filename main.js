@@ -611,7 +611,7 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
 
     if (data) {
-        bubbleBk.duration(200).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
+        bubbleBk.transition().duration(200).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
     } else {
         data = dataset;
     }
