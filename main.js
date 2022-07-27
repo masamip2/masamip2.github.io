@@ -589,12 +589,7 @@ function removeBubbles() {
 let bubbleBk = null;
 async function plot(data) {
 
-    removeBubbles();
-    if (data) {
-        //bubbleBk.style("opacity", 0.6);
-    } else {
-        data = dataset;
-    }
+
 
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
 
