@@ -581,16 +581,20 @@ function indicateDirector(title, director) {
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
-let bubbleBk = null;
-
-async function plot(data) {
-
+function removeBubbles() {
     d3.selectAll("circle").filter('.bubble-bg').remove();
     d3.selectAll("circle").filter('.bubble').remove();
+}
+
+let bubbleBk = null;
+async function plot(data) {
 
     if (data) {
-        bubbleBk.transition().duration(200).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
+        bubbleBk.transition().duration(200).style("opacity", 0.6);
+        removeBubbles();
+        bubbleBk.transition().duration(500).style("opacity", 0);
     } else {
+        removeBubbles();
         data = dataset;
     }
 
