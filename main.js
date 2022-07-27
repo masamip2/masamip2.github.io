@@ -580,7 +580,7 @@ function indicateDirector(title, director) {
 
 async function plot(data) {
     d3.selectAll("circle").filter('.bubble-bg').remove();
-    d3.selectAll("circle").filter('.bubble').remove();
+    d3.selectAll("circle").filter('.bubble').transition().duration(500).remove();
 
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
