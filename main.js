@@ -589,7 +589,7 @@ function removeBubbles() {
 let bubbleBk = null;
 async function plot(data) {
 
-    removeBubbles();
+    removeBubbles(); //
     if (data) {
         bubbleBk.style("opacity", 0.6);
     } else {
