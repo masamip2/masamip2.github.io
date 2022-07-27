@@ -53,7 +53,7 @@ async function filter() {
 
     if (all && gs.length == 0) {
         annotate(1);
-        await plot(dataset);
+        await plot();
     } else {
         annotate(gs.length > 0? 0 : year);
         await plot(dataset.filter(function(d) {
@@ -578,9 +578,18 @@ function indicateDirector(title, director) {
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
+//let bubbleBg = null;
+let bubbleAll = null;
+
 async function plot(data) {
-    d3.selectAll("circle").filter('.bubble-bg').remove();
-    d3.selectAll("circle").filter('.bubble').transition().duration(600).remove();
+
+    if (data) {
+        d3.selectAll("circle").filter('.bubble-bg').remove();
+        bubbleAll.transition().duration(800).remove();
+        if (!bubbleAll) console.log('aaa');
+    } else {
+        data = dataset;
+    }
 
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
     bubble.append("circle")
@@ -664,4 +673,10 @@ async function plot(data) {
                 </table>
             `);
         });
+
+    //if (!bubbleBg) bubbleBg = d3.selectAll("circle").filter('.bubble-bg');
+    if (!bubbleAll) {
+        console.log('111');
+        bubbleAll = d3.selectAll("circle").filter('.bubble');
+    }
 }
