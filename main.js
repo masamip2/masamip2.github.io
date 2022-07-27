@@ -302,8 +302,9 @@ function annotate(annt) {
     annt2010.style("opacity", 0);
     annt2020.style("opacity", 0);
 
-    annt0.style("opacity", annt === 1? 1 : 0);
-    annt1.style("opacity", annt === 1? 1 : 0);
+    let all = d3.select("#_All").style("fill") == 'orangered' || annt === 1? 1 : 0;
+    annt0.style("opacity", all === 1? 1 : 0);
+    annt1.style("opacity", all === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
     annt3.style("opacity", annt === 3? 1 : 0);
 
@@ -589,7 +590,7 @@ function removeBubbles() {
 let bubbleBk = null;
 async function plot(data) {
 
-    removeBubbles(); //
+    removeBubbles();
     if (data) {
         bubbleBk.style("opacity", 0.6);
     } else {
