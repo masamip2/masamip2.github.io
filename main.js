@@ -296,7 +296,7 @@ let annt2020 = svg.append('g').attr("class", "annotation-group").call(makeAnnota
 function annotate(annt) {
 
     let y = d3.select("#year").text();
-    if (y) {
+    if (y && annt > 0) {
         y = parseInt(y);
         if (y >= 1920 && y <= 1950) {
             annt1920_1950.style("opacity", 1);
