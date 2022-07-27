@@ -591,7 +591,7 @@ async function plot(data) {
 
     removeBubbles();
     if (data) {
-        bubbleBk.style("opacity", 0.7);
+        bubbleBk.style("opacity", 0.6);
     } else {
         data = dataset;
     }
