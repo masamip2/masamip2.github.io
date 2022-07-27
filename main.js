@@ -578,15 +578,16 @@ function indicateDirector(title, director) {
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
-//let bubbleBg = null;
 let bubbleAll = null;
 
 async function plot(data) {
 
+    d3.selectAll("circle").filter('.bubble-bg').remove();
+    d3.selectAll("circle").filter('.bubble').transition().duration(800).remove();
+
     if (data) {
-        d3.selectAll("circle").filter('.bubble-bg').remove();
-        bubbleAll.transition().duration(800).remove();
-        if (!bubbleAll) console.log('aaa');
+        console.log('222');
+        bubbleAll.style("opacity", 1).transition().duration(800).style("opacity", 0);
     } else {
         data = dataset;
     }
@@ -674,9 +675,8 @@ async function plot(data) {
             `);
         });
 
-    //if (!bubbleBg) bubbleBg = d3.selectAll("circle").filter('.bubble-bg');
     if (!bubbleAll) {
         console.log('111');
-        bubbleAll = d3.selectAll("circle").filter('.bubble');
+        bubbleAll = d3.selectAll("circle").filter('.bubble').attr("class", 'bubble-bk').style("opacity", 0);
     }
 }
