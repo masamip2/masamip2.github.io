@@ -37,11 +37,9 @@ async function init() {
     data = await d3.csv('imdb_top_1000.csv');
     for (let i = 0; i < data.length; i++) {
         const elms = (data[i].Genre).split(',').map(elm => elm.trim())
-        ////const dict0 = {'visible': 0}
         const dict1 = dictFields(data[i])
         const dict2 = dictGenres(elms)
         dataset.push({...dict1, ...dict2})
-        ////dataset.push({...dict0, ...dict1, ...dict2})
     }
     changeSlide('All');
 }
@@ -61,8 +59,6 @@ async function filter() {
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
             let d_genre = gs.length > 0? findCnt(d, gs) : true;
-            ////d.visible = d_year && d_genre? 1 : 0;
-            ////return d;
             return d_year && d_genre;
         }));
     }
@@ -582,7 +578,7 @@ function indicateDirector(title, director) {
     d3.select('.button').style("opacity", o == 1? 0.8 : 1);
 }
 
-let bubbleAll = null;
+let bubbleBk = null;
 
 async function plot(data) {
 
@@ -590,19 +586,19 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
 
     if (data) {
-        bubbleAll.style("opacity", 0.6).transition().duration(500).style("opacity", 0);
+        bubbleBk.style("opacity", 0.6).transition().duration(500).style("opacity", 0);
     } else {
         data = dataset;
     }
 
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
-    bubble.append("circle")
+    let bubbleBg = bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
         .attr("id", function (d) { return convertString(d.Series_Title, 1) })
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
-    bubble.append("circle")
+    let bubbleFg = bubble.append("circle")
         .attr("class", 'bubble')
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
@@ -610,8 +606,11 @@ async function plot(data) {
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
             return gs.length == 1? color(gs[0]) : "gainsboro"
-        })
-        .on("mouseover", function(event, d) {
+        });
+
+    if (!bubbleBk) bubbleBk = d3.selectAll("circle").filter('.bubble').attr("class", 'bubble-bk').style("opacity", 0.6);
+
+    bubbleFg.on("mouseover", function(event, d) {
             d3.select(this).style("stroke", "gray");
             tooltip.transition()
                 .duration(200)
@@ -677,6 +676,4 @@ async function plot(data) {
                 </table>
             `);
         });
-
-    if (!bubbleAll) bubbleAll = d3.selectAll("circle").filter('.bubble').attr("class", 'bubble-bk').style("opacity", 0.6);
 }
