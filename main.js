@@ -37,11 +37,11 @@ async function init() {
     data = await d3.csv('imdb_top_1000.csv');
     for (let i = 0; i < data.length; i++) {
         const elms = (data[i].Genre).split(',').map(elm => elm.trim())
-        //const dict0 = {'visible': 0}
+        ////const dict0 = {'visible': 0}
         const dict1 = dictFields(data[i])
         const dict2 = dictGenres(elms)
         dataset.push({...dict1, ...dict2})
-        //dataset.push({...dict0, ...dict1, ...dict2})
+        ////dataset.push({...dict0, ...dict1, ...dict2})
     }
     changeSlide('All');
 }
@@ -61,8 +61,8 @@ async function filter() {
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
             let d_genre = gs.length > 0? findCnt(d, gs) : true;
-            //d.visible = d_year && d_genre? 1 : 0;
-            //return d;
+            ////d.visible = d_year && d_genre? 1 : 0;
+            ////return d;
             return d_year && d_genre;
         }));
     }
