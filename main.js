@@ -295,6 +295,18 @@ let annt2020 = svg.append('g').attr("class", "annotation-group").call(makeAnnota
 
 function annotate(annt) {
 
+    annt1920_1950.style("opacity", 0);
+    annt1960.style("opacity", 0);
+    annt1970_1980.style("opacity", 0);
+    annt1990_2000.style("opacity", 0);
+    annt2010.style("opacity", 0);
+    annt2020.style("opacity", 0);
+
+    annt0.style("opacity", annt === 1? 1 : 0);
+    annt1.style("opacity", annt === 1? 1 : 0);
+    annt2.style("opacity", annt === 2? 1 : 0);
+    annt3.style("opacity", annt === 3? 1 : 0);
+
     let y = d3.select("#year").text();
     if (y && parseInt(annt) > 0) {
         y = parseInt(y);
@@ -311,48 +323,11 @@ function annotate(annt) {
         } else if (y == 2020) {
             annt2020.style("opacity", 1);
         }
-    } else {
-        annt1920_1950.style("opacity", 0);
-        annt1960.style("opacity", 0);
-        annt1970_1980.style("opacity", 0);
-        annt1990_2000.style("opacity", 0);
-        annt2010.style("opacity", 0);
-        annt2020.style("opacity", 0);
     }
     annt0.style("opacity", annt === 1? 1 : 0);
     annt1.style("opacity", annt === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
     annt3.style("opacity", annt === 3? 1 : 0);
-
-    /*
-    annt1920_1950.style("opacity", 0);
-    annt1960.style("opacity", 0);
-    annt1970_1980.style("opacity", 0);
-    annt1990_2000.style("opacity", 0);
-    annt2010.style("opacity", 0);
-    annt2020.style("opacity", 0);
-
-    annt0.style("opacity", annt === 1? 1 : 0);
-    annt1.style("opacity", annt === 1? 1 : 0);
-    annt2.style("opacity", annt === 2? 1 : 0);
-    annt3.style("opacity", annt === 3? 1 : 0);
-    
-    if (annt > 2) {
-        if (annt >= 1920 && annt <= 1950) {
-            annt1920_1950.style("opacity", 1);
-        } else if (annt == 1960) {
-            annt1960.style("opacity", 1);
-        } else if (annt >= 1970 && annt <= 1980) {
-            annt1970_1980.style("opacity", 1);
-        } else if (annt >= 1990 && annt <= 2000) {
-            annt1990_2000.style("opacity", 1);
-        } else if (annt == 2010) {
-            annt2010.style("opacity", 1);
-        } else if (annt == 2020) {
-            annt2020.style("opacity", 1);
-        }
-    }
-    */
 }
 
 
@@ -618,7 +593,7 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').remove();
 
     if (data) {
-        bubbleBk.transition().duration(200).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
+        bubbleBk.transition().duration(500).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
     } else {
         data = dataset;
     }
