@@ -324,10 +324,6 @@ function annotate(annt) {
             annt2020.style("opacity", 1);
         }
     }
-    annt0.style("opacity", annt === 1? 1 : 0);
-    annt1.style("opacity", annt === 1? 1 : 0);
-    annt2.style("opacity", annt === 2? 1 : 0);
-    annt3.style("opacity", annt === 3? 1 : 0);
 }
 
 
