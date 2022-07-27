@@ -586,8 +586,7 @@ async function plot(data) {
     d3.selectAll("circle").filter('.bubble').transition().duration(800).remove();
 
     if (data) {
-        console.log('222');
-        bubbleAll.style("opacity", 1).transition().duration(800).style("opacity", 0);
+        bubbleAll.style("opacity", 0.6).transition().duration(500).style("opacity", 0);
     } else {
         data = dataset;
     }
@@ -675,8 +674,5 @@ async function plot(data) {
             `);
         });
 
-    if (!bubbleAll) {
-        console.log('111');
-        bubbleAll = d3.selectAll("circle").filter('.bubble').attr("class", 'bubble-bk').style("opacity", 0);
-    }
+    if (!bubbleAll) bubbleAll = d3.selectAll("circle").filter('.bubble').attr("class", 'bubble-bk').style("opacity", 0.6);
 }
