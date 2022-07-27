@@ -590,7 +590,7 @@ let bubbleBk = null;
 async function plot(data) {
 
     if (data) {
-        bubbleBk.transition().duration(200).style("opacity", 0.6);
+        bubbleBk.transition().duration(500).style("opacity", 0.6);
         removeBubbles();
         bubbleBk.transition().duration(500).style("opacity", 0);
     } else {
