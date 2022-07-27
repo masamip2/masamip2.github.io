@@ -592,13 +592,27 @@ async function plot(data) {
     }
 
     let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
-    let bubbleBg = bubble.append("circle")
+
+    if (!bubbleBk) {
+        bubbleBk = bubble.append("circle")
+        .attr("class", 'bubble-bk')
+        .attr("cx", function (d) { return x(d.No_of_Votes) })
+        .attr("cy", function (d) { return y(d.IMDB_Rating) })
+        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
+        .style("fill", function (d) {
+            const gs = (d.Genre).split(',').map(elm => elm.trim())
+            return gs.length == 1? color(gs[0]) : "gainsboro"
+        })
+        .style("opacity", 0);
+    }
+
+    bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
         .attr("id", function (d) { return convertString(d.Series_Title, 1) })
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
-    let bubbleFg = bubble.append("circle")
+    bubble.append("circle")
         .attr("class", 'bubble')
         .attr("cx", function (d) { return x(d.No_of_Votes) })
         .attr("cy", function (d) { return y(d.IMDB_Rating) })
@@ -606,11 +620,8 @@ async function plot(data) {
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
             return gs.length == 1? color(gs[0]) : "gainsboro"
-        });
-
-    if (!bubbleBk) bubbleBk = d3.selectAll("circle").filter('.bubble').attr("class", 'bubble-bk').style("opacity", 0.6);
-
-    bubbleFg.on("mouseover", function(event, d) {
+        })
+        .on("mouseover", function(event, d) {
             d3.select(this).style("stroke", "gray");
             tooltip.transition()
                 .duration(200)
