@@ -589,11 +589,10 @@ function removeBubbles() {
 let bubbleBk = null;
 async function plot(data) {
 
+    removeBubbles();
     if (data) {
-        bubbleBk.transition().duration(500).style("opacity", 0.6).transition().duration(500).style("opacity", 0);
-        removeBubbles();
+        bubbleBk.transition().duration(500).style("opacity", 0.6);
     } else {
-        removeBubbles();
         data = dataset;
     }
 
@@ -608,8 +607,7 @@ async function plot(data) {
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
             return gs.length == 1? color(gs[0]) : "gainsboro"
-        })
-        .style("opacity", 0);
+        });
     }
 
     bubble.append("circle")
@@ -693,4 +691,6 @@ async function plot(data) {
                 </table>
             `);
         });
+
+    bubbleBk.transition().duration(500).style("opacity", 0);
 }
