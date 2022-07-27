@@ -61,9 +61,9 @@ async function filter() {
         await plot(dataset.filter(function(d) {
             let d_year = year? d.Released_Year >= parseInt(year) && d.Released_Year < parseInt(year)+10 : true;
             let d_genre = gs.length > 0? findCnt(d, gs) : true;
-            d.visible = d_year && d_genre? 1 : 0;
-            return d;
-            //return d_year && d_genre;
+            //d.visible = d_year && d_genre? 1 : 0;
+            //return d;
+            return d_year && d_genre;
         }));
     }
 }
