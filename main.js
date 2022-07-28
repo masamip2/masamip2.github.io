@@ -324,7 +324,7 @@ function annotate(annt) {
         } else if (y == 2020) {
             annt2020.style("opacity", 1);
         }
-        annt0.style("opacity", 1);
+        if (selectedGenres().length < 1) annt0.style("opacity", 1);
     }
 }
 
