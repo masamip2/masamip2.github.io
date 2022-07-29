@@ -376,7 +376,7 @@ let year = slider.append("text")
 
 const coordinates = [{x: 0, y: 10}, {x: 5, y: 15}, {x: 15, y: 0}];
 const checkmark = d3.line(coordinates);
-const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "navy", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
+const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "mediumblue", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
 const color = d3.scaleOrdinal().domain(genres).range(schemeset);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -620,7 +620,7 @@ async function plot(data) {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : (data? "slategray" : "gainsboro")
+            return gs.length == 1? color(gs[0]) : "gainsboro"
         })
         .on("mouseover", function(event, d) {
             d3.select(this).style("stroke", "darkslategray");
