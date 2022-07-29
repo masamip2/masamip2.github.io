@@ -376,7 +376,7 @@ let year = slider.append("text")
 
 const coordinates = [{x: 0, y: 10}, {x: 5, y: 15}, {x: 15, y: 0}];
 const checkmark = d3.line(coordinates);
-const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "mediumblue", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
+const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "stealblue", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
 const color = d3.scaleOrdinal().domain(genres).range(schemeset);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -482,16 +482,20 @@ function changeSlide(v) {
 }
 
 function overGenre(g, o) {
-    if (d3.select(`#-${g}`).style("opacity") == 0) {
-        d3.select(`#${g}`).style("opacity", o? 1 : 0.8).style("stroke-width", o? 2 : 1);
-        d3.select(`#_${g}`).style("opacity", o? 1 : 0.8);
+    if (d3.select("#_All").style("fill") != 'orangered') {
+        if (d3.select(`#-${g}`).style("opacity") == 0) {
+            d3.select(`#${g}`).style("opacity", o? 1 : 0.8).style("stroke-width", o? 2 : 1);
+            d3.select(`#_${g}`).style("opacity", o? 1 : 0.8);
+        }
     }
 }
 
 function changeGenre(g) {
-    let o = d3.select(`#-${g}`).style("opacity");
-    d3.select(`#-${g}`).style("opacity", o == 1? 0 : 1);
-    filter();
+    if (d3.select("#_All").style("fill") != 'orangered') {
+        let o = d3.select(`#-${g}`).style("opacity");
+        d3.select(`#-${g}`).style("opacity", o == 1? 0 : 1);
+        filter();
+    }
 }
 
 let x = d3.scaleSqrt().domain([25000, 2350000]).range([0, vizsize.width]);
@@ -689,5 +693,5 @@ async function plot(data) {
             `);
         });
 
-    if (selectedGenres().length == 0) bubbleBk.style("opacity", 1).transition().duration(2000).style("opacity", 0);
+    if (selectedGenres().length == 0) bubbleBk.style("opacity", 0.6).transition().duration(2000).style("opacity", 0);
 }
