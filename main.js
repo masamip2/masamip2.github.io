@@ -286,7 +286,7 @@ const annotation2020 = [{
     dy: -210
 }].map(function(d){ d.color = "darkorange"; return d });
 
-let annt = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation)).style("opacity", 0);
+let annt = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation)).style("opacity", 1);
 let annt0 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation0)).style("opacity", 0);
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1)).style("opacity", 0);
 let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation2)).style("opacity", 0);
