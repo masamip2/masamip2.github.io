@@ -309,7 +309,7 @@ function annotate(annt) {
     annt3.style("opacity", annt === 3? 1 : 0);
 
     let y = d3.select("#year").text();
-    if (y && parseInt(annt) > 0) {
+    if (y && parseInt(annt) > 3) {
         y = parseInt(y);
         if (y >= 1920 && y <= 1950) {
             annt1920_1950.style("opacity", 1);
@@ -376,7 +376,7 @@ let year = slider.append("text")
 
 const coordinates = [{x: 0, y: 10}, {x: 5, y: 15}, {x: 15, y: 0}];
 const checkmark = d3.line(coordinates);
-const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "stealblue", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
+const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "steelblue", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
 const color = d3.scaleOrdinal().domain(genres).range(schemeset);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -444,7 +444,8 @@ function overDecade(y, o) {
 }
 
 function changeDecade(y) {
-    if (y == 'All') genres.forEach (v => { d3.select(`#-${v}`).style("opacity", 0) });
+    genres.forEach (v => { d3.select(`#-${v}`).style("opacity", 0) });
+    d3.selectAll("checkbox").attr("cursor", (y == 'All'? "default" : "pointer"));
     d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
