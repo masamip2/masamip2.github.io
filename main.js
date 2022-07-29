@@ -612,6 +612,7 @@ async function plot(data) {
         });
     }
 
+    bubble.transition().duration(500);
     bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
         .attr("id", function (d) { return convertString(d.Series_Title, 1) })
@@ -694,6 +695,5 @@ async function plot(data) {
             `);
         });
 
-    bubble.transition().duration(500);
     //bubbleBk.transition().duration(500).style("opacity", 0);
 }
