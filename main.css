@@ -135,12 +135,7 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 .bubble, .bubble-bk {
     stroke: white;
     stroke-width: 1px;
-}
-.bubble {
     opacity: 0.6;
-}
-.bubble-bk {
-    opacity: 0.3;
 }
 .bubble-bg {
     fill: whitesmoke;

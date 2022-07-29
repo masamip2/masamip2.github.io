@@ -593,7 +593,7 @@ async function plot(data) {
 
     removeBubbles();
     if (data) {
-        bubbleBk.style("opacity", 0.3);
+        bubbleBk.style("opacity", 0.6);
     } else {
         data = dataset;
     }
@@ -625,7 +625,7 @@ async function plot(data) {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : "darkslategray"
+            return gs.length == 1? color(gs[0]) : "gainsboro"
         })
         .on("mouseover", function(event, d) {
             d3.select(this).style("stroke", "gray");
@@ -694,6 +694,5 @@ async function plot(data) {
             `);
         });
 
-    bubble.transition().duration(500).style("opacity", 0.6);
-    //bubbleBk.transition().duration(500).style("opacity", 0);
+    bubbleBk.transition().duration(500).style("opacity", 0);
 }
