@@ -689,5 +689,5 @@ async function plot(data) {
             `);
         });
 
-    bubbleBk.style("opacity", 1).transition().duration(2000).style("opacity", 0);
+    if (selectedGenres().length == 0) bubbleBk.style("opacity", 1).transition().duration(2000).style("opacity", 0);
 }
