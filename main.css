@@ -122,7 +122,6 @@ g.tick text { font-size: 14px; } /* d3 axis tick */
 }
 .checkbox, .genre {
     opacity: 0.8;
-    cursor: pointer;
 }
 .checkbox-multi, .genre-multi {
     opacity: 1;
