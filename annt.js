@@ -215,7 +215,7 @@ function annotate(annt) {
     annt2020.style("opacity", 0);
 
     let all = d3.select("#_All").style("fill") == 'orangered' || annt === 1? 1 : 0;
-    annt_.style("opacity", all === 0? 1 : 1);
+    annt_.style("opacity", all === 1? 0 : 1);
     annt0.style("opacity", annt === 1? 1 : 0);
     annt1.style("opacity", all === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
