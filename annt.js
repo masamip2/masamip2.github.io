@@ -15,7 +15,7 @@ const annotation = [{
     dy: 5
 }, {
     note: {
-        title: "Movies from Decade",
+        title: "Movies by Decade",
         label: "",
         wrap: 150,
         align: "left" },
@@ -30,12 +30,12 @@ const annotation_ = [{
     note: {
         title: "Filter by Genre",
         label: "'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres.",
-        wrap: 600,
+        wrap: 400,
         align: "middle" },
     connector: { end: "arrow" },
     x: 1060,
     y: 90,
-    dx: -220,
+    dx: -150,
     dy: 10
 }, {
 }].map(function(d){ d.color = "deeppink"; return d });
