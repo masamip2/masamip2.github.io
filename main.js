@@ -612,7 +612,6 @@ async function plot(data) {
         });
     }
 
-    bubble.transition().duration(500);
     bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
         .attr("id", function (d) { return convertString(d.Series_Title, 1) })
@@ -626,7 +625,7 @@ async function plot(data) {
         .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
         .style("fill", function (d) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : "gainsboro"
+            return gs.length == 1? color(gs[0]) : "darkslategray"
         })
         .on("mouseover", function(event, d) {
             d3.select(this).style("stroke", "gray");
@@ -695,5 +694,6 @@ async function plot(data) {
             `);
         });
 
+    bubble.transition().duration(500).style("opacity", 0.6);
     //bubbleBk.transition().duration(500).style("opacity", 0);
 }
