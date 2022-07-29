@@ -445,7 +445,8 @@ function overDecade(y, o) {
 
 function changeDecade(y) {
     genres.forEach (v => { d3.select(`#-${v}`).style("opacity", 0) });
-    d3.selectAll("checkbox").attr("cursor", (y == 'All'? "default" : "pointer"));
+    d3.selectAll(".checkbox").attr("cursor", (y == 'All'? "default" : "pointer"));
+    d3.selectAll(".genre").attr("cursor", (y == 'All'? "default" : "pointer"));
     d3.select('#_All').style("fill", y == 'All'? "orangered" : "whitesmoke");
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
