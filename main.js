@@ -598,7 +598,7 @@ async function plot(data) {
         data = dataset;
     }
 
-    let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter().transition().duration(500);
+    let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
 
     if (!bubbleBk) {
         bubbleBk = bubble.append("circle")
@@ -694,5 +694,6 @@ async function plot(data) {
             `);
         });
 
+    bubble.transition().duration(500);
     //bubbleBk.transition().duration(500).style("opacity", 0);
 }
