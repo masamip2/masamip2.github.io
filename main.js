@@ -592,15 +592,8 @@ let bubbleBk = null;
 async function plot(data) {
 
     removeBubbles();
-    if (data) {
-        bubbleBk.style("opacity", 0.6);
-    } else {
-        data = dataset;
-    }
-
-    let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
-
     if (!bubbleBk) {
+        let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(dataset).enter();
         bubbleBk = bubble.append("circle")
         .attr("class", 'bubble-bk')
         .attr("cx", function (d) { return x(d.No_of_Votes) })
@@ -610,89 +603,99 @@ async function plot(data) {
             const gs = (d.Genre).split(',').map(elm => elm.trim())
             return gs.length == 1? color(gs[0]) : "gainsboro"
         });
+
+    } else {
+        if (data) {
+            bubbleBk.style("opacity", 0.6);
+
+            let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
+            bubble.append("circle")
+                .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
+                .attr("id", function (d) { return convertString(d.Series_Title, 1) })
+                .attr("cx", function (d) { return x(d.No_of_Votes) })
+                .attr("cy", function (d) { return y(d.IMDB_Rating) })
+                .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
+            bubble.append("circle")
+                .attr("class", 'bubble')
+                .attr("cx", function (d) { return x(d.No_of_Votes) })
+                .attr("cy", function (d) { return y(d.IMDB_Rating) })
+                .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
+                .style("fill", function (d) {
+                    const gs = (d.Genre).split(',').map(elm => elm.trim())
+                    return gs.length == 1? color(gs[0]) : "slategray"
+                })
+                .on("mouseover", function(event, d) {
+                    d3.select(this).style("stroke", "gray");
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", 1);
+                    tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}<br>Gross: $ ${d.Gross? formatNumber(d.Gross) : 'N/A'}`)
+                        .style("left", (event.pageX+20) + "px")
+                        .style("top", (event.pageY+20) + "px");
+                })
+                .on("mouseout", function(event, d) {
+                    d3.select(this).style("stroke", "white");
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                })
+                .on("mousemove", function(event, d) {
+                })
+                .on("click", function(event, d) {
+                    annotate(2);
+                    clearDirector();
+                    d3.select(`#${convertString(d.Series_Title, 1)}`).style("stroke", "gray").style("opacity", 1);
+        
+                    info.html(`
+                        <table>
+                            <tr class="tr-img">
+                                <td colspan="2">
+                                    <div class="img">
+                                        <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Released Year</th>
+                                <td>${d.Released_Year}</td>
+                            </tr>
+                            <tr>
+                                <th>IMDB Rating</th>
+                                <td>${d.IMDB_Rating}</td>
+                            </tr>
+                            <tr>
+                                <th>Number of Votes</th>
+                                <td>${d.No_of_Votes}</td>
+                            </tr>
+                            <tr>
+                                <th>Gross</th>
+                                <td>$ ${d.Gross? d.Gross : 'N/A'}</td>
+                            </tr>
+                            <tr>
+                                <th>Series Title</th>
+                                <td>${d.Series_Title}</td>
+                            </tr>
+                            <tr>
+                                <th>Genre</th>
+                                <td>${d.Genre}</td>
+                            </tr>
+                            <tr>
+                                <th>Director</th>
+                                <td><input type="button" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Series_Title}', '${d.Director}')" value="${d.Director}"></td>
+                            </tr>
+                            <tr>
+                                <th>Overview</th>
+                                <td>${d.Overview}</td>
+                            </tr>
+                        </table>
+                    `);
+                });
+        
+        } else {
+            return;
+        }
     }
 
-    bubble.append("circle")
-        .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
-        .attr("id", function (d) { return convertString(d.Series_Title, 1) })
-        .attr("cx", function (d) { return x(d.No_of_Votes) })
-        .attr("cy", function (d) { return y(d.IMDB_Rating) })
-        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) });
-    bubble.append("circle")
-        .attr("class", 'bubble')
-        .attr("cx", function (d) { return x(d.No_of_Votes) })
-        .attr("cy", function (d) { return y(d.IMDB_Rating) })
-        .attr("r", function (d) { return z(d.Gross? (d.Gross).replace(/,/g, '') : 1) })
-        .style("fill", function (d) {
-            const gs = (d.Genre).split(',').map(elm => elm.trim())
-            return gs.length == 1? color(gs[0]) : "gainsboro"
-        })
-        .on("mouseover", function(event, d) {
-            d3.select(this).style("stroke", "gray");
-            tooltip.transition()
-                .duration(200)
-                .style("opacity", 1);
-            tooltip.html(`Year: ${d.Released_Year}<br>Votes: ${d.No_of_Votes}<br>Rating: ${d.IMDB_Rating}<br>Gross: $ ${d.Gross? formatNumber(d.Gross) : 'N/A'}`)
-                .style("left", (event.pageX+20) + "px")
-                .style("top", (event.pageY+20) + "px");
-        })
-        .on("mouseout", function(event, d) {
-            d3.select(this).style("stroke", "white");
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-        })
-        .on("mousemove", function(event, d) {
-        })
-        .on("click", function(event, d) {
-            annotate(2);
-            clearDirector();
-            d3.select(`#${convertString(d.Series_Title, 1)}`).style("stroke", "gray").style("opacity", 1);
 
-            info.html(`
-                <table>
-                    <tr class="tr-img">
-                        <td colspan="2">
-                            <div class="img">
-                                <img src="${(d.Poster_Link).split('._V1_U')[0]}" width=${imgsize.width} height=${imgsize.height} alt="Movie Image">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Released Year</th>
-                        <td>${d.Released_Year}</td>
-                    </tr>
-                    <tr>
-                        <th>IMDB Rating</th>
-                        <td>${d.IMDB_Rating}</td>
-                    </tr>
-                    <tr>
-                        <th>Number of Votes</th>
-                        <td>${d.No_of_Votes}</td>
-                    </tr>
-                    <tr>
-                        <th>Gross</th>
-                        <td>$ ${d.Gross? d.Gross : 'N/A'}</td>
-                    </tr>
-                    <tr>
-                        <th>Series Title</th>
-                        <td>${d.Series_Title}</td>
-                    </tr>
-                    <tr>
-                        <th>Genre</th>
-                        <td>${d.Genre}</td>
-                    </tr>
-                    <tr>
-                        <th>Director</th>
-                        <td><input type="button" class="button" onmouseover="overDirector(1)" onmouseout="overDirector(0)" onclick="indicateDirector('${d.Series_Title}', '${d.Director}')" value="${d.Director}"></td>
-                    </tr>
-                    <tr>
-                        <th>Overview</th>
-                        <td>${d.Overview}</td>
-                    </tr>
-                </table>
-            `);
-        });
-
-    bubbleBk.transition().duration(500).style("opacity", 0);
+    //bubbleBk.transition().duration(500).style("opacity", 0);
 }
