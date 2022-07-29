@@ -593,12 +593,12 @@ async function plot(data) {
 
     removeBubbles();
     if (data) {
-        bubbleBk.style("opacity", 0.6);
+        bubbleBk.style("opacity", 0.3);
     } else {
         data = dataset;
     }
 
-    let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter();
+    let bubble = svg.append('g').attr("transform", `translate(0, ${genresize.height*2})`).selectAll("circle").data(data).enter().transition().duration(500);
 
     if (!bubbleBk) {
         bubbleBk = bubble.append("circle")
@@ -694,5 +694,5 @@ async function plot(data) {
             `);
         });
 
-    bubbleBk.transition().duration(500).style("opacity", 0);
+    //bubbleBk.transition().duration(500).style("opacity", 0);
 }
