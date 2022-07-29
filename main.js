@@ -100,8 +100,8 @@ const makeAnnotation = (annt) => {
 const annotation0 = [{
     note: {
         title: "Overview",
-        label: "Visualize all the datapoints",
-        wrap: 250,
+        label: "All the datapoints",
+        wrap: 200,
         align: "middle" },
     connector: { end: "arrow" },
     x: 105,
@@ -109,6 +109,7 @@ const annotation0 = [{
     dx: -35,
     dy: 5
 }, {
+/*
     note: {
         title: "Filter by Decade",
         label: "Clicking or sliding.",
@@ -131,6 +132,7 @@ const annotation0 = [{
     dx: -220,
     dy: 10
 }, {
+*/
     note: {
         title: "Movie Detail",
         label: "Hover the cursor over each circle for the basic information of the movie, and click it to find out more about the movie.",
