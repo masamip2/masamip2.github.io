@@ -376,7 +376,7 @@ let year = slider.append("text")
 
 const coordinates = [{x: 0, y: 10}, {x: 5, y: 15}, {x: 15, y: 0}];
 const checkmark = d3.line(coordinates);
-const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "navy", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumdarkorchid"];
+const schemeset = ["sienna", "burlywood", "lightsalmon", "darkgoldenrod", "gold", "khaki", "yellowgreen", "mediumseagreen", "darkseagreen", "olive", "teal", "navy", "royalblue", "paleturquoise", "mediumturquoise", "dodgerblue", "pink", "plum", "palevioletred", "mediumslateblue", "mediumorchid"];
 const color = d3.scaleOrdinal().domain(genres).range(schemeset);
 
 let genre = svg.append("g").attr("transform", `translate(0, ${boxpos.y})`).selectAll("legend").data(genres).enter();
@@ -689,5 +689,5 @@ async function plot(data) {
             `);
         });
 
-    //bubbleBk.transition().duration(500).style("opacity", 0);
+    bubbleBk.style("opacity", 1).transition().duration(2000).style("opacity", 0);
 }
