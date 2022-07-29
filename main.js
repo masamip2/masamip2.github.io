@@ -100,7 +100,7 @@ const makeAnnotation = (annt) => {
 const annotation0 = [{
     note: {
         title: "Overview",
-        label: "All the datapoints",
+        label: "All the movies",
         wrap: 200,
         align: "middle" },
     connector: { end: "arrow" },
@@ -284,7 +284,7 @@ const annotation2020 = [{
     dy: -210
 }].map(function(d){ d.color = "darkorange"; return d });
 
-let annt0 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation0)).style("opacity", 0);
+let annt0 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation0)).style("opacity", 1);
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1)).style("opacity", 0);
 let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation2)).style("opacity", 0);
 let annt3 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation3)).style("opacity", 0);
@@ -305,7 +305,7 @@ function annotate(annt) {
     annt2020.style("opacity", 0);
 
     let all = d3.select("#_All").style("fill") == 'orangered' || annt === 1? 1 : 0;
-    annt0.style("opacity", annt === 1? 1 : 0);
+    //annt0.style("opacity", annt === 1? 1 : 0);
     annt1.style("opacity", all === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
     annt3.style("opacity", annt === 3? 1 : 0);
