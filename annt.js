@@ -28,7 +28,7 @@ const annotation = [{
 
 const annotation_ = [{
     note: {
-        title: "Specified by Genre",
+        title: "Filter by Genre",
         label: "The movies in specific genres can be filtered. 'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres.",
         wrap: 600,
         align: "middle" },
@@ -43,7 +43,7 @@ const annotation_ = [{
 const annotation0 = [{
     note: {
         title: "Movie Detail",
-        label: "Hover the cursor over each circle for the basic information of the movie, and click it to find out more about the movie.",
+        label: "Hover: Basic Info<br>Click: More Detail<br>Double-Click: Director's Movies",
         wrap: 300,
         align: "left" },
     connector: { end: "arrow" },

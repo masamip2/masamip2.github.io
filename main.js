@@ -376,7 +376,10 @@ async function plot(data) {
         });
     }
 
-    if (!data) return;
+    if (!data) {
+        bubbleBk.style("opacity", 0.6);
+        return;
+    }
 
     bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
