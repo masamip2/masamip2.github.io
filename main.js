@@ -376,6 +376,8 @@ async function plot(data) {
         });
     }
 
+    if (!data) return;
+
     bubble.append("circle")
         .attr("class", function (d) { return `bubble-bg ${convertString(d.Director)}` })
         .attr("id", function (d) { return convertString(d.Series_Title, 1) })
