@@ -44,8 +44,8 @@ async function init() {
     changeSlide('All');
 }
 
-async function filter() {
-    const all = d3.select('#_All').style("fill") == 'orangered'? 1 : 0;
+async function filter(all) {
+    const all = all? 1 : (d3.select('#_All').style("fill") == 'orangered'? 1 : 0);
     const year = d3.select('#year').text();
     const gs = selectedGenres();
 
@@ -214,7 +214,7 @@ function changeDecade(y) {
     const decade = y == 'All'? d3.min(decades) : Math.round(y/10)*10;
     handle.attr("x", positionHandle(decade));
     year.attr("x", scale(decade)).style("opacity", y == 'All'? 0 : 1).text(y == 'All'? '' : decade);
-    filter();
+    filter(y == 'All'? 1 : 0);
 }
 
 function changeSlide(v) {
@@ -259,7 +259,7 @@ function changeGenre(g) {
     if (d3.select("#_All").style("fill") != 'orangered') {
         let o = d3.select(`#-${g}`).style("opacity");
         d3.select(`#-${g}`).style("opacity", o == 1? 0 : 1);
-        filter();
+        filter(0);
     }
 }
 

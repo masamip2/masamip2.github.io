@@ -28,14 +28,14 @@ const annotation = [{
 
 const annotation_ = [{
     note: {
-        title: "Filter by Genre",
-        label: "'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres.",
-        wrap: 400,
+        title: "Specified by Genre",
+        label: "The movies in specific genres can be filtered. 'Multi-Genre' is pre-selected as most of the movies are categorized into multiple genres.",
+        wrap: 800,
         align: "middle" },
     connector: { end: "arrow" },
     x: 1060,
     y: 90,
-    dx: -150,
+    dx: -450,
     dy: 10
 }, {
 }].map(function(d){ d.color = "deeppink"; return d });
