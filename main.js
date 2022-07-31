@@ -410,6 +410,11 @@ async function plot(data) {
         })
         .on("mousemove", function(event, d) {
         })
+        .on("dblclick", function(event, d) {
+            clearDirector();
+            d3.select(`#${convertString(d.Series_Title, 1)}`).style("stroke", "gray").style("opacity", 1);
+            indicateDirector(d.Series_Title, d.Director);
+        })
         .on("click", function(event, d) {
             annotate(2);
             clearDirector();
