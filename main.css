@@ -3,6 +3,9 @@ body {
     color: gray;
     background: whitesmoke;
 }
+p {
+    color: dimgray;
+}
 table, th, td {
     border-collapse: collapse;
     border: 1px dotted;
