@@ -45,7 +45,7 @@ async function init() {
 }
 
 async function filter(all) {
-    const all = all? 1 : (d3.select('#_All').style("fill") == 'orangered'? 1 : 0);
+    all = all? 1 : (d3.select('#_All').style("fill") == 'orangered'? 1 : 0);
     const year = d3.select('#year').text();
     const gs = selectedGenres();
 
