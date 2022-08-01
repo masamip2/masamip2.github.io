@@ -42,7 +42,7 @@ const annotation_ = [{
 const annotation0 = [{
     note: {
         title: "Movie Detail",
-        label: "Hover: Basic Info\nClick: More Detail\nDouble-Click: Director's Movies",
+        label: "Hover for basic info, click for more detail and double-click for director's movies",
         wrap: 300,
         align: "left" },
     connector: { end: "arrow" },
@@ -215,7 +215,7 @@ function annotate(annt) {
 
     let all = d3.select("#_All").style("fill") == 'orangered' || annt === 1? 1 : 0;
     annt_.style("opacity", annt === 1? 0 : 1);
-    annt0.style("opacity", annt === 1? 1 : 0);
+    annt0.style("opacity", annt === 1? 0 : 1);
     annt1.style("opacity", all === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
     annt3.style("opacity", annt === 3? 1 : 0);
