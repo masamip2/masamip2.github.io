@@ -42,7 +42,7 @@ const annotation_ = [{
 const annotation0 = [{
     note: {
         title: "Movie Detail",
-        label: "Hover for basic info, click for more detail and double-click for director's movies.",
+        label: "Hover over for basic info, click for more detail and double-click for director's movies.",
         wrap: 300,
         align: "left" },
     connector: { end: "arrow" },
