@@ -42,7 +42,7 @@ const annotation_ = [{
 const annotation0 = [{
     note: {
         title: "Movie Detail",
-        label: "Hover for basic info, click for more detail and double-click for director's movies",
+        label: "Hover for basic info, click for more detail and double-click for director's movies.",
         wrap: 300,
         align: "left" },
     connector: { end: "arrow" },
@@ -192,7 +192,7 @@ const annotation2020 = [{
 }].map(function(d){ d.color = "darkorange"; return d });
 
 let annt = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation)).style("opacity", 1);
-let annt_ = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation)).style("opacity", 0);
+let annt_ = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation_)).style("opacity", 0);
 let annt0 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation0)).style("opacity", 0);
 let annt1 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation1)).style("opacity", 0);
 let annt2 = svg.append('g').attr("class", "annotation-group").call(makeAnnotation(annotation2)).style("opacity", 0);
@@ -214,8 +214,8 @@ function annotate(annt) {
     annt2020.style("opacity", 0);
 
     let all = d3.select("#_All").style("fill") == 'orangered' || annt === 1? 1 : 0;
-    annt_.style("opacity", annt === 1? 0 : 1);
-    annt0.style("opacity", annt === 1? 0 : 1);
+    annt_.style("opacity", all === 1? 0 : 1);
+    annt0.style("opacity", all === 1? 0 : 1);
     annt1.style("opacity", all === 1? 1 : 0);
     annt2.style("opacity", annt === 2? 1 : 0);
     annt3.style("opacity", annt === 3? 1 : 0);
@@ -236,6 +236,6 @@ function annotate(annt) {
         } else if (y == 2020) {
             annt2020.style("opacity", 1);
         }
-        if (selectedGenres().length < 1) annt0.style("opacity", 1);
+        if (selectedGenres().length > 0) annt0.style("opacity", 0);
     }
 }
